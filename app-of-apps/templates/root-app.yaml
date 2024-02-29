@@ -6,14 +6,14 @@ metadata:
   finalizers:
   - resources-finalizer.argocd.argoproj.io
 spec:
-  destination:
-    server: https://kubernetes.default.svc
-    namespace: default
   project: default
   source:
     path: ./apps-of-apps/
     repoURL: https://github.com/mikelaferriere/k8s-homelab.git
     targetRevision: HEAD
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: default
   syncPolicy:
     automated:
       prune: true

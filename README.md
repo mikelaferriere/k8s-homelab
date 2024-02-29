@@ -29,7 +29,8 @@ ansible-playbook -i inv/homelab k8s-worker.yml
 Inside this repo, run:
 ```bash
 helm repo add argo-cd https://argoproj.github.io/argo-helm
-helm install --namespace argocd --create-namespace argo-cd argo-cd/
+helm repo update
+helm install --namespace argocd --create-namespace argo-cd applications-sets/argo-cd/
 kubectl get pods -n argocd --watch
 ```
 - Wait for all pods to be in Running state
