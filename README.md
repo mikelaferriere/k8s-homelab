@@ -47,5 +47,5 @@ kubectl port-forward -n argocd svc/argo-cd-argocd-server 8080:443
 
 ## Apply Management App
 ```bash
-helm template app-of-apps/ | kubectl apply -f -
+helm template app-of-apps/management/ | kubectl apply -f -
 ```
