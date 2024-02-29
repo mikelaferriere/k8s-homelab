@@ -5,8 +5,6 @@ metadata:
   name: prometheus
   finalizers:
   - resources-finalizer.argocd.argoproj.io
-labels:
-  argocd.argoproj.io/instance: root-app
 spec:
   project: default
   source:
