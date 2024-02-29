@@ -6,7 +6,7 @@ metadata:
   finalizers:
   - resources-finalizer.argocd.argoproj.io
 labels:
-  argocd.argoproj.io/instance: argo-cd
+  argocd.argoproj.io/instance: root-app
 spec:
   project: default
   source:
