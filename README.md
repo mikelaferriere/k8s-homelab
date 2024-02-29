@@ -29,23 +29,23 @@ ansible-playbook -i inv/homelab k8s-worker.yml
 Inside this repo, run:
 ```bash
 helm repo add argo-cd https://argoproj.github.io/argo-helm
-helm install --namespace argocd --create-namespace argo-cd charts/argo-cd/
-kubectl get pods --watch
+helm install --namespace argocd --create-namespace argo-cd argo-cd/
+kubectl get pods -n argocd --watch
 ```
 - Wait for all pods to be in Running state
 
 
 Get initial secret:
 ```bash
-kubectl get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d
+kubectl get secret -n argocd argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d
 ```
 
 Forward Port to 8080 (we'll add ingress-controller later):
 ```bash
-kubectl port-forward svc/argo-cd-argocd-server 8080:443
+kubectl port-forward -n argocd svc/argo-cd-argocd-server 8080:443
 ```
 
 ## Apply Management App
 ```bash
-helm template management/ | kubectl apply -f -
+helm template app-of-apps/ | kubectl apply -f -
 ```

@@ -1,4 +1,4 @@
 ---
 apiVersion: v2
-name: management
+name: argo-cd
 version: 1.0.0
