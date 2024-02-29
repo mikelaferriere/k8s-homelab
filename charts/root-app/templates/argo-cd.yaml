@@ -10,7 +10,7 @@ spec:
   project: default
   source:
     repoURL: https://github.com/mikelaferriere/k8s-homelab.git
-    path: application-sets/argo-cd/
+    path: charts/argo-cd/
     targetRevision: HEAD
   destination:
     server: https://kubernetes.default.svc
