@@ -1,4 +1,4 @@
 ---
 apiVersion: v2
-name: root-app
+name: management
 version: 1.0.0
