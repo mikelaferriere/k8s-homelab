@@ -11,8 +11,8 @@ spec:
     namespace: default
   project: default
   source:
-    path: ./apps-of-apps/manifests/
-    repoURL: https://gitlab.com/Tanmay-Bhat/argocd.git
+    path: ./apps-of-apps/
+    repoURL: https://github.com/mikelaferriere/k8s-homelab.git
     targetRevision: HEAD
   syncPolicy:
     automated:
