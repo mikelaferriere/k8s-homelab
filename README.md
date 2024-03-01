@@ -50,3 +50,8 @@ kubectl port-forward -n argo-cd svc/argo-cd-argocd-server 8080:443
 ```bash
 helm template app-of-apps/ | kubectl apply -f -
 ```
+
+## Debugging
+
+**Apps Hanging On Delete**
+https://argo-cd.readthedocs.io/en/stable/user-guide/app_deletion/
