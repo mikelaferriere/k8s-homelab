@@ -51,6 +51,11 @@ kubectl port-forward -n argo-cd svc/argo-cd-argocd-server 8080:443
 helm template app-of-apps/ | kubectl apply -f -
 ```
 
+## Install Charts for applications
+```bash
+helm dependency build
+```
+
 ## Debugging
 
 **Apps Hanging On Delete**
