@@ -2,8 +2,7 @@
 replicaCount: 1
 
 volumes:
-  - name: usbShare
-    nfs:
+  - nfs:
       server: 192.168.1.22
       path: /volumeUSB1/usbshare
 
