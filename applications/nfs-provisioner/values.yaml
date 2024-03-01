@@ -3,7 +3,7 @@ replicaCount: 1
 
 nfs:
   server: 192.168.1.22
-  path: /volumeUSB1/usbshare
+  path: /nfs/sharedUSB
 
 storageClass:
   defaultClass: true
