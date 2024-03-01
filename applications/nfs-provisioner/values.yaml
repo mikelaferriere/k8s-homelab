@@ -1,0 +1,11 @@
+---
+replicaCount: 1
+
+nfs:
+  server: 192.168.1.22
+  path: /volumeUSB1/usbshare
+
+storageClass:
+  defaultClass: true
+  name: ufs-usb
+  provisionerName: nfs-provisioner-01
