@@ -8,5 +8,4 @@ nginx:
 
 app:
   ingress:
-    enabled: true
-    hosts: []
+    enabled: false
