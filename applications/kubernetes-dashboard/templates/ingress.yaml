@@ -15,8 +15,7 @@ spec:
   ingressClassName: nginx
   tls: []
   rules:
-  - host: dashboard.example.com
-    http:
+  - http:
       paths:
       - path: /dashboard(/|$)(.*)
         pathType: ImplementationSpecific
