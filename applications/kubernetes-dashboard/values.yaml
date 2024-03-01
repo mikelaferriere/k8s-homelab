@@ -1,3 +1,4 @@
+# https://github.com/kubernetes/dashboard/tree/master/charts/kubernetes-dashboard#configuration
 ---
 cert_manager:
   enabled: true
@@ -7,4 +8,4 @@ nginx:
 
 app:
   ingress:
-    enabled: false
+    enabled: true
