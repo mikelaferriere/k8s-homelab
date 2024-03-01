@@ -1,1 +1,10 @@
 ---
+cert_manager:
+  enabled: true
+
+nginx:
+  enabled: false
+
+app:
+  ingress:
+    enabled: false
