@@ -60,3 +60,7 @@ helm dependency build
 
 **Apps Hanging On Delete**
 https://argo-cd.readthedocs.io/en/stable/user-guide/app_deletion/
+
+```bash
+kubectl patch app APP_NAME -p '{"metadata": {"finalizers": null}}' --type merge -n argo-cd
+```
