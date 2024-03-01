@@ -4,7 +4,7 @@ kind: StorageClass
 metadata:
   name: {{ .Values.storageClass.name }}
   annotations:
-    storageclass.kubernetes.io/is-default-class":"{{ .Values.storageClass.defaultClass }}"
+    storageclass.kubernetes.io/is-default-class:"{{ .Values.storageClass.defaultClass }}"
 provisioner: {{ .Values.storageClass.provisionerName }}
 parameters:
   archiveOnDelete: "{{ .Values.storageClass.archiveOnDelete }}"
