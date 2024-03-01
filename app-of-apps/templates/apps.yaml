@@ -2,20 +2,19 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: root-app
-  labels:
-    tag: all
+  name: apps
+  namespace: argo-cd
   finalizers:
   - resources-finalizer.argocd.argoproj.io
 spec:
   project: default
   source:
-    path: charts/root-app/
-    repoURL: https://github.com/mikelaferriere/k8s-homelab.git
-    targetRevision: HEAD
+    path: apps/
+    repoURL: {{ .Values.spec.source.repoURL }}
+    targetRevision: {{ .Values.spec.source.targetRevision }}
   destination:
-    server: https://kubernetes.default.svc
-    namespace: default
+    server: {{ .Values.spec.destination.server }}
+    namespace: argo-cd
   syncPolicy:
     automated:
       prune: true

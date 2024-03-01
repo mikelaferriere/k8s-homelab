@@ -1,7 +1,7 @@
 ---
 apiVersion: v1
-name: root-app
-description: A Helm chart for Kubernetes
+name: apps
+description: The container holding all the apps
 
 # A chart can be either an 'application' or a 'library' chart.
 #
