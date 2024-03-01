@@ -18,8 +18,6 @@ spec:
           value: 192.168.1.22
         - name: "nfs.path"
           value: /volumeUSB1/usbshare
-      valueFiles:
-        - values.yaml
   destination:
     server: {{ .Values.spec.destination.server }}
     namespace: nfs-provisioner
