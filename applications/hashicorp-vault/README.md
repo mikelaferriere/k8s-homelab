@@ -20,3 +20,17 @@ kubectl -n security exec -ti hashicorp-vault-0 -- vault operator unseal <unseal-
 kubectl -n securityexec -ti hashicorp-vault-0 -- vault operator unseal <unseal-key>
 kubectl -n security exec -ti hashicorp-vault-0 -- vault operator unseal <unseal-key>
 ```
+
+# Create key/value secrets
+https://developer.hashicorp.com/vault/docs/secrets/kv/kv-v2
+
+```bash
+kubectl -n security exec -it hashicorp-vault-0 -- /bin/sh
+/ $
+
+export VAULT_TOKEN=<root-token>
+
+vault secrets enable -version=2 kv
+vault kv put hv/database/config username="db-readonly-username" password="db-secret-password"
+vault kv get kv/database/config
+```
