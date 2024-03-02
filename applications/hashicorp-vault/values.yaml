@@ -1,2 +1,7 @@
 ---
-
+vault:
+  server:
+    service:
+      type: LoadBalancer
+    dataStorage:
+      mountPath: /volumeUSB1/usbshare
