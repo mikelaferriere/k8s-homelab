@@ -14,11 +14,11 @@ spec:
   ingressClassName: nginx
   rules:
     - http:
-      paths:
-      - path: /dashboard(/|$)(.*)
-        pathType: ImplementationSpecific
-        backend:
-          service:
-            name: kubernetes-dashboard
-            port: 
-              number: 443
+        paths:
+        - path: /dashboard(/|$)(.*)
+          pathType: ImplementationSpecific
+          backend:
+            service:
+              name: kubernetes-dashboard
+              port: 
+                number: 443
