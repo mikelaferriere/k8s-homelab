@@ -15,7 +15,7 @@ spec:
     helm:
       parameters:
         - name: controller.allowSnippetAnnotations
-          value: true
+          value: "true"
   destination:
     server: {{ .Values.spec.destination.server }}
     namespace: ingress-nginx
