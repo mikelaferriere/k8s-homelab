@@ -8,6 +8,7 @@ grafana:
     type: pvc
 
   sidecar:
+    # Beware of crazy JSON :/
     dashboards:
       enabled: true
     datasources:
