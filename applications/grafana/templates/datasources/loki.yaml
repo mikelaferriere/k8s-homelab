@@ -11,7 +11,7 @@ stringData:
     datasources:
       - name: Loki
         type: loki
-        url: http://loki.monitoring.svc
+        url: http://loki-gateway.monitoring.svc
         jsonData:
           sslmode: 'disable' # disable/require/verify-ca/verify-full
         # <bool> allow users to edit datasources from the UI.

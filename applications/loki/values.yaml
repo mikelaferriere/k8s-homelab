@@ -33,3 +33,7 @@ loki:
       type: 'filesystem'
   singleBinary:
     replicas: 1
+
+  gateway:
+    service:
+      type: LoadBalancer
