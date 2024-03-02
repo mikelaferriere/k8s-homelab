@@ -1,4 +1,5 @@
 ---
 prometheus:
-  service:
-    type: LoadBalancer
+  server:
+    service:
+      type: LoadBalancer
