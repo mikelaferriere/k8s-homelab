@@ -11,5 +11,5 @@ kubernetes-dashboard:
       hosts: []
       ingressClassName: nginx
       paths:
-        web: /dashboard
+        web: /dashboard/
         api: /dashboard/api
