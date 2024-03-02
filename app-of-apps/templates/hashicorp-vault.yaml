@@ -19,6 +19,7 @@ spec:
     automated:
       prune: true
       selfHeal: true
+  # see https://discuss.hashicorp.com/t/instaling-vault-through-argocd-workflow-agent-injector-cant-be-synced/32375/2
   ignoreDifferences:
   - group: admissionregistration.k8s.io
     kind: MutatingWebhookConfiguration
