@@ -6,3 +6,7 @@ grafana:
   persistence:
     enabled: true
     type: pvc
+
+  sidecar:
+    datasources:
+      enabled: true

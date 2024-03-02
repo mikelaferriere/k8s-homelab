@@ -1,4 +1,1 @@
-# Get admin password
-```bash
-kubectl get secret --namespace monitoring grafana -o jsonpath="{.data.admin-password}" | base64 --decode ; echo
-```
+# https://github.com/prometheus-community/helm-charts/tree/main/charts/prometheus#configuration
