@@ -1,5 +1,7 @@
 ---
-# vault:
+vault:
+  injector:
+    enabled: false
 #   server:
 #     dataStorage:
 #       mountPath: /volumeUSB1/usbshare
