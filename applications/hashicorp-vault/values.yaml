@@ -1,4 +1,7 @@
 ---
-vault:
-  ui:
-    enabled: true
+# vault:
+#   server:
+#     dataStorage:
+#       mountPath: /volumeUSB1/usbshare
+#   ui:
+#     enabled: true
