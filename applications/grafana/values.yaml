@@ -8,6 +8,8 @@ grafana:
     type: pvc
 
   sidecar:
+    dashboards:
+      enabled: true
     datasources:
       enabled: true
       initDatasources: true
