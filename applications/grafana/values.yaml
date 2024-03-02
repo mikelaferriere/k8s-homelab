@@ -10,3 +10,5 @@ grafana:
   sidecar:
     datasources:
       enabled: true
+      skipReload: false
+      reloadUrl: http://grafana.monitoring.svc.cluster.local/api/admin/provisioning/datasources/reload
