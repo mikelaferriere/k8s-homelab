@@ -10,3 +10,6 @@ kubernetes-dashboard:
       enabled: true
       hosts: []
       ingressClassName: nginx
+      paths:
+        web: /dashboard
+        api: /dashboard/api
