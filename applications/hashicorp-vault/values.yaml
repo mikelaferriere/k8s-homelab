@@ -2,8 +2,6 @@
 vault:
   injector:
     enabled: false
-#   server:
-#     dataStorage:
-#       mountPath: /volumeUSB1/usbshare
-#   ui:
-#     enabled: true
+  server:
+    service:
+      type: LoadBalancer
