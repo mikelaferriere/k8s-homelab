@@ -8,5 +8,5 @@ nfs-subdir-external-provisioner:
 
   storageClass:
     defaultClass: true
-    name: ufs-usb
+    name: nfs-usb
     provisionerName: nfs-provisioner-01
