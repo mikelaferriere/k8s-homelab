@@ -7,4 +7,6 @@ kubernetes-dashboard:
     enabled: false
   app:
     ingress:
-      enabled: false
+      enabled: true
+      hosts: []
+      ingressClassName: nginx
