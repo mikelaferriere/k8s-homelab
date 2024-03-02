@@ -1,2 +1,3 @@
 ---
-allowSnippetAnnotations: true
+controller:
+  allowSnippetAnnotations: true
