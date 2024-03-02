@@ -17,4 +17,5 @@ spec:
     namespace: nfs-provisioner
   syncPolicy:
     automated:
+      prune: true
       selfHeal: true

@@ -17,4 +17,5 @@ spec:
     namespace: metallb-system
   syncPolicy:
     automated:
+      prune: true
       selfHeal: true
