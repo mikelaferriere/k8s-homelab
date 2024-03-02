@@ -53,3 +53,12 @@ metadata:
   name: nfs-provisioner
   annotations:
     argocd.argoproj.io/sync-wave: "-1"
+
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: security
+  annotations:
+    argocd.argoproj.io/sync-wave: "-1"
+    
