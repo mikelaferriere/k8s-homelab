@@ -1,2 +1,4 @@
 ---
-#grafana:
+grafana:
+  service:
+    type: LoadBalancer
