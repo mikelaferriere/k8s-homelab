@@ -6,27 +6,39 @@ authentik:
         value: $__file{/vault/secrets/secret-key}
 
     podAnnotations:
-      podAnnotations:
-        vault.hashicorp.com/role: 'app'
-        vault.hashicorp.com/agent-inject-template-secret-key: |
-          {{- with secret "authentik" -}}
-          {{ .Data.secret-key }}
-          {{- end }}
-        vault.hashicorp.com/agent-inject-template-postgresql-password: |
-          {{- with secret "authentik/postgresql" -}}
-          {{ .Data.password }}
-          {{- end }}
+      vault.hashicorp.com/role: 'app'
+      vault.hashicorp.com/agent-inject-template-secret-key: |
+        {{- with secret "authentik" -}}
+        {{ .Data.secret-key }}
+        {{- end }}
+      vault.hashicorp.com/agent-inject-template-postgresql-password: |
+        {{- with secret "authentik/postgresql" -}}
+        {{ .Data.password }}
+        {{- end }}
 
     deploymentAnnotations:
-        vault.hashicorp.com/role: 'app'
-        vault.hashicorp.com/agent-inject-template-secret-key: |
-          {{- with secret "authentik" -}}
-          {{ .Data.secret-key }}
-          {{- end }}
-        vault.hashicorp.com/agent-inject-template-postgresql-password: |
-          {{- with secret "authentik/postgresql" -}}
-          {{ .Data.password }}
-          {{- end }}
+      vault.hashicorp.com/role: 'app'
+      vault.hashicorp.com/agent-inject-template-secret-key: |
+        {{- with secret "authentik" -}}
+        {{ .Data.secret-key }}
+        {{- end }}
+      vault.hashicorp.com/agent-inject-template-postgresql-password: |
+        {{- with secret "authentik/postgresql" -}}
+        {{ .Data.password }}
+        {{- end }}
+
+  # server:
+  #   service:
+  #     annotations:
+        # vault.hashicorp.com/role: 'app'
+        # vault.hashicorp.com/agent-inject-template-secret-key: |
+        #   {{- with secret "authentik" -}}
+        #   {{ .Data.secret-key }}
+        #   {{- end }}
+        # vault.hashicorp.com/agent-inject-template-postgresql-password: |
+        #   {{- with secret "authentik/postgresql" -}}
+        #   {{ .Data.password }}
+        #   {{- end }}
 
   authentik:
     secret_key: $__file{/vault/secrets/secret-key} 
