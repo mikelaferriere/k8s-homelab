@@ -6,46 +6,46 @@ authentik:
         # value: file:///vault/secrets/secret-key
         value: "as"
 
-    podAnnotations:
-      vault.hashicorp.com/agent-inject: "true"
-      vault.hashicorp.com/agent-inject-status: "update"
-      vault.hashicorp.com/role: 'internal-app'
-      vault.hashicorp.com/agent-inject-template-secret-key: |
-        {{- with secret "authentik" -}}
-        {{ .Data.secret-key }}
-        {{- end }}
-      vault.hashicorp.com/agent-inject-template-postgresql-password: |
-        {{- with secret "authentik/postgresql" -}}
-        {{ .Data.password }}
-        {{- end }}
+  #   podAnnotations:
+  #     vault.hashicorp.com/agent-inject: "true"
+  #     vault.hashicorp.com/agent-inject-status: "update"
+  #     vault.hashicorp.com/role: 'internal-app'
+  #     vault.hashicorp.com/agent-inject-template-secret-key: |
+  #       {{- with secret "authentik" -}}
+  #       {{ .Data.secret-key }}
+  #       {{- end }}
+  #     vault.hashicorp.com/agent-inject-template-postgresql-password: |
+  #       {{- with secret "authentik/postgresql" -}}
+  #       {{ .Data.password }}
+  #       {{- end }}
 
-    deploymentAnnotations:
-      vault.hashicorp.com/agent-inject: "true"
-      vault.hashicorp.com/agent-inject-status: "update"
-      vault.hashicorp.com/role: 'internal-app'
-      vault.hashicorp.com/agent-inject-template-secret-key: |
-        {{- with secret "authentik" -}}
-        {{ .Data.secret-key }}
-        {{- end }}
-      vault.hashicorp.com/agent-inject-template-postgresql-password: |
-        {{- with secret "authentik/postgresql" -}}
-        {{ .Data.password }}
-        {{- end }}
+  #   deploymentAnnotations:
+  #     vault.hashicorp.com/agent-inject: "true"
+  #     vault.hashicorp.com/agent-inject-status: "update"
+  #     vault.hashicorp.com/role: 'internal-app'
+  #     vault.hashicorp.com/agent-inject-template-secret-key: |
+  #       {{- with secret "authentik" -}}
+  #       {{ .Data.secret-key }}
+  #       {{- end }}
+  #     vault.hashicorp.com/agent-inject-template-postgresql-password: |
+  #       {{- with secret "authentik/postgresql" -}}
+  #       {{ .Data.password }}
+  #       {{- end }}
 
-  server:
-    service:
-      annotations:
-        vault.hashicorp.com/agent-inject: "true"
-        vault.hashicorp.com/agent-inject-status: "update"
-        vault.hashicorp.com/role: 'internal-app'
-        vault.hashicorp.com/agent-inject-template-secret-key: |
-          {{- with secret "authentik" -}}
-          {{ .Data.secret-key }}
-          {{- end }}
-        vault.hashicorp.com/agent-inject-template-postgresql-password: |
-          {{- with secret "authentik/postgresql" -}}
-          {{ .Data.password }}
-          {{- end }}
+  # server:
+  #   service:
+  #     annotations:
+  #       vault.hashicorp.com/agent-inject: "true"
+  #       vault.hashicorp.com/agent-inject-status: "update"
+  #       vault.hashicorp.com/role: 'internal-app'
+  #       vault.hashicorp.com/agent-inject-template-secret-key: |
+  #         {{- with secret "authentik" -}}
+  #         {{ .Data.secret-key }}
+  #         {{- end }}
+  #       vault.hashicorp.com/agent-inject-template-postgresql-password: |
+  #         {{- with secret "authentik/postgresql" -}}
+  #         {{ .Data.password }}
+  #         {{- end }}
 
   authentik:
     secret_key: ""
