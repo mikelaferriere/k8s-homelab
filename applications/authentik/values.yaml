@@ -1,2 +1,18 @@
 ---
-# authentik:
+authentik:
+  global:
+    podAnnotations:
+      podAnnotations:
+        vault.hashicorp.com/agent-inject-secret-secret-key: 'authentik/secret-key'
+
+    deploymentAnnotations:
+      podAnnotations:
+        vault.hashicorp.com/agent-inject-secret-secret-key: 'authentik/secret-key'
+
+  authentik:
+    secret_key: $__file{/vault/secrets/secret-key} 
+
+  worker:
+    env:
+      - name: AUTHENTIK_SECRET_KEY
+        value: $__file{/vault/secrets/secret-key}
