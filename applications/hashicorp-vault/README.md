@@ -2,6 +2,7 @@ https://developer.hashicorp.com/vault/docs/platform/k8s/helm
 https://github.com/hashicorp/vault-helm
 https://github.com/hashicorp/vault-helm/blob/main/values.yaml
 
+
 # Unseal vault
 
 ## Get vault pods
@@ -68,9 +69,9 @@ path "secret/*" {
 }
 EOF
 
-vault write auth/kubernetes/role/internalapp \
-      bound_service_account_names=internal-app \
-      bound_service_account_namespaces=default \
+vault write auth/kubernetes/role/internal-app \
+      bound_service_account_names=authentik,internal-app \
+      bound_service_account_namespaces=security \
       policies=internal-app \
       ttl=24h
 ```
