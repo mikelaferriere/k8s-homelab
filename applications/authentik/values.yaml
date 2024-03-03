@@ -1,6 +1,10 @@
 ---
 authentik:
   global:
+    env:
+      - name: AUTHENTIK_SECRET_KEY
+        value: $__file{/vault/secrets/secret-key}
+
     podAnnotations:
       podAnnotations:
         vault.hashicorp.com/agent-inject-secret-secret-key: 'authentik/secret-key'
@@ -12,7 +16,4 @@ authentik:
   authentik:
     secret_key: $__file{/vault/secrets/secret-key} 
 
-  worker:
-    env:
-      - name: AUTHENTIK_SECRET_KEY
-        value: $__file{/vault/secrets/secret-key}
+  # worker:
