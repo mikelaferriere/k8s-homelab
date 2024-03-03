@@ -7,11 +7,12 @@ authentik:
 
     podAnnotations:
       podAnnotations:
+        vault.hashicorp.com/role: 'app'
         vault.hashicorp.com/agent-inject-secret-secret-key: 'authentik/secret-key'
         vault.hashicorp.com/agent-inject-secret-postgresql-password: 'authentik/postgresql/password'
 
     deploymentAnnotations:
-      podAnnotations:
+        vault.hashicorp.com/role: 'app'
         vault.hashicorp.com/agent-inject-secret-secret-key: 'authentik/secret-key'
         vault.hashicorp.com/agent-inject-secret-postgresql-password: 'authentik/postgresql/password'
 
@@ -20,12 +21,12 @@ authentik:
     error_reporting:
       enabled: false
     postgresql:
-      password: $__file{/vault/secrets/postgresql/password}
+      password: $__file{/vault/secrets/postgresql-password}
 
   postgresql:
     enabled: true
     auth:
-      password: $__file{/vault/secrets/postgresql/password}
+      password: $__file{/vault/secrets/postgresql-password}
 
   redis:
     enabled: true
