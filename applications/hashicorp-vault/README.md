@@ -50,9 +50,27 @@ vault write auth/approle/role/app \
 
 ```
 
-# Create and attach policy to approle
+# Configure Kubernetes authentication
+https://developer.hashicorp.com/vault/tutorials/kubernetes/kubernetes-sidecar
+```bash
+vault auth enable kubernetes
+vault write auth/kubernetes/config \
+      kubernetes_host="https://$KUBERNETES_PORT_443_TCP_ADDR:443"
+```
+
+# Create and attach policy to kubernetes
 https://www.hashicorp.com/resources/policies-vault
 
 ```bash
-echo -e 'path "secret/*" {\n  capabilities = ["read", "list"]\n}' | vault policy write app -
+vault policy write internal-app - <<EOF
+path "secret/*" {
+   capabilities = ["read"]
+}
+EOF
+
+vault write auth/kubernetes/role/internalapp \
+      bound_service_account_names=internal-app \
+      bound_service_account_namespaces=default \
+      policies=internal-app \
+      ttl=24h
 ```
