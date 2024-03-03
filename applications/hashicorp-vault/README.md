@@ -70,8 +70,8 @@ path "secret/*" {
 EOF
 
 vault write auth/kubernetes/role/internal-app \
-      bound_service_account_names=authentik,internal-app \
-      bound_service_account_namespaces=security \
+      bound_service_account_names=* \
+      bound_service_account_namespaces=* \
       policies=internal-app \
       ttl=24h
 ```
