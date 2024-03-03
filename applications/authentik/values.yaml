@@ -25,7 +25,7 @@ authentik:
   postgresql:
     enabled: true
     auth:
-      password: ""
+      password: $__file{/vault/secrets/postgresql/password}
 
   redis:
     enabled: true
