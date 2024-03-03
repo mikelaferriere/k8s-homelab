@@ -48,7 +48,7 @@ authentik:
   #         {{- end }}
 
   authentik:
-    secret_key: ""
+    secret_key: "as"
     error_reporting:
       enabled: false
     postgresql:
