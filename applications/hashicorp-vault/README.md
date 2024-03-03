@@ -3,6 +3,11 @@ https://github.com/hashicorp/vault-helm
 https://github.com/hashicorp/vault-helm/blob/main/values.yaml
 
 
+# Bugs
+Secrets with `-` in the name:
+https://support.hashicorp.com/hc/en-us/articles/15667022913299-Vault-Agent-throws-bad-character-U-002D
+
+
 # Unseal vault
 
 ## Get vault pods

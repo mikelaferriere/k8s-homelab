@@ -12,3 +12,5 @@ vault:
   server:
     service:
       type: LoadBalancer
+  csi:
+    enabled: true
