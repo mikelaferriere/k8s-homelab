@@ -34,3 +34,23 @@ vault secrets enable -version=2 kv
 vault kv put hv/database/config username="db-readonly-username" password="db-secret-password"
 vault kv get kv/database/config
 ```
+
+# Enable AppRole auth so other apps in the cluster can access secrets
+https://developer.hashicorp.com/vault/docs/auth/approle
+
+```bash
+kubectl -n security exec -it hashicorp-vault-0 -- /bin/sh
+/ $
+
+export VAULT_TOKEN=<root-token>
+
+vault auth enable approle
+
+vault write auth/approle/role/app \
+    secret_id_ttl=10m \
+    token_num_uses=10 \
+    token_ttl=20m \
+    token_max_ttl=30m \
+    secret_id_num_uses=40
+
+```

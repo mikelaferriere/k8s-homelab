@@ -3,7 +3,7 @@ authentik:
   global:
     env:
       - name: AUTHENTIK_SECRET_KEY
-        value: $__file{/vault/secrets/secret-key}
+        value: file:///vault/secrets/secret-key
 
     podAnnotations:
       vault.hashicorp.com/agent-inject: "true"
@@ -47,16 +47,16 @@ authentik:
           {{- end }}
 
   authentik:
-    secret_key: $__file{/vault/secrets/secret-key} 
+    secret_key: file:///vault/secrets/secret-key
     error_reporting:
       enabled: false
     postgresql:
-      password: $__file{/vault/secrets/postgresql-password}
+      password: file:///vault/secrets/postgresql-password
 
   postgresql:
     enabled: true
     auth:
-      password: $__file{/vault/secrets/postgresql-password}
+      password: file:///vault/secrets/postgresql-password
 
   redis:
     enabled: true
