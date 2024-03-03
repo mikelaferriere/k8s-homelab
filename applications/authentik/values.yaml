@@ -32,8 +32,9 @@ authentik:
   #       {{ .Data.password }}
   #       {{- end }}
 
-  # server:
-  #   service:
+  server:
+    service:
+      type: LoadBalancer
   #     annotations:
   #       vault.hashicorp.com/agent-inject: "true"
   #       vault.hashicorp.com/agent-inject-status: "update"
