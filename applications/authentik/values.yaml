@@ -70,13 +70,13 @@ authentik:
 
   authentik:
     log_level: debug
-    secret_key: "PleaseGenerateA50CharKe"
+    secret_key: "PleaseGenerateA50CharKey"
     # This sends anonymous usage-data, stack traces on errors and
     # performance data to authentik.error-reporting.a7k.io, and is fully opt-in
     error_reporting:
       enabled: false
     postgresql:
-      password: "ThisIsNotASecurePasswor"
+      password: "ThisIsNotASecurePassword"
 
   # server:
   #   ingress:
@@ -86,10 +86,10 @@ authentik:
 
   postgresql:
     enabled: true
-    diagnosticMode:
-      enabled: true
+    image:
+      tag: 16.2.0
     auth:
-      password: "ThisIsNotASecurePasswor"
+      password: "ThisIsNotASecurePassword"
 
-  # redis:
-  #   enabled: true
+  redis:
+    enabled: true
