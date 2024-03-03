@@ -6,6 +6,8 @@ authentik:
         value: $__file{/vault/secrets/secret-key}
 
     podAnnotations:
+      vault.hashicorp.com/agent-inject: "true"
+      vault.hashicorp.com/agent-inject-status: "update"
       vault.hashicorp.com/role: 'app'
       vault.hashicorp.com/agent-inject-template-secret-key: |
         {{- with secret "authentik" -}}
@@ -17,6 +19,8 @@ authentik:
         {{- end }}
 
     deploymentAnnotations:
+      vault.hashicorp.com/agent-inject: "true"
+      vault.hashicorp.com/agent-inject-status: "update"
       vault.hashicorp.com/role: 'app'
       vault.hashicorp.com/agent-inject-template-secret-key: |
         {{- with secret "authentik" -}}
@@ -30,6 +34,8 @@ authentik:
   server:
     service:
       annotations:
+        vault.hashicorp.com/agent-inject: "true"
+        vault.hashicorp.com/agent-inject-status: "update"
         vault.hashicorp.com/role: 'app'
         vault.hashicorp.com/agent-inject-template-secret-key: |
           {{- with secret "authentik" -}}
