@@ -39,11 +39,6 @@ vault kv get kv/database/config
 https://developer.hashicorp.com/vault/docs/auth/approle
 
 ```bash
-kubectl -n security exec -it hashicorp-vault-0 -- /bin/sh
-/ $
-
-export VAULT_TOKEN=<root-token>
-
 vault auth enable approle
 
 vault write auth/approle/role/app \
@@ -53,4 +48,11 @@ vault write auth/approle/role/app \
     token_max_ttl=30m \
     secret_id_num_uses=40
 
+```
+
+# Create and attach policy to approle
+https://www.hashicorp.com/resources/policies-vault
+
+```bash
+echo -e 'path "secret/*" {\n  capabilities = ["read", "list"]\n}' | vault policy write app -
 ```
