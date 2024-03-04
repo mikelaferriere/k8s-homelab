@@ -37,7 +37,7 @@ kubectl -n security exec -it hashicorp-vault-0 -- /bin/sh
 export VAULT_TOKEN=<root-token>
 
 vault secrets enable -version=2 kv
-vault kv put hv/database/config username="db-readonly-username" password="db-secret-password"
+vault kv put kv/database/config username="db-readonly-username" password="db-secret-password"
 vault kv get kv/database/config
 ```
 
