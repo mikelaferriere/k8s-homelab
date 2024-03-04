@@ -52,11 +52,9 @@ authentik:
     auth:
       usePasswordFiles: true
 
-    # serviceAccount:
-    #   create: false
-    #   name: internal-app
-
     primary:
+      persistence:
+        subPath: "k8s/authentik"
       extraVolumes:
         - name: secrets-store-inline
           csi:
@@ -76,6 +74,9 @@ authentik:
 
   redis:
     enabled: true
+    master:
+      persistence:
+        subPath: "k8s/authentik"
 
 secret-store-csi-driver:
   syncSecret:

@@ -80,3 +80,7 @@ vault write auth/kubernetes/role/internal-app \
       policies=internal-app \
       ttl=24h
 ```
+
+# Secret Store CSI
+For when using attributes won't work:
+https://developer.hashicorp.com/vault/tutorials/kubernetes/kubernetes-secret-store-driver
