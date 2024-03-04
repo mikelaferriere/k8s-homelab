@@ -3,7 +3,7 @@ nfs-subdir-external-provisioner:
   replicaCount: 1
   nfs:
     server: 192.168.1.22
-    path: /volumeUSB1/usbshare
+    path: /volumeUSB1/usbshare/k8s-pvc
   storageClass:
     defaultClass: true
     name: nfs-usb
