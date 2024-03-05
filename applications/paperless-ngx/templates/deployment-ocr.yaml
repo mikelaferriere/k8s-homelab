@@ -1,0 +1,47 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations: {}
+  labels:
+    app: {{ .Values.app.name }}-ocr
+  name: {{ .Values.app.name }}-ocr
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ .Values.app.name }}-ocr
+  strategy: {}
+  template:
+    metadata:
+      annotations: {}
+      labels:
+        app: {{ .Values.app.name }}-ocr
+    spec:
+      containers:
+        - name: gotenberg
+          image: docker.io/gotenberg/gotenberg:latest
+          command:
+            - "gotenberg"
+            - "--chromium-disable-javascript=true"
+            - "--chromium-allow-list=file:///tmp/."
+          resources:
+            limits:
+              cpu: 500m
+            requests:
+              cpu: 200m
+          ports:
+            - containerPort: 3000
+          resources: {}
+        - name: tika
+          image: ghcr.io/paperless-ngx/tika:latest
+          resources:
+            limits:
+              cpu: 500m
+            requests:
+              cpu: 200m
+          ports:
+            - containerPort: 9998
+          resources: {}
+      restartPolicy: Always
+status: {}

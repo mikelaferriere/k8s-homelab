@@ -1,1 +1,16 @@
 ---
+app:
+  name: "paperless-ngx"
+  storageClass: "nfs-provisioner-documents-test"
+
+postgresql:
+  nameOverride: "postgresql"
+  metrics:
+    enabled: true
+
+redis:
+  nameOverride: "redis"
+  replica:
+    replicaCount: 1
+  metrics:
+    enabled: true
