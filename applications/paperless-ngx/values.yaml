@@ -5,12 +5,8 @@ app:
 
 postgresql:
   nameOverride: "postgresql"
-  metrics:
-    enabled: true
 
 redis:
   nameOverride: "redis"
   replica:
     replicaCount: 1
-  metrics:
-    enabled: true
