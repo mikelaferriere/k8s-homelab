@@ -16,8 +16,8 @@ spec:
         app: gotenberg
     spec:
       containers:
-      - name: tigotenbergka
-        image: ghcr.io/paperless-ngx/gotenberg:latest
+      - name: gotenberg
+        image: docker.io/gotenberg/gotenberg:latest
         pullImage: Always
         command:
           - "gotenberg"
