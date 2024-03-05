@@ -18,7 +18,7 @@ spec:
       containers:
       - name: gotenberg
         image: docker.io/gotenberg/gotenberg:latest
-        pullImage: Always
+        imagePullPolicy: Always
         command:
           - "gotenberg"
           - "--chromium-disable-javascript=true"
