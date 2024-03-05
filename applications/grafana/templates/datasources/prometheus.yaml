@@ -2,7 +2,7 @@
 apiVersion: v1
 kind: Secret
 metadata:
-  name: grafana-datasources
+  name: prometheus-datasource
   labels:
     grafana_datasource: 'true' # default value for: sidecar.datasources.label
 stringData:
