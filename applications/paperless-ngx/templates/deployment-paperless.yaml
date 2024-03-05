@@ -39,17 +39,20 @@ spec:
           resources: {}
           volumeMounts:
             - mountPath: /usr/src/paperless/data
-              name: {{ .Values.app.name }}-claim
+              name: document-claim
             - mountPath: /usr/src/paperless/media
-              name: {{ .Values.app.name }}-claim
+              name: document-claim
             - mountPath: /usr/src/paperless/export
-              name: {{ .Values.app.name }}-claim
+              name: document-claim
             - mountPath: /usr/src/paperless/consume
-              name: {{ .Values.app.name }}-claim
+              name: paperless-consume
       restartPolicy: Always
-#      volumes:
-#        - name: paperless-consume
-#          nfs:
-#            server: Your-NFS-HOSTNAME-OR-IP
-#            path: /path/to/export/directory
+     volumes:
+       - name: document-claim
+         persistentVolumeClaim:
+           claimName: {{ .Values.app.name }}-claim
+       - name: paperless-consume
+         nfs:
+           server: 192.168.1.22
+           path: /volume1/doc-test/consume
 status: {}
