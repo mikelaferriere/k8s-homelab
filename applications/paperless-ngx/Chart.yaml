@@ -1,0 +1,10 @@
+apiVersion: v2
+name: paperless-ngx
+version: 1.0.0
+dependencies:
+  - name: redis
+    version: 18.17.1
+    repository: oci://registry-1.docker.io/bitnamicharts
+  - name: postgresql
+    version: 14.2.4
+    repository: oci://registry-1.docker.io/bitnamicharts
