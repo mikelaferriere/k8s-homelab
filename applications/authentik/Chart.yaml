@@ -3,7 +3,7 @@ name: authentik
 version: 1.0.1
 dependencies:
   - name: authentik
-    version: 2024.2.1
+    version: 2024.2.2
     repository: https://charts.goauthentik.io/
   - name: secrets-store-csi-driver
     version: 1.4.0
