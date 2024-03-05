@@ -69,7 +69,7 @@ https://www.hashicorp.com/resources/policies-vault
 
 ```bash
 vault policy write internal-app - <<EOF
-path "secret/*" {
+path "*" {
    capabilities = ["read"]
 }
 EOF
