@@ -14,9 +14,9 @@ loki:
       # -- If enabled, ServiceMonitor resources for Prometheus Operator are created
       enabled: false
     selfMonitoring:
-      enabled: true
+      enabled: false
       grafanaAgent:
-        installOperator: true
+        installOperator: false
       lokiCanary:
         enabled: false
 
