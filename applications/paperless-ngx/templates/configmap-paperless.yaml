@@ -6,7 +6,7 @@ metadata:
 data:
   PAPERLESS_SECRET_KEY: "generate a long secret or make one up"
   PAPERLESS_DBHOST: postgresql
-  PAPERLESS_REDIS: "redis://redis:6379"
+  PAPERLESS_REDIS: "redis"
   PAPERLESS_TIKA_ENABLED: "1"
   PAPERLESS_TIKA_ENDPOINT: http://{{ .Values.app.name }}-ocr:9998
   PAPERLESS_TIKA_GOTENBERG_ENDPOINT: http://{{ .Values.app.name }}-ocr:3000
