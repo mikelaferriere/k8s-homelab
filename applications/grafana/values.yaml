@@ -10,7 +10,9 @@ grafana:
   sidecar:
     # Beware of crazy JSON :/
     dashboards:
+      # https://github.com/grafana/helm-charts/blob/main/charts/grafana/values.yaml#L718
       enabled: true
+
     datasources:
       enabled: true
       initDatasources: true
