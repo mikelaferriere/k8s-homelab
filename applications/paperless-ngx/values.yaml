@@ -3,9 +3,14 @@ app:
   name: "paperless-ngx"
   storageClass: "nfs-documents-test"
 
-# postgresql:
-#   nameOverride: "postgresql"
+postgresql:
+  auth:
+    username: "paperless"
+    password: "paperless"
+    database: "paperless"
 
 redis:
+  auth:
+    enabled: false
   replica:
     replicaCount: 1

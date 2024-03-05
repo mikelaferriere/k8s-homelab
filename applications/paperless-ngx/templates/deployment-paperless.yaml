@@ -39,18 +39,24 @@ spec:
           resources: {}
           volumeMounts:
             - mountPath: /usr/src/paperless/data
-              name: document-claim
+              name: data-claim
             - mountPath: /usr/src/paperless/media
-              name: document-claim
+              name: media-claim
             - mountPath: /usr/src/paperless/export
-              name: document-claim
+              name: export-claim
             - mountPath: /usr/src/paperless/consume
               name: paperless-consume
       restartPolicy: Always
       volumes:
-        - name: document-claim
+        - name: data-claim
           persistentVolumeClaim:
-            claimName: {{ .Values.app.name }}-claim
+            claimName: data-claim
+        - name: media-claim
+          persistentVolumeClaim:
+            claimName: media-claim
+        - name: export-claim
+          persistentVolumeClaim:
+            claimName: export-claim
         - name: paperless-consume
           nfs:
             server: 192.168.1.22

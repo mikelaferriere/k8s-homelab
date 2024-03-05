@@ -3,8 +3,40 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   labels:
-    app: {{ .Values.app.name }}-claim
-  name: {{ .Values.app.name }}-claim
+    app: {{ .Values.app.name }}
+  name: data-claim
+spec:
+  storageClassName: {{ .Values.app.storageClass }}
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi
+status: {}
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  labels:
+    app: {{ .Values.app.name }}
+  name: media-claim
+spec:
+  storageClassName: {{ .Values.app.storageClass }}
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi
+status: {}
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  labels:
+    app: {{ .Values.app.name }}
+  name: export-claim
 spec:
   storageClassName: {{ .Values.app.storageClass }}
   accessModes:
