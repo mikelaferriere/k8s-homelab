@@ -1,7 +1,7 @@
 ---
 app:
   name: "paperless-ngx"
-  storageClass: "nfs-provisioner-documents-test"
+  storageClass: "nfs-documents-test"
 
 postgresql:
   nameOverride: "postgresql"
