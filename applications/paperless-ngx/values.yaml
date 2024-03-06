@@ -23,13 +23,13 @@ postgresql:
               secretProviderClass: "vault-database"
       extraVolumeMounts:
         - name: secrets-store-inline
-          mountPath: "/vault/secrets/postgresql-password"
+          mountPath: "/vault/secrets/pg_password"
           readOnly: true
       extraEnvVars:
         - name: ALLOW_EMPTY_PASSWORD
           value: "true"
         - name: POSTGRES_PASSWORD_FILE
-          value: /vault/secrets/postgresql-password
+          value: /vault/secrets/pg_password
 
 redis:
   auth:

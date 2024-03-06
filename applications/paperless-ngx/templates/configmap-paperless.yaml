@@ -9,11 +9,11 @@ data:
   PAPERLESS_TIME_ZONE: America/New_York
   PAPERLESS_TASK_WORKERS: "2"
 
-  PAPERLESS_SECRET_KEY: file:///vault/secrets/secrets/secretkey
-  PAPERLESS_ADMIN_USER: file:///vault/secrets/secrets/admin_user
-  PAPERLESS_ADMIN_PASSWORD: file:///vault/secrets/secrets/admin_password
+  PAPERLESS_SECRET_KEY: file:///vault/secrets/secretkey
+  PAPERLESS_ADMIN_USER: file:///vault/secrets/admin_user
+  PAPERLESS_ADMIN_PASSWORD: file:///vault/secrets/admin_password
   PAPERLESS_DBHOST: {{ .Values.app.name }}-postgresql
-  PAPERLESS_DBPASS: file:///vault/secrets/secrets/password
+  PAPERLESS_DBPASS: file:///vault/secrets/pg_password
   PAPERLESS_REDIS: redis://{{ .Values.app.name }}-redis-master
   PAPERLESS_TIKA_ENABLED: "1"
   PAPERLESS_TIKA_ENDPOINT: http://{{ .Values.app.name }}-ocr:9998

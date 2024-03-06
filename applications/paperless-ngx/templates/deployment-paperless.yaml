@@ -38,7 +38,7 @@ spec:
           resources: {}
           volumeMounts:
             - name: secrets-store-inline
-              mountPath: "/vault/secrets/secrets"
+              mountPath: "/vault/secrets"
               readOnly: true
             - mountPath: /usr/src/paperless/data
               name: data-claim
