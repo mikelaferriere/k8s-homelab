@@ -78,7 +78,7 @@ vault write auth/kubernetes/role/internal-app \
       bound_service_account_names=* \
       bound_service_account_namespaces=* \
       policies=internal-app \
-      ttl=24h
+      ttl=1h
 ```
 
 # Secret Store CSI

@@ -15,20 +15,22 @@ spec:
     type: Recreate
   template:
     metadata:
-      annotations:
-        vault.hashicorp.com/agent-inject: "true"
-        vault.hashicorp.com/agent-inject-status: "update"
-        vault.hashicorp.com/role: 'internal-app'
-        vault.hashicorp.com/agent-inject-template-secret-key: |
-          {{`{{- with secret "kv/data/paperless" -}}
-          export PAPERLESS_SECRET_KEY={{ .Data.secretkey }}
-          export PAPERLESS_SECRET_KEY={{ .Data.admin_user }}
-          export PAPERLESS_SECRET_KEY={{ .Data.admin_password }}
-          {{- end }}`}}
-        vault.hashicorp.com/agent-inject-template-postgresql-password: |
-          {{`{{- with secret "kv/data/paperless/postgresql" -}}
-          export PAPERLESS_DBPASS={{ .Data.password }}
-          {{- end }}`}}
+      # annotations:
+      #   vault.hashicorp.com/agent-inject: "true"
+      #   vault.hashicorp.com/agent-inject-status: "update"
+      #   vault.hashicorp.com/role: 'internal-app'
+      #   # vault.hashicorp.com/agent-inject-secret-secret-key: 'kv/data/secrets/paperless'
+      #   vault.hashicorp.com/agent-inject-template-secret-key: |
+      #     {{`{{ with secret "kv/data/secrets/paperless" }}
+      #     export PAPERLESS_SECRET_KEY={{ .Data.data.secretkey }}
+      #     export PAPERLESS_ADMIN_USER={{ .Data.data.admin_user }}
+      #     export PAPERLESS_ADMIN_PASSWORD={{ .Data.data.admin_password }}
+      #     {{ end }}`}}
+      #   # vault.hashicorp.com/agent-inject-secret-postgresql-password: 'kv/data/secrets/paperless/postgresql'
+      #   vault.hashicorp.com/agent-inject-template-postgresql-password: |
+      #     {{`{{ with secret "kv/data/secrets/paperless/postgresql" }}
+      #     export PAPERLESS_DBPASS={{ .Data.data.password }}
+      #     {{ end }}`}}
       labels:
         app: {{ .Values.app.name }}-app
     spec:
