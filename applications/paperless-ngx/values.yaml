@@ -1,13 +1,35 @@
 ---
 app:
   name: "paperless-ngx"
-  storageClass: "nfs-documents-test"
+  storageClass: "nfs-paperless"
+
+secret-store-csi-driver:
+  syncSecret:
+    enabled: true
 
 postgresql:
-  auth:
-    username: "paperless"
-    password: "paperless"
-    database: "paperless"
+    auth:
+      username: "paperless"
+      database: "paperless"
+      usePasswordFiles: true
+
+    primary:
+      extraVolumes:
+        - name: secrets-store-inline
+          csi:
+            driver: secrets-store.csi.k8s.io
+            readOnly: true
+            volumeAttributes:
+              secretProviderClass: "vault-database"
+      extraVolumeMounts:
+        - name: secrets-store-inline
+          mountPath: "/vault/secrets/postgresql-password"
+          readOnly: true
+      extraEnvVars:
+        - name: ALLOW_EMPTY_PASSWORD
+          value: "true"
+        - name: POSTGRES_PASSWORD_FILE
+          value: /vault/secrets/postgresql-password
 
 redis:
   auth:
