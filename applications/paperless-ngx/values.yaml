@@ -15,21 +15,21 @@ postgresql:
 
     primary:
       extraVolumes:
-        - name: secrets-store-inline
+        - name: vault-database
           csi:
             driver: secrets-store.csi.k8s.io
             readOnly: true
             volumeAttributes:
               secretProviderClass: "vault-database"
       extraVolumeMounts:
-        - name: secrets-store-inline
+        - name: vault-database
           mountPath: "/vault/secrets/pg_password"
           readOnly: true
       extraEnvVars:
         - name: ALLOW_EMPTY_PASSWORD
           value: "true"
         - name: POSTGRES_PASSWORD_FILE
-          value: /vault/secrets/pg_password
+          value: /mnt/secrets-store/pg_password
 
 redis:
   auth:

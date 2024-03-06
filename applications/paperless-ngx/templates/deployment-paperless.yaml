@@ -61,8 +61,17 @@ spec:
               name: export-claim
             - mountPath: /usr/src/paperless/consume
               name: paperless-consume
+            - name: vault-database
+              mountPath: "/mnt/secrets-store"
+              readOnly: true
       restartPolicy: Always
       volumes:
+        - name: vault-database
+          csi:
+            driver: secrets-store.csi.k8s.io
+            readOnly: true
+            volumeAttributes:
+              secretProviderClass: "vault-database"
         - name: data-claim
           persistentVolumeClaim:
             claimName: data-claim
