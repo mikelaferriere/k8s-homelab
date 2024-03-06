@@ -1,5 +1,8 @@
 ---
 argo-cd:
+  global:
+    addPrometheusAnnotations: true
+    
   dex:
     enabled: false
   notifications:
@@ -12,8 +15,8 @@ argo-cd:
     service:
       type: LoadBalancer
 
-  global:
-    podAnnotations:
-      prometheus.io/scrape: "true"
-      prometheus.io/path: /metrics
-      prometheus.io/port: "8080"
+  # global:
+  #   podAnnotations:
+  #     prometheus.io/scrape: "true"
+  #     prometheus.io/path: /metrics
+  #     prometheus.io/port: "8080"
