@@ -7,3 +7,6 @@ spec:
   storageClassName: nfs
   accessModes:
     - ReadWriteMany
+  resources:
+    requests:
+      storage: 300Gi
