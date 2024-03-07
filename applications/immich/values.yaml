@@ -13,3 +13,8 @@ immich:
 
   redis:
     enabled: true
+
+  server:
+    service:
+      main: 
+        type: LoadBalancer
