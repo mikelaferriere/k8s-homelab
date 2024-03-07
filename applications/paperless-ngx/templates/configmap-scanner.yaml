@@ -1,0 +1,12 @@
+---
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: scanner-config
+data:
+  IP: "192.168.6.197"
+  LABEL: scan
+  PATTERN: "scan_dd.mm.yyyy_hh:MM:ss"
+  PUID: "0"
+  PGID: "0"
+  TX: "America/New_York"

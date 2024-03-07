@@ -12,8 +12,8 @@ data:
   PAPERLESS_SECRET_KEY_FILE: /mnt/secrets-store/secretkey
   PAPERLESS_ADMIN_USER_FILE: /mnt/secrets-store/admin_user
   PAPERLESS_ADMIN_PASSWORD_FILE: /mnt/secrets-store/admin_password
-
   PAPERLESS_DBPASS_FILE: /mnt/secrets-store/pg_password
+
   PAPERLESS_REDIS: redis://{{ .Values.app.name }}-redis-master
   PAPERLESS_TIKA_ENABLED: "1"
   PAPERLESS_TIKA_ENDPOINT: http://{{ .Values.app.name }}-ocr:9998
@@ -22,3 +22,4 @@ data:
   PAPERLESS_CONSUMER_POLLING: "60"
   PAPERLESS_CONSUMER_RECURSIVE: "true"
   PAPERLESS_CONSUMER_SUBDIRS_AS_TAGS: "true"
+  PAPERLESS_FILENAME_FORMAT: {created_year}/{correspondent}/{created_month}.{created_day}-{title}

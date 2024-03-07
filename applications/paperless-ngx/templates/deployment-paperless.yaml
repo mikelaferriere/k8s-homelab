@@ -15,30 +15,23 @@ spec:
     type: Recreate
   template:
     metadata:
-      # annotations:
-      #   vault.hashicorp.com/agent-inject: "true"
-      #   vault.hashicorp.com/agent-inject-status: "update"
-      #   vault.hashicorp.com/role: 'internal-app'
-      #   # vault.hashicorp.com/agent-inject-secret-secret-key: 'kv/data/secrets/paperless'
-      #   vault.hashicorp.com/agent-inject-template-secret-key: |
-      #     {{`{{ with secret "kv/data/secrets/paperless" }}
-      #     export PAPERLESS_SECRET_KEY={{ .Data.data.secretkey }}
-      #     export PAPERLESS_ADMIN_USER={{ .Data.data.admin_user }}
-      #     export PAPERLESS_ADMIN_PASSWORD={{ .Data.data.admin_password }}
-      #     {{ end }}`}}
-      #   # vault.hashicorp.com/agent-inject-secret-postgresql-password: 'kv/data/secrets/paperless/postgresql'
-      #   vault.hashicorp.com/agent-inject-template-postgresql-password: |
-      #     {{`{{ with secret "kv/data/secrets/paperless/postgresql" }}
-      #     export PAPERLESS_DBPASS={{ .Data.data.password }}
-      #     {{ end }}`}}
       labels:
         app: {{ .Values.app.name }}-app
     spec:
       containers:
+        - name: {{ .Values.app.name }}-scanner
+          image: manuc66/node-hp-scan-to:latest
+          resources: {}
+          envFrom:
+          - configMapRef:
+              name: scanner-config
+          volumeMounts:
+            - mountPath: /scan
+              name: paperless-scanner
         - name: {{ .Values.app.name }}-app
           envFrom:
           - configMapRef:
-              name: {{ .Values.app.name }}-config   
+              name: {{ .Values.app.name }}-config
           image: ghcr.io/paperless-ngx/paperless-ngx:latest
           livenessProbe:
             exec:
@@ -84,5 +77,9 @@ spec:
         - name: paperless-consume
           nfs:
             server: 192.168.1.22
-            path: /volume1/doc-test/consume
+            path: /volume1/paperless/consume
+        - name: paperless-scanner
+          nfs:
+            server: 192.168.1.22
+            path: /volume1/paperless/consume/scanner
 status: {}
