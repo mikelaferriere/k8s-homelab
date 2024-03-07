@@ -1,0 +1,1 @@
+https://github.com/immich-app/immich-charts
