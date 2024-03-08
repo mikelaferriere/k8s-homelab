@@ -1,8 +1,9 @@
 ---
 ingress-nginx:
   controller:
-    annotations:
+    metrics:
+      enabled: true
+    podAnnotations:
       prometheus.io/scrape: "true"
-      prometheus.io/port: "9113"
-      prometheus.io/scheme: http
+      prometheus.io/port: "10254"
     allowSnippetAnnotations: true

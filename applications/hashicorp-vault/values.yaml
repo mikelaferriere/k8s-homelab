@@ -1,5 +1,8 @@
 ---
 vault:
+  global:
+    serverTelemetry:
+      prometheusOperator: true
   injector:
     enabled: true
     metrics:
