@@ -12,12 +12,12 @@ authentik:
       vault.hashicorp.com/agent-inject-status: "update"
       vault.hashicorp.com/role: 'internal-app'
       vault.hashicorp.com/agent-inject-template-secret-key: |
-        {{- with secret "kv/data/authentik" -}}
-        {{ index .Data.data "secret-key" }}
+        {{- with secret "kv/data/secrets/authentik" -}}
+        {{ .Data.AUTHENTIK_SECRET_KEY }}
         {{- end }}
       vault.hashicorp.com/agent-inject-template-postgresql-password: |
-        {{- with secret "kv/data/authentik/postgresql" -}}
-        {{ .Data.password }}
+        {{- with secret "kv/data/secrets/authentik" -}}
+        {{ .Data.PG_PASSWORD }}
         {{- end }}
 
 
@@ -26,12 +26,12 @@ authentik:
       vault.hashicorp.com/agent-inject-status: "update"
       vault.hashicorp.com/role: 'internal-app'
       vault.hashicorp.com/agent-inject-template-secret-key: |
-        {{- with secret "kv/data/authentik" -}}
-        {{ index .Data.data "secret-key" }}
+        {{- with secret "kv/data/secrets/authentik" -}}
+        {{ .Data.AUTHENTIK_SECRET_KEY }}
         {{- end }}
       vault.hashicorp.com/agent-inject-template-postgresql-password: |
-        {{- with secret "kv/data/authentik/postgresql" -}}
-        {{ .Data.password }}
+        {{- with secret "kv/data/secrets/authentik" -}}
+        {{ .Data.PG_PASSWORD }}
         {{- end }}
 
   server:
@@ -65,13 +65,13 @@ authentik:
               secretProviderClass: "vault-database"
       extraVolumeMounts:
         - name: secrets-store-inline
-          mountPath: "/vault/secrets/postgresql-password"
+          mountPath: "/mnt/secret-store/postgresql-password"
           readOnly: true
       extraEnvVars:
         - name: ALLOW_EMPTY_PASSWORD
           value: "true"
         - name: POSTGRES_PASSWORD_FILE
-          value: /vault/secrets/postgresql-password
+          value: /mnt/secret-store/postgresql-password
 
   redis:
     enabled: true
