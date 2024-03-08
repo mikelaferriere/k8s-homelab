@@ -5,3 +5,20 @@ spec:
   source:
     repoURL: https://github.com/mikelaferriere/k8s-homelab.git
     targetRevision: HEAD
+
+namespaces:
+  - argo-cd
+  - cert-manager
+  - immich
+  - ingress-nginx
+  - kubernetes-dashboard
+  - metallb-system
+  - monitoring
+  - nfs-provisioner
+  - paperless-ngx
+  - security
+
+applications:
+  - name: immich
+    path: applications/immich/
+    destinationNamespace: immich
