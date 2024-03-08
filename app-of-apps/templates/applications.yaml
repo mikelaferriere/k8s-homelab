@@ -6,7 +6,7 @@ metadata:
   name: {{ $app.name }}
   namespace: argo-cd
   finalizers:
-  - resources-finalizer.argocd.argoproj.io
+    - resources-finalizer.argocd.argoproj.io
 spec:
   project: default
   source:
@@ -20,4 +20,8 @@ spec:
     automated:
       prune: true
       selfHeal: true
+  {{- if $app.ignoreDifferences }}
+  ignoreDifferences:
+  {{- toYaml $app.ignoreDifferences | nindent 4 }}
+  {{- end }}
 {{- end }}

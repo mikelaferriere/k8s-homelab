@@ -1,4 +1,12 @@
 ---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: argo-cd
+  annotations:
+    argocd.argoproj.io/sync-wave: "-1"
+
+---
 {{- range $namespace := .Values.namespaces }}
 apiVersion: v1
 kind: Namespace
