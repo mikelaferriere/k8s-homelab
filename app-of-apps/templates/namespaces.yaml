@@ -7,11 +7,14 @@ metadata:
     argocd.argoproj.io/sync-wave: "-1"
 
 ---
-{{- range $namespace := .Values.namespaces }}
 apiVersion: v1
-kind: Namespace
-metadata:
-  name: {{ $namespace }}
-  annotations:
-    argocd.argoproj.io/sync-wave: "-1"
+kind: List
+items: 
+{{- range .Values.namespaces }}
+  - apiVersion: v1
+    kind: Namespace
+    metadata:
+      name: {{ . }}
+      annotations:
+        argocd.argoproj.io/sync-wave: "-1"
 {{- end }}
