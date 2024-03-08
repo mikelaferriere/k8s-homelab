@@ -43,7 +43,7 @@ applications:
     path: applications/immich/
     destinationNamespace: immich
   - name: ingress-nginx
-    path: applications/ingress-nginx/
+    path: applications/ingress-controller/
     destinationNamespace: ingress-nginx
   - name: loki
     path: applications/loki/
