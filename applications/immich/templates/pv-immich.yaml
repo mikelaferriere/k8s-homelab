@@ -5,7 +5,7 @@ metadata:
   name: nfs-photos
 spec:
   capacity:
-    storage: 300Gi
+    storage: 1Gi
   volumeMode: Filesystem
   accessModes:
     - ReadWriteMany
