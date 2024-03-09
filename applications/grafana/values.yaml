@@ -50,7 +50,7 @@ grafana:
     ############ Grafana / Authentik Integration ############
     #########################################################
     auth:
-      signout_redirect_url: https://auth-k8s.laferriere.app/application/o/grafana/end-session/
+      signout_redirect_url: http://10.10.10.208/application/o/grafana/end-session/
       # Optionally enable auto-login
       oauth_auto_login: true
       oauth_allow_insecure_email_lookup: true
@@ -66,8 +66,8 @@ grafana:
       client_id: $__file{/mnt/secrets-store/client_id}
       client_secret: $__file{/mnt/secrets-store/client_secret}
       scopes: openid email profile
-      auth_url: https://auth-k8s.laferriere.app/application/o/authorize/
-      token_url: https://auth-k8s.laferriere.app/application/o/token/
-      api_url: https://auth-k8s.laferriere.app/application/o/userinfo/
+      auth_url: http://10.10.10.208/application/o/authorize/
+      token_url: http://10.10.10.208/application/o/token/
+      api_url: http://10.10.10.208/application/o/userinfo/
       # Optionally map user groups to Grafana roles
       role_attribute_path: contains(groups[*], 'Grafana Admins') && 'Admin' || contains(groups[*], 'Grafana Editors') && 'Editor' || 'Viewer'
