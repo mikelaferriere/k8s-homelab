@@ -35,11 +35,8 @@ authentik:
         {{- end }}
 
   server:
-    ingress:
-      ingressClassName: nginx
-      enabled: true
-      hosts:
-        - auth-k8s.laferriere.app
+    service:
+      type: LoadBalancer
 
   authentik:
     secret_key: file:///vault/secrets/secret-key
