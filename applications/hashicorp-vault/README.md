@@ -81,6 +81,30 @@ vault write auth/kubernetes/role/internal-app \
       ttl=1h
 ```
 
+# Configure OIDC
+```bash
+export VAULT_TOKEN=<root-token>
+export VAULT_ADDR='http://127.0.0.1:8200'
+
+vault auth enable oidc
+
+vault write auth/oidc/config \
+    oidc_discovery_url="https://<EXTERNAL_OATUH_DOMAIN>/application/o/hashicorp-vault/" \
+    oidc_client_id="<HASHICORP_CLIENT_ID>" \
+    oidc_client_secret="<HASHICORP_CLIENT_SECRET>" \
+    default_role="reader"
+
+vault write auth/oidc/role/reader \
+    bound_audiences="<HASHICORP_CLIENT_ID>" \
+    allowed_redirect_uris="https://<EXTERNAL_DOMAIN>/ui/vault/auth/oidc/oidc/callback" \
+    allowed_redirect_uris="https://<EXTERNAL_DOMAIN>/oidc/callback" \
+    allowed_redirect_uris="http://localhost:8200/oidc/callback" \
+    user_claim="sub" \
+    policies="reader"
+
+vault login -method=oidc role="reader"
+```
+
 # Secret Store CSI
 For when using attributes won't work:
 https://developer.hashicorp.com/vault/tutorials/kubernetes/kubernetes-secret-store-driver
