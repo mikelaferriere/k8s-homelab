@@ -13,6 +13,7 @@ data:
   PAPERLESS_ADMIN_USER_FILE: /mnt/secrets-store/admin_user
   PAPERLESS_ADMIN_PASSWORD_FILE: /mnt/secrets-store/admin_password
   PAPERLESS_DBPASS_FILE: /mnt/secrets-store/pg_password
+  PAPERLESS_URL: https://paperless.laferriere.app
 
   PAPERLESS_REDIS: redis://{{ .Values.app.name }}-redis-master
   PAPERLESS_TIKA_ENABLED: "1"
@@ -23,3 +24,5 @@ data:
   PAPERLESS_CONSUMER_RECURSIVE: "true"
   PAPERLESS_CONSUMER_SUBDIRS_AS_TAGS: "true"
   PAPERLESS_FILENAME_FORMAT: "{created_year}/{correspondent}/{created_month}.{created_day}-{title}"
+  PAPERLESS_APPS: allauth.socialaccount.providers.openid_connect
+  PAPERLESS_SOCIALACCOUNT_PROVIDERS_FILE: /mnt/secrets-store/providers_json
