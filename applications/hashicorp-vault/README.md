@@ -84,25 +84,36 @@ vault write auth/kubernetes/role/internal-app \
 # Configure OIDC
 ```bash
 export VAULT_TOKEN=<root-token>
-export VAULT_ADDR='http://127.0.0.1:8200'
+export AUTH_DOMAIN=<>
+export AUTH_CLIENT_ID=<>
+export AUTH_CLIENT_SECRET=<>
+export VAULT_DOMAIN=<>
+export VAULT_INTERNAL_DOMAIN=<>
+
+vault policy write manager - <<EOF
+path "*" {
+   capabilities = ["create", "read", "update", "delete", "list"]
+}
+EOF
 
 vault auth enable oidc
 
 vault write auth/oidc/config \
-    oidc_discovery_url="https://<EXTERNAL_OATUH_DOMAIN>/application/o/hashicorp-vault/" \
-    oidc_client_id="<HASHICORP_CLIENT_ID>" \
-    oidc_client_secret="<HASHICORP_CLIENT_SECRET>" \
-    default_role="reader"
+    oidc_discovery_url="https://${AUTH_DOMAIN}/application/o/hashicorp-vault/" \
+    oidc_client_id="${AUTH_CLIENT_ID}" \
+    oidc_client_secret="${AUTH_CLIENT_SECRET}" \
+    default_role="manager"
 
-vault write auth/oidc/role/reader \
-    bound_audiences="<HASHICORP_CLIENT_ID>" \
-    allowed_redirect_uris="https://<EXTERNAL_DOMAIN>/ui/vault/auth/oidc/oidc/callback" \
-    allowed_redirect_uris="https://<EXTERNAL_DOMAIN>/oidc/callback" \
-    allowed_redirect_uris="http://localhost:8200/oidc/callback" \
+vault write auth/oidc/role/manager \
+    bound_audiences="${AUTH_CLIENT_ID}" \
+    allowed_redirect_uris="https://${VAULT_DOMAIN}/ui/vault/auth/oidc/oidc/callback" \
+    allowed_redirect_uris="https://${VAULT_DOMAIN}/oidc/callback" \
+    allowed_redirect_uris="http://${VAULT_INTERNAL_DOMAIN}/ui/vault/auth/oidc/oidc/callback" \
+    allowed_redirect_uris="http://${VAULT_INTERNAL_DOMAIN}/oidc/callback" \
     user_claim="sub" \
-    policies="reader"
+    policies="manager"
 
-vault login -method=oidc role="reader"
+vault login -method=oidc role="manager"
 ```
 
 # Secret Store CSI
