@@ -1,1 +1,11 @@
 ---
+docker-registry-ui:
+  ui:
+    service:
+      type: LoadBalancer
+  registry:
+    enabled: true
+    extraEnv:
+      - REGISTRY_HTTP_HEADERS_Access-Control-Allow-Origin: ['*']
+    service:
+      type: LoadBalancer
