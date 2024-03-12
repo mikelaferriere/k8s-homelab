@@ -1,11 +1,19 @@
 ---
 docker-registry-ui:
   ui:
+    singleRegistry: true
+    dockerRegistryUrl: http://registry:5000
+    useCacheControl: true
     service:
       type: LoadBalancer
   registry:
     enabled: true
     extraEnv:
-      - REGISTRY_HTTP_HEADERS_Access-Control-Allow-Origin: ['*']
+      - name: REGISTRY_HTTP_HEADERS_Access-Control-Allow-Origin
+        value: "['*']"
+      - name: REGISTRY_HTTP_HEADERS_Access-Control-Allow-Headers
+        value: "['Authorization', 'Accept', 'Cache-Control']"
+      - name: REGISTRY_HTTP_HEADERS_Access-Control-Expose-Headers
+        value: "['Docker-Content-Digest']"
     service:
       type: LoadBalancer
