@@ -8,6 +8,7 @@ spec:
 
 namespaces:
   - cert-manager
+  - homelab
   - immich
   - ingress-nginx
   - kubernetes-dashboard
@@ -66,3 +67,7 @@ applications:
   - name: promtail
     path: applications/promtail/
     destinationNamespace: monitoring
+  - name: docker-registry
+    path: applications/docker-registry/
+    destinationNamespace: homelab
+
