@@ -67,7 +67,7 @@ applications:
   - name: promtail
     path: applications/promtail/
     destinationNamespace: monitoring
-  - name: docker-registry
-    path: applications/docker-registry/
+  - name: homelab-api
+    path: applications/homelab-api/
     destinationNamespace: homelab
 

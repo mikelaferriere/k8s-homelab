@@ -1,0 +1,40 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations: {}
+  labels:
+    app: {{ .Values.app.name }}
+  name: {{ .Values.app.name }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ .Values.app.name }}
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.app.name }}
+    spec:
+      containers:
+        - name: {{ .Values.app.name }}
+          envFrom:
+          - configMapRef:
+              name: {{ .Values.app.name }}-config
+          image: 10.10.10.199:5000/typescript/api:latest
+          livenessProbe:
+            exec:
+              command:
+                - curl
+                - -f
+                - http://localhost:8000
+            failureThreshold: 5
+            periodSeconds: 30
+            timeoutSeconds: 10
+          ports:
+            - containerPort: 8000
+          resources: {}
+      restartPolicy: Always
+status: {}
