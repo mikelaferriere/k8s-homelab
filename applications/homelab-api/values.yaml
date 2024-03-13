@@ -3,6 +3,7 @@ app:
   name: api
 
 postgresql:
+  fullnameOverride: postgresql
   auth:
     username: postgres
     password: postgres

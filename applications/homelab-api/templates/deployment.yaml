@@ -28,6 +28,16 @@ spec:
       labels:
         app: {{ .Values.app.name }}
     spec:
+      initContainers:
+        - name: flyway-migrations
+          image: 10.10.10.199:5000/migrations/api
+          command: 
+            - "flyway"
+            - "-user=postgres"
+            - "-password=postgres"
+            - "-locations=migrations"
+            - "-url=jdbc:postgresql://postgresql:5432/postgres"
+            - "migrate"
       containers:
         - name: {{ .Values.app.name }}
           envFrom:
