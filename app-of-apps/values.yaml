@@ -68,6 +68,6 @@ applications:
     path: applications/promtail/
     destinationNamespace: monitoring
   - name: homelab-api
-    path: applications/homelab-api/
+    path: applications/homelab/api/
     destinationNamespace: homelab
 

@@ -8,3 +8,4 @@ data:
   PGUSER: postgres
   PGPASSWORD: postgres
   PGDATABASE: postgres
+  PGHOST: postgresql
