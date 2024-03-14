@@ -11,7 +11,7 @@ spec:
   ports:
     - name: "{{ .Values.app.name }}"
       port: {{ .Values.app.port }}
-      targetPort: {{ .Values.app.port }}
+      targetPort: {{ .Values.app.targetPort }}
   selector:
     app: {{ .Values.app.name }}
 status:
