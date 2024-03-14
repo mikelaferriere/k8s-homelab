@@ -70,4 +70,19 @@ applications:
   - name: homelab-api
     path: applications/homelab/api/
     destinationNamespace: homelab
+  - name: homelab-event-bus
+    path: applications/homelab/event-bus/
+    destinationNamespace: homelab
+  - name: homelab-websocket
+    path: applications/homelab/websocket/
+    destinationNamespace: homelab
+  - name: homelab-speech-recognizer
+    path: applications/homelab/speech-recognizer/
+    destinationNamespace: homelab
+  - name: homelab-speech-python
+    path: applications/homelab/speech-python/
+    destinationNamespace: homelab
+  - name: homelab-scheduler
+    path: applications/homelab/scheduler/
+    destinationNamespace: homelab
 

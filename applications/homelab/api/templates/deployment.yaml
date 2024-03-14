@@ -43,19 +43,28 @@ spec:
           envFrom:
           - configMapRef:
               name: {{ .Values.app.name }}-config
-          image: 10.10.10.199:5000/typescript/api:latest
+          image: 10.10.10.199:5000/typescript/{{ .Values.app.name }}:latest
           command: ["sh", "-c", ". /vault/secrets/init && node app/build/index.js"]
           livenessProbe:
             exec:
               command:
                 - curl
                 - -f
-                - http://localhost:8081
+                - http://localhost:{{ .Values.app.port }}
             failureThreshold: 5
             periodSeconds: 30
             timeoutSeconds: 10
           ports:
-            - containerPort: 8081
+            - containerPort: {{ .Values.app.port }}
           resources: {}
+        {{- range $consumer := .Values.app.consumers }}
+        - name: {{ $consumer }}
+          envFrom:
+          - configMapRef:
+              name: {{ $.Values.app.name }}-config
+          image: 10.10.10.199:5000/typescript/{{ $.Values.app.name }}:latest
+          command: ["sh", "-c", ". /vault/secrets/init && node app/build/consumer/{{ $consumer }}/index.js"]
+          resources: {}
+        {{- end }}
       restartPolicy: Always
 status: {}

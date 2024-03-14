@@ -1,6 +1,18 @@
 ---
 app:
   name: api
+  port: 8081
+  consumers: [
+    "calendar-events",
+    "fitbit-update",
+    "hue-rooms",
+    "sports-fetch-new-scores",
+    "sports-scoreboard",
+    "sports-sync-scores",
+    "weather-current",
+    "weather-hourly",
+    "withings-update"
+  ]
 
 postgresql:
   fullnameOverride: postgresql

@@ -5,6 +5,9 @@ metadata:
   name: {{ .Values.app.name }}-config
 data:
   ENVIRONMENT: production
+  EVENT_BUS_HOST: ws://event-bus:10000
+  MQTT_BROKER: ws://mqtt-broker
+  PROXY_HOST: http://192.168.1.117
   PGUSER: postgres
   PGPASSWORD: postgres
   PGDATABASE: postgres
