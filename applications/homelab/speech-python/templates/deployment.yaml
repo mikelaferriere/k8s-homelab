@@ -15,7 +15,16 @@ spec:
     type: Recreate
   template:
     metadata:
-      annotations: {}
+      annotations:
+        vault.hashicorp.com/agent-inject: "true"
+        vault.hashicorp.com/role: internal-app
+        # vault.hashicorp.com/agent-inject-secret-defined: kv/data/secrets/homelab
+        vault.hashicorp.com/agent-inject-template-init: |
+          {{`{{- with secret "kv/data/secrets/homelab" -}}
+            {{- range $key, $value := .Data.data }}
+            export {{ $key }}={{ $value }}
+            {{- end }}
+          {{- end }}`}}
       labels:
         app: {{ .Values.app.name }}
     spec:
@@ -25,6 +34,7 @@ spec:
           - configMapRef:
               name: {{ .Values.app.name }}-config
           image: 10.10.10.199:5000/python/speechv2:latest
+          command: ["sh", "-c", ". /vault/secrets/init && flask run -h 0.0.0.0 -p 5000 --with-threads"]
           livenessProbe:
             exec:
               command:
