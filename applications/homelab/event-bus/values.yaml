@@ -1,0 +1,4 @@
+---
+app:
+  name: event-bus
+  port: 10000

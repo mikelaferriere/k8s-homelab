@@ -1,0 +1,4 @@
+---
+app:
+  name: speech-recognizer
+  port: 10001

@@ -1,0 +1,4 @@
+---
+app:
+  name: websocket
+  port: 10002

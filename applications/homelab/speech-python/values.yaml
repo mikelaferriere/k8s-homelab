@@ -1,0 +1,4 @@
+---
+app:
+  name: speechv2
+  port: 5000
