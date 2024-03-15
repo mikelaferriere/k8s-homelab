@@ -2,4 +2,3 @@
 app:
   name: event-bus
   port: 10000
-  targetPort: 8080

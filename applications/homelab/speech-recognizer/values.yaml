@@ -2,4 +2,4 @@
 app:
   name: speech-recognizer
   port: 10001
-  targetPort: 8080
+

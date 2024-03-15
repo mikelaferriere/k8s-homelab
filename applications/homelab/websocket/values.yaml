@@ -2,4 +2,3 @@
 app:
   name: websocket
   port: 10002
-  targetPort: 8080
