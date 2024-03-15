@@ -1,0 +1,4 @@
+---
+mosquitto:
+  auth:
+    enabled: false

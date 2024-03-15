@@ -1,0 +1,6 @@
+dependencies:
+- name: mosquitto
+  repository: https://sintef.github.io/mosquitto-helm-chart
+  version: 0.1.0
+digest: sha256:dae2ba4b6547dcaf2506022c5594679eecd7a318df9a3740f0572ab5849dd22a
+generated: "2024-03-14T22:05:47.385510084-04:00"

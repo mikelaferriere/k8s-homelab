@@ -85,4 +85,6 @@ applications:
   - name: homelab-scheduler
     path: applications/homelab/scheduler/
     destinationNamespace: homelab
-
+  - name: mosquitto
+    path: applications/mosquitto/
+    destinationNamespace: mosquitto
