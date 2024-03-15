@@ -9,4 +9,5 @@ data:
   MQTT_BROKER: ws://mqtt-broker
   PROXY_HOST: http://192.168.1.117
   PORT: "{{ .Values.app.port }}"
+  MODEL_DIR: /model
 
