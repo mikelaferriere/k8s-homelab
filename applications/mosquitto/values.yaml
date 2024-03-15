@@ -2,3 +2,5 @@
 mosquitto:
   auth:
     enabled: false
+  service:
+    type: LoadBalancer
