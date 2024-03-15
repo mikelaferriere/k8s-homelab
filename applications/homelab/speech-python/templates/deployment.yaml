@@ -40,7 +40,7 @@ spec:
               command:
                 - curl
                 - -f
-                - http://localhost:{{ .Values.app.port }}
+                - http://localhost:{{ .Values.app.port }}/status
             failureThreshold: 5
             periodSeconds: 30
             timeoutSeconds: 10
