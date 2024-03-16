@@ -32,7 +32,7 @@ spec:
       containers:
         - name: {{ .Values.app.name }}
           image: prompve/prometheus-pve-exporter:latest
-          command: ["--config.file=/vault/secrets/config"]
+          command: []
           livenessProbe:
             exec:
               command:
