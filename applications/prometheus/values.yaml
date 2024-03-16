@@ -1,9 +1,9 @@
 ---
 prometheus:
   server:
-    defaultFlagsOverride:
-      - --web.enable-remote-write-receiver
-      - --enable-feature=otlp-write-receiver
+    # defaultFlagsOverride:
+    #   - --web.enable-remote-write-receiver
+    #   - --enable-feature=otlp-write-receiver
     service:
       type: LoadBalancer
   extraScrapeConfigs: |
