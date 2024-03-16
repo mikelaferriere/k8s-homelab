@@ -18,7 +18,7 @@ spec:
       annotations:
         vault.hashicorp.com/agent-inject: "true"
         vault.hashicorp.com/role: internal-app
-        vault.hashicorp.com/agent-inject-template-config: |
+        vault.hashicorp.com/agent-inject-template-config.yml: |
           {{`{{- with secret "kv/data/proxmox" -}}
           default:
             user: prometheus@pam
@@ -32,7 +32,7 @@ spec:
       containers:
         - name: {{ .Values.app.name }}
           image: prompve/prometheus-pve-exporter:latest
-          command: []
+          command: ["--config.file=/vault/secrets/config.yml"]
           livenessProbe:
             exec:
               command:
