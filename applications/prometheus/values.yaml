@@ -6,7 +6,7 @@ prometheus:
       - --enable-feature=otlp-write-receiver
     service:
       type: LoadBalancer
-  extraScrapeConfigs:
+  extraScrapeConfigs: |
     - job_name: proxmox-pve
       static_configs:
         - targets:
