@@ -1,5 +1,9 @@
 ---
 prometheus:
   server:
+    extraFlags:
+      - web.enable-lifecycle
+      - web.enable-remote-write-receiver
+      - enable-feature=otlp-write-receiver
     service:
       type: LoadBalancer
