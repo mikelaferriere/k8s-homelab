@@ -1,0 +1,49 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations: {}
+  labels:
+    app: {{ .Values.app.name }}
+  name: {{ .Values.app.name }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ .Values.app.name }}
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      annotations:
+        vault.hashicorp.com/agent-inject: "true"
+        vault.hashicorp.com/role: internal-app
+        vault.hashicorp.com/agent-inject-template-config: |
+          {{`{{- with secret "kv/data/proxmox" -}}
+          default:
+            user: prometheus@pam
+            token_name: exporter
+            token_value: {{ .Data.data.token }}
+            verify_ssl: false
+          {{- end }}`}}
+      labels:
+        app: {{ .Values.app.name }}
+    spec:
+      containers:
+        - name: {{ .Values.app.name }}
+          image: prompve/prometheus-pve-exporter:latest
+          command: ["--config.file=/vault/secrets/config"]
+          livenessProbe:
+            exec:
+              command:
+                - curl
+                - -f
+                - http://localhost:9221
+            failureThreshold: 5
+            periodSeconds: 30
+            timeoutSeconds: 10
+          ports:
+            - containerPort: 9221
+          resources: {}
+      restartPolicy: Always
+status: {}
