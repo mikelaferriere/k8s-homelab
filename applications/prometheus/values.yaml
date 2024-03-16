@@ -1,9 +1,23 @@
 ---
 prometheus:
   server:
-    extraFlags:
-      - web.enable-lifecycle
-      - web.enable-remote-write-receiver
-      - enable-feature=otlp-write-receiver
+    defaultFlagsOverride:
+      - --web.enable-remote-write-receiver
+      - --enable-feature=otlp-write-receiver
     service:
       type: LoadBalancer
+  extraScrapeConfigs:
+    - job_name: proxmox-pve
+      static_configs:
+        - targets:
+          - 192.168.1.7
+      metrics_path: /pve
+      params:
+        module: [ default ]
+      relabel_configs:
+        - source_labels: [ __address__ ]
+          target_label: __param_target
+        - source_labels: [ __param_target ]
+          target_label: instance
+        - target_label: __address__
+          replacement: pve-exporter:9221

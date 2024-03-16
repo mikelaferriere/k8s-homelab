@@ -89,3 +89,6 @@ applications:
   - name: mosquitto
     path: applications/mosquitto/
     destinationNamespace: mosquitto
+  - name: pve-exporter
+    path: applications/pve-exporter/
+    destinationNamespace: monitoring
