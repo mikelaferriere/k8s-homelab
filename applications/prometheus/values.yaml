@@ -14,6 +14,8 @@ prometheus:
       metrics_path: /pve
       params:
         module: [ default ]
+        cluster: ['1']
+        node: ['1']
       relabel_configs:
         - source_labels: [ __address__ ]
           target_label: __param_target
