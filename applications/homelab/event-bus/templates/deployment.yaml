@@ -47,6 +47,12 @@ spec:
             timeoutSeconds: 10
           ports:
             - containerPort: {{ .Values.app.port }}
-          resources: {}
+          resources:
+            requests:
+              memory: "100Mi"
+              cpu: "15m"
+            limits:
+              memory: "200Mi"
+              cpu: "30m"
       restartPolicy: Always
 status: {}

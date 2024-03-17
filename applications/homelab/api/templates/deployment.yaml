@@ -56,7 +56,13 @@ spec:
             timeoutSeconds: 10
           ports:
             - containerPort: {{ .Values.app.port }}
-          resources: {}
+          resources:
+            requests:
+              memory: "750Mi"
+              cpu: "300m"
+            limits:
+              memory: "1Gi"
+              cpu: "500m"
         {{- range $consumer := .Values.app.consumers }}
         - name: {{ $consumer }}
           envFrom:
