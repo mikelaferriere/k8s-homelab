@@ -1,0 +1,8 @@
+apiVersion: v2
+name: jaeger
+version: 1.0.0
+dependencies:
+  - name: jaeger
+    version: 2.0.1
+    repository: https://jaegertracing.github.io/helm-charts
+

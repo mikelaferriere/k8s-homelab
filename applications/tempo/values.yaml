@@ -1,4 +1,0 @@
----
-tempo:
-  service:
-    type: LoadBalancer

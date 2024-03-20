@@ -92,7 +92,7 @@ applications:
   - name: pve-exporter
     path: applications/pve-exporter/
     destinationNamespace: monitoring
-  - name: tempo
-    path: applications/tempo/
+  - name: jaeger
+    path: applications/jaeger/
     destinationNamespace: monitoring
 

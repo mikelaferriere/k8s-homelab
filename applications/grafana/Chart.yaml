@@ -5,7 +5,4 @@ dependencies:
   - name: grafana
     version: 7.3.3
     repository: https://grafana.github.io/helm-charts
-  - name: grafana-agent
-    version: 0.37.0
-    repository: https://grafana.github.io/helm-charts
 
