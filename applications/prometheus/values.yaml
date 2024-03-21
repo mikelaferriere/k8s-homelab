@@ -28,6 +28,7 @@ prometheus:
         - targets:
           - 192.168.6.27:9100
           - 192.168.6.180:9100
+          - 192.168.6.216:9100
       metrics_path: /metrics
       # params:
       #   module: [ default ]
