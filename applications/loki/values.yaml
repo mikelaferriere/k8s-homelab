@@ -26,29 +26,27 @@ loki:
   minio:
     enabled: true
 
+  singleBinary:
+    replicas: 1
+
   loki:
     auth_enabled: false
     commonConfig:
       replication_factor: 1
     storage:
       type: 'filesystem'
-  singleBinary:
-    replicas: 1
-  config: |
-    table_manager:
-      retention_deletes_enabled: true
-      retention_period: 48h
-
+    compactor:
+      retention_enabled: true
+      retention_delete_delay: 2h
+      retention_delete_worker_count: 150
     limits_config:
       split_queries_by_interval: 24h
       max_query_parallelism: 100
       enforce_metric_name: false
       reject_old_samples: true
       reject_old_samples_max_age: 48h
-
+      retention_period: 48h
     query_scheduler:
       max_outstanding_requests_per_tenant: 4096
-
     frontend:
       max_outstanding_per_tenant: 4096
-
