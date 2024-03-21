@@ -34,4 +34,21 @@ loki:
       type: 'filesystem'
   singleBinary:
     replicas: 1
+  config: |
+    table_manager:
+      retention_deletes_enabled: true
+      retention_period: 48h
+
+    limits_config:
+      split_queries_by_interval: 24h
+      max_query_parallelism: 100
+      enforce_metric_name: false
+      reject_old_samples: true
+      reject_old_samples_max_age: 48h
+
+    query_scheduler:
+      max_outstanding_requests_per_tenant: 4096
+
+    frontend:
+      max_outstanding_per_tenant: 4096
 
