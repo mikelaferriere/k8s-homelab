@@ -40,10 +40,10 @@ spec:
             - containerPort: {{ .Values.app.port }}
           resources:
             requests:
-              memory: "250Mi"
-              cpu: "50m"
+              memory: "50Mi"
+              cpu: "20m"
             limits:
-              memory: "400Mi"
-              cpu: "100m"
+              memory: "100Mi"
+              cpu: "50m"
       restartPolicy: Always
 status: {}
