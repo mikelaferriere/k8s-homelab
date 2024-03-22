@@ -1,9 +1,19 @@
 ---
 prometheus:
+  serverFiles:
+    alerting_rules.yml:
+      groups:
+        - name: Instances
+          rules:
+            - alert: InstanceDown
+              expr: up == 0
+              for: 5m
+              labels:
+                severity: page
+              annotations:
+                description: '{{ $labels.instance }} of job {{ $labels.job }} has been down for more than 5 minutes.'
+                summary: 'Instance {{ $labels.instance }} down'
   server:
-    # defaultFlagsOverride:
-    #   - --web.enable-remote-write-receiver
-    #   - --enable-feature=otlp-write-receiver
     service:
       type: LoadBalancer
   extraScrapeConfigs: |
