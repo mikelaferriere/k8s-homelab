@@ -13,6 +13,12 @@ prometheus:
               annotations:
                 description: '{{ $labels.instance }} of job {{ $labels.job }} has been down for more than 5 minutes.'
                 summary: 'Instance {{ $labels.instance }} down'
+            - alert: PodRestarts
+              annotations:
+                message: Pod {{ $labels.namespace }}/{{ $labels.pod }} ({{ $labels.container}}) is restarting {{ printf "%.2f" $value }} times during the last hour.
+              expr: increase(kube_pod_container_status_restarts_total{container!~"kubernetes-vault-renew"}[1h]) >= 1
+              labels:
+                severity: critical
   server:
     service:
       type: LoadBalancer
