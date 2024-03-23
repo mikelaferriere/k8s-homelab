@@ -116,6 +116,22 @@ vault write auth/oidc/role/manager \
 vault login -method=oidc role="manager"
 ```
 
+# Configure Prometheus scrape
+```bash
+export VAULT_TOKEN=<root-token>
+
+vault policy write prometheus-metrics - << EOF
+path "/sys/metrics" {
+  capabilities = ["read"]
+}
+EOF
+
+vault token create \
+  -field=token \
+  -policy prometheus-metric
+
+```
+
 # Secret Store CSI
 For when using attributes won't work:
 https://developer.hashicorp.com/vault/tutorials/kubernetes/kubernetes-secret-store-driver

@@ -342,15 +342,27 @@ prometheus:
                 description: "Vault cluster is not healthy {{ $labels.instance }}: {{ $value | printf \"%.2f\"}}%\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
 
   server:
+    podAnnotations:
+      vault.hashicorp.com/agent-inject: "true"
+      vault.hashicorp.com/role: internal-app
+      vault.hashicorp.com/agent-inject-template-hashicorp_vault_token: |
+        {{- with secret "kv/data/secrets/hashicorp_vault" -}}
+        {{- .Data.data.PROMETHEUS_TOKEN }}
+        {{- end }}
     service:
       type: LoadBalancer
   extraScrapeConfigs: |
     - job_name: 'vault'
       metrics_path: "/v1/sys/metrics"
       scheme: http
+      params:
+        format:
+          - prometheus
+      authorization:
+        credentials_file: /vault/secrets/hashicorp_vault_token
       static_configs:
       - targets:
-        - vault.security.svc:8200
+        - hashicorp-vault.security.svc:8200
 
     - job_name: proxmox-pve
       static_configs:
