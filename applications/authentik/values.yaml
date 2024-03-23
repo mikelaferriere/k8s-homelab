@@ -1,6 +1,7 @@
 ---
 authentik:
   global:
+    addPrometheusAnnotations: true
     env:
       - name: AUTHENTIK_SECRET_KEY
         value: file:///vault/secrets/secret-key
@@ -35,6 +36,8 @@ authentik:
         {{- end }}
 
   server:
+    metrics:
+      enabled: true
     service:
       type: LoadBalancer
 
