@@ -1,5 +1,25 @@
 ---
 prometheus:
+  alertmanager:
+    enabled: true
+    configAnnotations:
+      vault.hashicorp.com/agent-inject: "true"
+      vault.hashicorp.com/role: internal-app
+      vault.hashicorp.com/agent-inject-secret-url: kv/data/secrets/notifications
+
+    config:
+      global:
+        slack_api_url_file: '/vault/secret/url/DISCORD'
+
+      route:
+        receiver: 'discord-alerts'
+
+      receivers:
+        - name: 'discord-alerts'
+          slack_configs:
+            - channel: '#k8s-alerts'
+              text: Alert
+    
   serverFiles:
     alerting_rules.yml:
       groups:
