@@ -354,7 +354,7 @@ prometheus:
   extraScrapeConfigs: |
     - job_name: 'vault'
       metrics_path: "/v1/sys/metrics"
-      scheme: https
+      scheme: http
       params:
         format:
           - prometheus
@@ -362,7 +362,7 @@ prometheus:
         credentials_file: /vault/secrets/hashicorp_vault_token
       static_configs:
       - targets:
-        - hashicorp-vault-0.security.svc:8200
+        - hashicorp-vault-0.hashicorp-vault-internal.security.svc:8201
 
     - job_name: proxmox-pve
       static_configs:

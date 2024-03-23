@@ -25,9 +25,9 @@ vault:
           address = "[::]:8200"
           cluster_address = "[::]:8201"
           # Enable unauthenticated metrics access (necessary for Prometheus Operator)
-          #telemetry {
-          #  unauthenticated_metrics_access = "true"
-          #}
+          telemetry {
+           unauthenticated_metrics_access = "true"
+          }
         }
         storage "file" {
           path = "/vault/data"
@@ -50,5 +50,8 @@ vault:
         }
     service:
       type: LoadBalancer
+  serverTelemetry:
+    serviceMonitor:
+      enabled: true
   csi:
     enabled: true
