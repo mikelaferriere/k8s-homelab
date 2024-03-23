@@ -14,13 +14,20 @@ spec:
         app: diun
       annotations:
         diun.enable: "true"
+        vault.hashicorp.com/agent-inject: "true"
+        vault.hashicorp.com/role: internal-app
+        vault.hashicorp.com/agent-inject-template-env_file: |
+          {{`{{- with secret "kv/data/notifications" -}}
+          export DIUN_NOTIF_DISCORD_WEBHOOKURL={{ .Data.data.DISCORD_IMAGE_UPDATE }}
+          {{- end }}`}}
+
     spec:
       serviceAccountName: diun
       containers:
         - name: diun
           image: crazymax/diun:latest
           imagePullPolicy: Always
-          args: ["serve"]
+          command: ["sh", "-c", "source /vault/secrets/env_file && diun serve"]
           env:
             - name: TZ
               value: "America/New_York"
@@ -38,12 +45,29 @@ spec:
               value: "true"
             - name: DIUN_PROVIDERS_KUBERNETES_WATCHBYDEFAULT
               value: "true"
+            - name: DIUN_REGOPTS_LOCALREGISTRY_NAME
+              value: "10.10.10.199:5000"
+            - name: DIUN_REGOPTS_LOCALREGISTRY_SELECTOR
+              value: image
+            - name: DIUN_REGOPTS_LOCALREGISTRY_INSECURETLS
+              value: "true"
+
           volumeMounts:
             - mountPath: "/data"
               name: "diun-claim"
+            # Necessary for private repository
+            # - mountPath: /root/.docker/
+            #   name: docker-config
+            #   readOnly: true
       restartPolicy: Always
       volumes:
         - name: diun-claim
           persistentVolumeClaim:
             claimName: diun-claim
+        # - name: docker-config
+        #   secret:
+        #     secretName: regcred
+        #     items:
+        #     - key: .dockerconfigjson
+        #       path: config.json
 
