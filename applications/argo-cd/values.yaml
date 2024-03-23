@@ -14,6 +14,9 @@ argo-cd:
       - --insecure
     service:
       type: LoadBalancer
+  controller:
+    metrics:
+      enabled: true
 
   # global:
   #   podAnnotations:
