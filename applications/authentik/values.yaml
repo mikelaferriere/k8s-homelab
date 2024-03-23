@@ -49,6 +49,8 @@ authentik:
       password: file:///vault/secrets/postgresql-password
 
   postgresql:
+    metrics:
+      enabled: true
     enabled: true
     image:
       tag: 16.2.0

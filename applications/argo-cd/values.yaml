@@ -17,9 +17,3 @@ argo-cd:
   controller:
     metrics:
       enabled: true
-
-  # global:
-  #   podAnnotations:
-  #     prometheus.io/scrape: "true"
-  #     prometheus.io/path: /metrics
-  #     prometheus.io/port: "8080"

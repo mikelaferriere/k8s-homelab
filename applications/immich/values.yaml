@@ -9,6 +9,8 @@ immich:
         existingClaim: nfs-photos
 
   postgresql:
+    metrics:
+      enabled: true
     enabled: true
 
   redis:

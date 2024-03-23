@@ -8,6 +8,8 @@ secret-store-csi-driver:
     enabled: true
 
 postgresql:
+    metrics:
+      enabled: true
     auth:
       username: "paperless"
       database: "paperless"
