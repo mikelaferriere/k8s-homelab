@@ -2,23 +2,29 @@
 prometheus:
   alertmanager:
     enabled: true
-    configAnnotations:
+    image:
+      tag: 0.27.1
+
+    podAnnotations:
       vault.hashicorp.com/agent-inject: "true"
       vault.hashicorp.com/role: internal-app
-      vault.hashicorp.com/agent-inject-secret-url: kv/data/secrets/notifications
+      vault.hashicorp.com/agent-inject-template-discord_url: |
+        {{- with secret "kv/data/notifications" -}}
+        {{- .Data.data.DISCORD -}}
+        {{- end }}
 
     config:
-      global:
-        slack_api_url_file: '/vault/secret/url/DISCORD'
-
       route:
-        receiver: 'discord-alerts'
+        group_by: ['alertname', 'job']
+        group_wait: 15s
+        group_interval: 15s
+        repeat_interval: 15s
+        receiver: discord
 
       receivers:
-        - name: 'discord-alerts'
-          slack_configs:
-            - channel: '#k8s-alerts'
-              text: Alert
+        - name: discord
+          discord_configs:
+            - webhook_url_file: /vault/secrets/discord_url
     
   serverFiles:
     alerting_rules.yml:
