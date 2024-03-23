@@ -2,9 +2,6 @@
 prometheus:
   alertmanager:
     enabled: true
-    image:
-      tag: 0.27.1
-
     podAnnotations:
       vault.hashicorp.com/agent-inject: "true"
       vault.hashicorp.com/role: internal-app
