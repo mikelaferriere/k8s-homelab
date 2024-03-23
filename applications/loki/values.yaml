@@ -1,18 +1,18 @@
 ---
 loki:
   monitoring:
-  #   dashboards:
-  #     # -- If enabled, create configmap with dashboards for monitoring Loki
-  #     enabled: false
-  #   rules:
-  #     # -- If enabled, create PrometheusRule resource with Loki recording rules
-  #     enabled: false
-  #   alerts:
-  #     # -- If enabled, create PrometheusRule resource with Loki alerting rules
-  #     enabled: false
-  #   serviceMonitor:
-  #     # -- If enabled, ServiceMonitor resources for Prometheus Operator are created
-  #     enabled: false
+    dashboards:
+      # -- If enabled, create configmap with dashboards for monitoring Loki
+      enabled: false
+    rules:
+      # -- If enabled, create PrometheusRule resource with Loki recording rules
+      enabled: false
+    alerts:
+      # -- If enabled, create PrometheusRule resource with Loki alerting rules
+      enabled: false
+    serviceMonitor:
+      # -- If enabled, ServiceMonitor resources for Prometheus Operator are created
+      enabled: true
     selfMonitoring:
       enabled: false
       grafanaAgent:
