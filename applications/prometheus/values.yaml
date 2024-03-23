@@ -345,6 +345,13 @@ prometheus:
     service:
       type: LoadBalancer
   extraScrapeConfigs: |
+    - job_name: 'vault'
+      metrics_path: "/v1/sys/metrics"
+      scheme: http
+      static_configs:
+      - targets:
+        - vault.security.svc:8200
+
     - job_name: proxmox-pve
       static_configs:
         - targets:
@@ -361,6 +368,7 @@ prometheus:
           target_label: instance
         - target_label: __address__
           replacement: pve-exporter:9221
+
     - job_name: raspberry-pi
       static_configs:
         - targets:
