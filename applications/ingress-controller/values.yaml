@@ -13,11 +13,10 @@ internal-ingress:
 
 external-ingress:
   controller:
-    service:
-      LoadBalancerIP: 192.168.1.2
     electionID: external-ingress-controller
     ingressClassResource:
       name: external-ingress  # default: nginx
       enabled: true
       default: false
       controllerValue: "k8s.io/external-ingress-nginx"  # default: k8s.io/ingress-nginx
+

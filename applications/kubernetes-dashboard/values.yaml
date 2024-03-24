@@ -7,11 +7,9 @@ kubernetes-dashboard:
     enabled: false
   app:
     ingress:
-      annotations:
-        metallb.universe.tf/loadBalancerIPs: 10.10.10.207
       enabled: true
       hosts: []
-      ingressClassName: nginx
+      ingressClassName: internal-ingress
       paths:
         web: /
         api: /api
