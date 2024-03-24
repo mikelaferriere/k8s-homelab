@@ -7,8 +7,8 @@ metadata:
     app: {{ .Values.app.name }}-app
   name: {{ .Values.app.name }}-app
 spec:
-  annotations:
-    metallb.universe.tf/loadBalancerIPs: 10.10.10.202
+  # annotations:
+  #   metallb.universe.tf/loadBalancerIPs: 10.10.10.202
   type: LoadBalancer
   ports:
     - name: "{{ .Values.app.name }}-app"
