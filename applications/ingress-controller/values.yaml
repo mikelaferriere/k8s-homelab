@@ -6,7 +6,7 @@ internal-ingress:
       annotations:
         metallb.universe.tf/address-pool: internal-ips
     ingressClassResource:
-      name: internal-nginx  # default: nginx
+      name: internal-ingress  # default: nginx
       enabled: true
       default: false
       controllerValue: "k8s.io/internal-ingress-nginx"  # default: k8s.io/ingress-nginx
@@ -18,7 +18,7 @@ external-ingress:
         metallb.universe.tf/address-pool: external-ips
     electionID: external-ingress-controller
     ingressClassResource:
-      name: external-nginx  # default: nginx
+      name: external-ingress  # default: nginx
       enabled: true
       default: false
       controllerValue: "k8s.io/external-ingress-nginx"  # default: k8s.io/ingress-nginx

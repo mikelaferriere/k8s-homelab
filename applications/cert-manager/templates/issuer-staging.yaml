@@ -12,5 +12,6 @@
 #   solvers:
 #     - http01:
 #       ingress:
-#         class: nginx
+#         class: external-ingress
+
 
