@@ -7,3 +7,4 @@ metadata:
 spec:
   ipAddressPools:
   - first-pool
+  - external-pool
