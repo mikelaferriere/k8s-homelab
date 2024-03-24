@@ -1,1 +1,8 @@
 ---
+metallb:
+  controller:
+    tolerations:
+      - key: "node-role.kubernetes.io/control-plane"
+        operator: "Equal"
+        value: ""
+        effect: "NoSchedule"
