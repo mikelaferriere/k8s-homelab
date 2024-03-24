@@ -9,10 +9,10 @@ spec:
   ingressClassName: external-ingress
   tls:
   - hosts:
-    - example.example.com
-    secretName: quickstart-example-tls
+    - test.laferriere.app
+    # secretName: quickstart-example-tls
   rules:
-  - host: example.example.com
+  - host: test.laferriere.app
     http:
       paths:
       - path: /
