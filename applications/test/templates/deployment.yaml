@@ -2,26 +2,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: nginx-deployment
+  name: hello-world
+  labels:
+    app: hello-world
 spec:
+  replicas: 1
   selector:
     matchLabels:
-      app: nginx
-  replicas: 1
+      app: hello-world
   template:
     metadata:
       labels:
-        app: nginx
+        app: hello-world
     spec:
       containers:
-        - name: nginx
-          image: nginx:latest
-          ports:
-            - containerPort: 80
-          resources:
-            limits:
-              cpu: "1024m"
-              memory: "1024Mi"
-            requests:
-              memory: "512Mi"
-              cpu: "512m"
+      - name: hello-world
+        image: k8s.gcr.io/echoserver:1.4
+        ports:
+        - containerPort: 8080
