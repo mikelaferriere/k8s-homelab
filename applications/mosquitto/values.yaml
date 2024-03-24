@@ -3,4 +3,6 @@ mosquitto:
   auth:
     enabled: false
   service:
+    annotations:
+      metallb.universe.tf/loadBalancerIPs: 10.10.10.215
     type: LoadBalancer
