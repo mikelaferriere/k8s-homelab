@@ -8,8 +8,6 @@ kubernetes-dashboard:
   app:
     ingress:
       enabled: true
-      annotations:
-        metallb.universe.tf/address-pool: external-pool
       hosts: []
       ingressClassName: nginx
       paths:
