@@ -358,6 +358,8 @@ prometheus:
         {{- .Data.data.PROMETHEUS_TOKEN }}
         {{- end }}
     service:
+      annotations:
+        metallb.universe.tf/loadBalancerIPs: 10.10.10.206
       type: LoadBalancer
   extraScrapeConfigs: |
     - job_name: 'vault'

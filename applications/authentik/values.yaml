@@ -39,6 +39,8 @@ authentik:
     metrics:
       enabled: true
     service:
+      annotations:
+        metallb.universe.tf/loadBalancerIPs: 10.10.10.208
       type: LoadBalancer
 
   authentik:

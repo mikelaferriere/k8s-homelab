@@ -8,7 +8,7 @@ kubernetes-dashboard:
   app:
     ingress:
       annotations:
-        metallb.universe.tf/address-pool: external-pool
+        metallb.universe.tf/loadBalancerIPs: 10.10.10.207
       enabled: true
       hosts: []
       ingressClassName: nginx
