@@ -14,7 +14,7 @@ internal-ingress:
 external-ingress:
   controller:
     service:
-      LoadBalancerIP: 192.168.1.3
+      LoadBalancerIP: 192.168.1.2
     electionID: external-ingress-controller
     ingressClassResource:
       name: external-ingress  # default: nginx
