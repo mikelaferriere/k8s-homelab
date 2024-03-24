@@ -2,7 +2,5 @@
 mosquitto:
   auth:
     enabled: false
-  podAnnotations:
-    metallb.universe.tf/loadBalancerIPs: 10.10.10.215
   service:
     type: LoadBalancer
