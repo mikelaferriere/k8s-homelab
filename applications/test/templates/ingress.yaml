@@ -3,14 +3,14 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: nginx-ingress
-  annotations: {}
-    # cert-manager.io/cluster-issuer: "letsencrypt-staging"
+  annotations:
+    cert-manager.io/cluster-issuer: "letsencrypt-staging"
 spec:
   ingressClassName: external-ingress
   tls:
   - hosts:
     - test.laferriere.app
-    # secretName: quickstart-example-tls
+    secretName: test-example-tls
   rules:
   - host: test.laferriere.app
     http:
