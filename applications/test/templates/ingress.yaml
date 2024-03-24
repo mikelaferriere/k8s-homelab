@@ -3,15 +3,19 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: nginx-ingress
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-staging
 spec:
   ingressClassName: external-ingress
-  # tls:
-  # - hosts:
-  #   - laferriere.app
-  #   - 192.168.1.2
-  #   secretName: tls-secret-staging
+  tls:
+  - hosts:
+    - laferriere.app
+    - test.laferriere.app
+    # - 192.168.1.2
+    # secretName: tls-secret-staging
   rules:
-    - http:
+  - host: "*.laferriere.app"
+    http:
       paths:
       - path: /
         pathType: Prefix
