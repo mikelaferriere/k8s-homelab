@@ -7,7 +7,7 @@ kind: IPAddressPool
 metadata:
   # A name for the address pool. Services can request allocation
   # from a specific address pool using this name.
-  name: first-pool
+  name: external-pool
   namespace: metallb-system
 spec:
   # A list of IP address ranges over which MetalLB has
