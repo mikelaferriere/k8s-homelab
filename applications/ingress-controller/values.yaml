@@ -1,9 +1,18 @@
 ---
-ingress-nginx:
+internal-ingress:
   controller:
-    metrics:
+    electionID: internal-ingress-controller
+    ingressClassResource:
+      name: internal-nginx  # default: nginx
       enabled: true
-    podAnnotations:
-      prometheus.io/scrape: "true"
-      prometheus.io/port: "10254"
-    allowSnippetAnnotations: true
+      default: false
+      controllerValue: "k8s.io/internal-ingress-nginx"  # default: k8s.io/ingress-nginx
+
+external-ingress:
+  controller:
+    electionID: external-ingress-controller
+    ingressClassResource:
+      name: external-nginx  # default: nginx
+      enabled: true
+      default: false
+      controllerValue: "k8s.io/external-ingress-nginx"  # default: k8s.io/ingress-nginx
