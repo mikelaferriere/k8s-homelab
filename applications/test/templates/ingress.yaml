@@ -6,7 +6,7 @@ metadata:
   annotations: {}
     #cert-manager.io/issuer: "letsencrypt-staging"
 spec:
-  ingressClassName: nginx
+  ingressClassName: external-ingress
   tls:
   - hosts:
     - example.example.com
