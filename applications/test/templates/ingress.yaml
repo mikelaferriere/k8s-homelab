@@ -5,13 +5,13 @@ metadata:
   name: nginx-ingress
 spec:
   ingressClassName: external-ingress
-  tls:
-  - hosts:
-    - laferriere.app
-    secretName: tls-secret-staging
+  # tls:
+  # - hosts:
+  #   - laferriere.app
+  #   - 192.168.1.2
+  #   secretName: tls-secret-staging
   rules:
-  - host: laferriere.app
-    http:
+    - http:
       paths:
       - path: /
         pathType: Prefix
