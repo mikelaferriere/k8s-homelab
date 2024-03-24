@@ -15,8 +15,6 @@ external-ingress:
   controller:
     service:
       LoadBalancerIP: 192.168.1.3
-      # annotations:
-      #   metallb.universe.tf/address-pool: external-ips
     electionID: external-ingress-controller
     ingressClassResource:
       name: external-ingress  # default: nginx
