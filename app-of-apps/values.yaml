@@ -98,4 +98,7 @@ applications:
   - name: diun
     path: applications/diun/
     destinationNamespace: monitoring
+  - name: test-application
+    path: applications/test/
+    destinationNamespace: homelab
 
