@@ -49,6 +49,8 @@ vault:
           disable_hostname = true
         }
     service:
+      annotations:
+        metallb.universe.tf/loadBalancerIPs: 10.10.10.204
       type: LoadBalancer
   serverTelemetry:
     serviceMonitor:
