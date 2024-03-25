@@ -11,7 +11,7 @@ spec:
   tls:
   - hosts:
       - test.laferriere.app
-    secretName: tls-secret-staging
+    secretName: tls-secret-prod
   rules:
   - host: test.laferriere.app
     http:
