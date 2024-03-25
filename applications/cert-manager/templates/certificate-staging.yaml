@@ -1,14 +1,18 @@
 ---
-apiVersion: cert-manager.io/v1
-kind: Certificate
-metadata:
-  name: letsencrypt-crt-staging
-spec:
-  secretName: tls-secret-staging
-  issuerRef:
-    kind: ClusterIssuer
-    name: letsencrypt-dev
-  commonName: laferriere.app
-  dnsNames:
-    - laferriere.app
-    - test.laferriere.app
+# apiVersion: cert-manager.io/v1
+# kind: Certificate
+# metadata:
+#   name: letsencrypt-crt-staging
+# spec:
+#   secretTemplate:
+#     annotations:
+#       reflector.v1.k8s.emberstack.com/reflection-allowed: "true"
+#       reflector.v1.k8s.emberstack.com/reflection-allowed-namespaces: ""
+#   secretName: tls-secret-staging
+#   issuerRef:
+#     kind: ClusterIssuer
+#     name: letsencrypt-dev
+#   commonName: laferriere.app
+#   dnsNames:
+#     - laferriere.app
+#     - test.laferriere.app

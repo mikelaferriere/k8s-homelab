@@ -4,13 +4,14 @@ kind: Ingress
 metadata:
   name: hello-world-ingress
   annotations:
+    kubernetes.io/ingress.class: "external-ingress"
     cert-manager.io/cluster-issuer: letsencrypt-dev
 spec:
   ingressClassName: external-ingress
   tls:
   - hosts:
       - test.laferriere.app
-    # secretName: tls-secret-staging
+    secretName: tls-secret-staging
   rules:
   - host: test.laferriere.app
     http:
