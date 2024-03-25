@@ -10,7 +10,7 @@ spec:
       reflector.v1.k8s.emberstack.com/reflection-allowed-namespaces: ""
   secretName: tls-secret-prod
   issuerRef:
-    kind: ClusterIssuer
+    kind: Issuer
     name: letsencrypt-issuer-prod
   commonName: laferriere.app
   dnsNames:
