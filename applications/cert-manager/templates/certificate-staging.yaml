@@ -7,7 +7,7 @@ spec:
   secretName: tls-secret-staging
   issuerRef:
     kind: ClusterIssuer
-    name: letsencrypt-staging
+    name: letsencrypt-dev
   commonName: test.laferriere.app
   dnsNames:
     - test.laferriere.app
