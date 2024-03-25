@@ -1,13 +1,13 @@
 ---
-# apiVersion: cert-manager.io/v1
-# kind: Certificate
-# metadata:
-#   name: le-crt-staging
-# spec:
-#   secretName: tls-secret-staging
-#   issuerRef:
-#     kind: ClusterIssuer
-#     name: letsencrypt-staging
-#   commonName: test.laferriere.app
-#   dnsNames:
-#     - test.laferriere.app
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: le-crt-staging
+spec:
+  secretName: tls-secret-staging
+  issuerRef:
+    kind: ClusterIssuer
+    name: letsencrypt-staging
+  commonName: test.laferriere.app
+  dnsNames:
+    - test.laferriere.app
