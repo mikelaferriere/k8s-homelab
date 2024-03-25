@@ -3,34 +3,34 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: hello-world-ingress
-  annotations:
-    kubernetes.io/ingress.class: "external-ingress"
-    cert-manager.io/cluster-issuer: letsencrypt-dev
+  # annotations:
+  #   kubernetes.io/ingress.class: "external-ingress"
+  #   cert-manager.io/cluster-issuer: letsencrypt-dev
 spec:
   ingressClassName: external-ingress
-  tls:
-  - hosts:
-      - test.laferriere.app
-    secretName: tls-secret-dev
-  rules:
-  - host: test.laferriere.app
-    http:
-      paths:
-      - path: /
-        pathType: Prefix
-        backend:
-          service:
-            name: hello-world
-            port:
-              number: 80
-
+  # tls:
+  # - hosts:
+  #     - test.laferriere.app
+  #   secretName: tls-secret-staging
   # rules:
-  #   - http:
-  #       paths:
-  #       - path: /
-  #         pathType: Prefix
-  #         backend:
-  #           service:
-  #             name: hello-world
-  #             port:
-  #               number: 80
+  # - host: test.laferriere.app
+  #   http:
+  #     paths:
+  #     - path: /
+  #       pathType: Prefix
+  #       backend:
+  #         service:
+  #           name: hello-world
+  #           port:
+  #             number: 80
+
+  rules:
+    - http:
+        paths:
+        - path: /
+          pathType: Prefix
+          backend:
+            service:
+              name: hello-world
+              port:
+                number: 80
