@@ -7,7 +7,7 @@ kubernetes-dashboard:
     enabled: false
   app:
     ingress:
-      enabled: true
+      enabled: false
       hosts: []
       ingressClassName: internal-ingress
       paths:
