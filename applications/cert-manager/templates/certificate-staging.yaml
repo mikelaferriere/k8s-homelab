@@ -8,6 +8,7 @@ spec:
   issuerRef:
     kind: ClusterIssuer
     name: letsencrypt-dev
-  commonName: mealie.laferriere.app
+  commonName: laferriere.app
   dnsNames:
-    - mealie.laferriere.app
+    - laferriere.app
+    - test.laferriere.app
