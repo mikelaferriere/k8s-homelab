@@ -2,7 +2,7 @@
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  name: le-crt-staging
+  name: letsencrypt-crt-staging
 spec:
   secretName: tls-secret-staging
   issuerRef:
