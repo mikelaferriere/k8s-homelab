@@ -102,7 +102,4 @@ applications:
   - name: test-application
     path: applications/test/
     destinationNamespace: homelab
-  # - name: hairpin-proxy
-  #   path: applications/hairpin-proxy
-  #   destinationNamespace: hairpin-proxy
 
