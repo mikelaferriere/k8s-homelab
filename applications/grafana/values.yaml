@@ -4,6 +4,18 @@ grafana:
     annotations:
       metallb.universe.tf/loadBalancerIPs: 10.10.10.205
     type: LoadBalancer
+  ingress:
+    enabled: true
+    annotations:
+      kubernetes.io/ingress.class: "nginx"
+      cert-manager.io/cluster-issuer: letsencrypt-issuer-prod
+    ingressClassName: nginx
+    tls:
+      - hosts:
+          - grafana.laferriere.app
+        secretName: grafana-secret
+    hosts:
+      - grafana.laferriere.app
 
   persistence:
     enabled: true
