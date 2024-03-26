@@ -42,6 +42,18 @@ authentik:
       annotations:
         metallb.universe.tf/loadBalancerIPs: 10.10.10.208
       type: LoadBalancer
+    ingress:
+      enabled: true
+      annotations:
+        kubernetes.io/ingress.class: "nginx"
+        cert-manager.io/cluster-issuer: letsencrypt-issuer-prod
+      ingressClassName: nginx
+      tls:
+        - hosts:
+            - auth-k8s.laferriere.app
+          secretName: authentik-secret
+      hosts:
+        - auth-k8s.laferriere.app
 
   authentik:
     secret_key: file:///vault/secrets/secret-key
