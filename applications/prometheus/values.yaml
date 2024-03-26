@@ -362,6 +362,12 @@ prometheus:
         metallb.universe.tf/loadBalancerIPs: 10.10.10.206
       type: LoadBalancer
   extraScrapeConfigs: |
+    - job_name: 'cert-manager'
+      metrics_path: "/metrics"
+      static_configs:
+      - targets:
+        - cert-manager.cert-manager.svc:9402
+
     - job_name: 'vault'
       metrics_path: "/v1/sys/metrics"
       scheme: http
