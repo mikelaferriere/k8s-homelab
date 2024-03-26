@@ -14,8 +14,7 @@ internal-ingress:
 external-ingress:
   controller:
     service:
-      ExternalIPs: 
-        - 192.168.1.2
+      LoadBalancerIP: 192.168.1.2
       annotations:
         metallb.universe.tf/address-pool: external-ips
     electionID: external-ingress-controller

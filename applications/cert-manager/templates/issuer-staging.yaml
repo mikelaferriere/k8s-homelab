@@ -1,7 +1,7 @@
 ---
 # https://cert-manager.io/docs/tutorials/acme/nginx-ingress/
 apiVersion: cert-manager.io/v1
-kind: Issuer
+kind: ClusterIssuer
 metadata:
   name: letsencrypt-issuer-dev
 spec:
@@ -15,7 +15,5 @@ spec:
       name: letsencrypt-dev
     # Enable the HTTP-01 challenge provider
     solvers:
-      - http01:
-          ingress:
-            class: external-ingress
+      - http01: {}
 
