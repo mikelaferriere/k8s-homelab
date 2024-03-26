@@ -22,4 +22,22 @@ immich:
         annotations:
           metallb.universe.tf/loadBalancerIPs: 10.10.10.201
         type: LoadBalancer
+    ingress:
+      main:
+        enabled: true
+        annotations:
+          kubernetes.io/ingress.class: "nginx"
+          cert-manager.io/cluster-issuer: letsencrypt-issuer-prod
+          # proxy-body-size is set to 0 to remove the body limit on file uploads
+          nginx.ingress.kubernetes.io/proxy-body-size: "0"
+        ingressClassName: nginx
+        tls:
+          - hosts:
+            - immich.laferriere.app
+            secretName: immich-secret
+        hosts:
+          - host: immich.laferriere.app
+            paths:
+              - path: /
+
 
