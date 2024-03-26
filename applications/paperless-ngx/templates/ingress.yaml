@@ -1,0 +1,25 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: paperless-ngx-ingress
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+    cert-manager.io/cluster-issuer: letsencrypt-issuer-prod
+spec:
+  ingressClassName: nginx
+  tls:
+  - hosts:
+      - paperless.laferriere.app
+    secretName: paperless-ngx-prod
+  rules:
+  - host: paperless.laferriere.app
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: {{ .Values.app.name }}-app
+            port:
+              name: http
