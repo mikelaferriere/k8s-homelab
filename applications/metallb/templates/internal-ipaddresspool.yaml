@@ -15,6 +15,7 @@ spec:
   # will all share the same settings. Each range can be either a
   # CIDR prefix, or an explicit start-end range of IPs.
   addresses:
+  - 192.168.1.2/32
   - 10.10.10.101-10.10.10.198
   - 10.10.10.200-10.10.10.220
   autoAssign: true
