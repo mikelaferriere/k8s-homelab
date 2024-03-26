@@ -1,0 +1,20 @@
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: alertmanager-datasource
+  labels:
+    grafana_datasource: 'true' # default value for: sidecar.datasources.label
+stringData:
+  alertmanager.yaml: |-
+    apiVersion: 1
+    datasources:
+      - name: Alertmanager
+        type: alertmanager
+        url: http://prometheus-alertmanager.monitoring.svc:9093
+        access: proxy
+        jsonData:
+          # Valid options for implementation include mimir, cortex and prometheus
+          implementation: prometheus
+          # Whether or not Grafana should send alert instances to this Alertmanager
+          handleGrafanaManagedAlerts: false
