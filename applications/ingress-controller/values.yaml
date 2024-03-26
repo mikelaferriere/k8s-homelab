@@ -3,5 +3,6 @@ ingress-nginx:
   controller:
     service:
       LoadBalancerIP: 192.168.1.2
+      externalTrafficPolicy: Local
       annotations:
         metallb.universe.tf/address-pool: internal-ips
