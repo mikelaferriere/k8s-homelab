@@ -52,6 +52,20 @@ vault:
       annotations:
         metallb.universe.tf/loadBalancerIPs: 10.10.10.204
       type: LoadBalancer
+    ingress:
+      enabled: true
+      annotations:
+        kubernetes.io/ingress.class: "nginx"
+        cert-manager.io/cluster-issuer: letsencrypt-issuer-prod
+      ingressClassName: nginx
+      tls:
+        - hosts:
+            - vault.laferriere.app
+          secretName: hashicorp-vault-secret
+      hosts:
+        - host: vault.laferriere.app
+
+
   serverTelemetry:
     serviceMonitor:
       enabled: true
