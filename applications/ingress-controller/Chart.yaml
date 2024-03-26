@@ -6,8 +6,8 @@ dependencies:
     alias: internal-ingress
     version: 4.10.0
     repository: https://kubernetes.github.io/ingress-nginx
-  # - name: ingress-nginx
-  #   alias: external-ingress
-  #   version: 4.10.0
-  #   repository: https://kubernetes.github.io/ingress-nginx
+  - name: ingress-nginx
+    alias: external-ingress
+    version: 4.10.0
+    repository: https://kubernetes.github.io/ingress-nginx
 

@@ -11,15 +11,15 @@ internal-ingress:
       default: false
       controllerValue: "k8s.io/internal-ingress-nginx"  # default: k8s.io/ingress-nginx
 
-# external-ingress:
-#   controller:
-#     service:
-#       LoadBalancerIP: 192.168.1.2
-#       annotations:
-#         metallb.universe.tf/address-pool: external-ips
-#     electionID: external-ingress-controller
-#     ingressClassResource:
-#       name: external-ingress  # default: nginx
-#       enabled: true
-#       default: false
-#       controllerValue: "k8s.io/external-ingress-nginx"  # default: k8s.io/ingress-nginx
+external-ingress:
+  controller:
+    service:
+      LoadBalancerIP: 192.168.1.2
+      annotations:
+        metallb.universe.tf/address-pool: external-ips
+    electionID: external-ingress-controller
+    ingressClassResource:
+      name: external-ingress  # default: nginx
+      enabled: true
+      default: false
+      controllerValue: "k8s.io/external-ingress-nginx"  # default: k8s.io/ingress-nginx
