@@ -99,8 +99,8 @@ applications:
   - name: diun
     path: applications/diun/
     destinationNamespace: monitoring
-  - name: zoneminder
-    path: applications/zoneminder/
+  - name: external-services
+    path: applications/external-services/
     destinationNamespace: homelab
   - name: test-application
     path: applications/test/

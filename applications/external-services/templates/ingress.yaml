@@ -34,3 +34,49 @@ spec:
             name: zoneminder
             port:
               number: 80
+
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: media-ingress
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+    cert-manager.io/cluster-issuer: letsencrypt-issuer-prod
+spec:
+  ingressClassName: nginx
+  tls:
+  - hosts:
+      - plex.laferriere.media
+      - laferriere.media
+    secretName: media-prod
+  rules:
+  - host: laferriere.media
+    http:
+      paths:
+      - path: /movies
+        pathType: Prefix
+        backend:
+          service:
+            name: movies
+            port:
+              number: 7878
+      - path: /tv
+        pathType: Prefix
+        backend:
+          service:
+            name: tv
+            port:
+              number: 8989
+  - host: plex.laferriere.media
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: plex
+            port:
+              number: 32400
+
+
