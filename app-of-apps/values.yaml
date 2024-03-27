@@ -99,6 +99,9 @@ applications:
   - name: diun
     path: applications/diun/
     destinationNamespace: monitoring
+  - name: zoneminder
+    path: applications/zoneminder/
+    destinationNamespace: homelab
   - name: test-application
     path: applications/test/
     destinationNamespace: homelab
