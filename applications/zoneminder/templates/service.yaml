@@ -4,13 +4,8 @@ kind: Service
 metadata:
   name: zoneminder
 spec:
-  type: LoadBalancer
   ports:
-    - port: 8080
+    - port: 80
       protocol: TCP
       targetPort: 80
       name: http
-    - port: 9000
-      protocol: TCP
-      targetPort: 9000
-      name: other

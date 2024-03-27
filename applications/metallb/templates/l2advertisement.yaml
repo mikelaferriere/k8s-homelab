@@ -7,13 +7,3 @@ metadata:
 spec:
   ipAddressPools:
   - internal-ips
-
----
-apiVersion: metallb.io/v1beta1
-kind: L2Advertisement
-metadata:
-  name: external
-  namespace: metallb-system
-spec:
-  ipAddressPools:
-  - external-ips
