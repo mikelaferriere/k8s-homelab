@@ -2,13 +2,13 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: api-ingress
+  name: speech-ingress
 spec:
   ingressClassName: nginx
   rules:
   - http:
       paths:
-      - path: /api/v1
+      - path: /api/v2/speech
         pathType: Prefix
         backend:
           service:
