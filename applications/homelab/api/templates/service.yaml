@@ -10,7 +10,7 @@ metadata:
 spec:
   type: LoadBalancer
   ports:
-    - name: "{{ .Values.app.name }}"
+    - name: http
       port: {{ .Values.app.port }}
       targetPort: {{ .Values.app.port }}
   selector:
