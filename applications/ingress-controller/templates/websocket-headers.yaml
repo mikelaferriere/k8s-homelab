@@ -1,0 +1,14 @@
+---
+apiVersion: v1
+data:
+  Upgrade: "$http_upgrade"
+  X-Forwarded-Host: "$http_host"
+  X-Forwarded-Proto: "$scheme"
+  X-Forwarded-For: "$remote_addr"
+  Host: "$host"
+  Connection: "upgrade"
+kind: ConfigMap
+metadata:
+  name: custom-headers
+  namespace: ingress-nginx
+
