@@ -10,15 +10,10 @@ metadata:
       proxy_set_header Upgrade "websocket";
       proxy_set_header Connection "Upgrade";
 spec:
-  ingressClassName: nginx
   rules:
-  - http:
+    http:
       paths:
-      - path: /ws/ws
-        pathType: Prefix
-        backend:
-          service:
-            name: {{ .Values.app.name }}
-            port:
-              number: {{ .Values.app.port }}
+        - backend:
+          serviceName: {{ .Values.app.name }}
+          servicePort: {{ .Values.app.port }}
 
