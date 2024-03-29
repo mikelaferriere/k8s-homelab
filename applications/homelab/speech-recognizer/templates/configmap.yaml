@@ -5,8 +5,8 @@ metadata:
   name: {{ .Values.app.name }}-config
 data:
   ENVIRONMENT: production
-  EVENT_BUS_HOST: ws://event-bus:10000
-  MQTT_BROKER: ws://mosquitto.mosquitto.svc
+  EVENT_BUS_HOST: ws://192.168.1.2:10000
+  MQTT_BROKER: ws://192.168.1.2
   PROXY_HOST: http://192.168.1.2
   PORT: "{{ .Values.app.port }}"
   MODEL_DIR: /model
