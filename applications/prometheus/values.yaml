@@ -1,5 +1,12 @@
 ---
 prometheus:
+  # By default, Prometheus only discovers serviceMonitors in its
+  # own namespace. Disabling these allows it to discover serviceMonitors
+  # in all namespaces
+  prometheusSpec:
+    podMonitorSelectorNilUsesHelmValues: false
+    serviceMonitorSelectorNilUsesHelmValues: false
+
   alertmanager:
     enabled: true
     podAnnotations:
