@@ -2,17 +2,14 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  annotations:
-    nginx.ingress.kubernetes.io/use-regex: "true"
-    nginx.ingress.kubernetes.io/rewrite-target: /$3
   name: scheduler-ingress
 spec:
   ingressClassName: nginx
   rules:
   - http:
       paths:
-      - path: /api/scheduler(/|$)(.*)
-        pathType: ImplementationSpecific
+      - path: /api/scheduler
+        pathType: Prefix
         backend:
           service:
             name: {{ .Values.app.name }}
