@@ -12,6 +12,7 @@ spec:
     path: ./app-of-apps/
     repoURL: {{ .Values.spec.source.repoURL }}
     targetRevision: {{ .Values.spec.source.targetRevision }}
+    plugin: {}
   destination:
     server: {{ .Values.spec.destination.server }}
     namespace: argo-cd
