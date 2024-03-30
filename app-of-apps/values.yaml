@@ -17,7 +17,7 @@ namespaces:
   - nfs-provisioner
   # - paperless-ngx
   # - protonmail
-  # - security
+  - security
 
 applications:
   # - name: authentik
@@ -29,15 +29,15 @@ applications:
   # - name: grafana
   #   path: applications/grafana/
   #   destinationNamespace: monitoring
-  # - name: hashicorp-vault
-  #   path: applications/hashicorp-vault/
-  #   destinationNamespace: security
-  #   # see https://discuss.hashicorp.com/t/instaling-vault-through-argocd-workflow-agent-injector-cant-be-synced/32375/2
-  #   ignoreDifferences:
-  #     - group: admissionregistration.k8s.io
-  #       kind: MutatingWebhookConfiguration
-  #       jqPathExpressions:
-  #         - .webhooks[]?.clientConfig.caBundle
+  - name: hashicorp-vault
+    path: applications/hashicorp-vault/
+    destinationNamespace: security
+    # see https://discuss.hashicorp.com/t/instaling-vault-through-argocd-workflow-agent-injector-cant-be-synced/32375/2
+    ignoreDifferences:
+      - group: admissionregistration.k8s.io
+        kind: MutatingWebhookConfiguration
+        jqPathExpressions:
+          - .webhooks[]?.clientConfig.caBundle
   # - name: immich
   #   path: applications/immich/
   #   destinationNamespace: immich
