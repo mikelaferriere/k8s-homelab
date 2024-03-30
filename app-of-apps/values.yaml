@@ -20,9 +20,9 @@ namespaces:
   - security
 
 applications:
-  # - name: authentik
-  #   path: applications/authentik/
-  #   destinationNamespace: security
+  - name: authentik
+    path: applications/authentik/
+    destinationNamespace: security
   - name: cert-manager
     path: applications/cert-manager/
     destinationNamespace: cert-manager
