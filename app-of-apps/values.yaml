@@ -18,6 +18,7 @@ namespaces:
   - mosquitto
   - nfs-provisioner
   - paperless-ngx
+  - protonmail
   - security
 
 applications:
@@ -102,7 +103,7 @@ applications:
   - name: external-services
     path: applications/external-services/
     destinationNamespace: homelab
-  - name: test-application
-    path: applications/test/
-    destinationNamespace: homelab
+  - name: protonmail
+    path: applications/protonmail/
+    destinationNamespace: protonmail
 
