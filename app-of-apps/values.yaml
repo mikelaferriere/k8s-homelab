@@ -47,9 +47,9 @@ applications:
   # - name: loki
   #   path: applications/loki/
   #   destinationNamespace: monitoring
-  # - name: metallb
-  #   path: applications/metallb/
-  #   destinationNamespace: metallb-system
+  - name: metallb
+    path: applications/metallb/
+    destinationNamespace: metallb-system
   # - name: nfs-provisioner-paperless
   #   path: applications/nfs-provisioner-paperless/
   #   destinationNamespace: nfs-provisioner
@@ -59,9 +59,9 @@ applications:
   # - name: paperless-ngx
   #   path: applications/paperless-ngx/
   #   destinationNamespace: paperless-ngx
-  - name: prometheus
-    path: applications/prometheus/
-    destinationNamespace: monitoring
+  # - name: prometheus
+  #   path: applications/prometheus/
+  #   destinationNamespace: monitoring
   # - name: promtail
   #   path: applications/promtail/
   #   destinationNamespace: monitoring
