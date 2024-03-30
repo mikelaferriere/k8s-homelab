@@ -1,4 +1,4 @@
 ---
 app:
-  name: scheduler-v2
+  name: scheduler
   port: 3000
