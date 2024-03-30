@@ -7,5 +7,9 @@ spec:
   selector:
     app: protonmail-bridge
   ports:
-    - port: 25
+    - name: smtp
+      port: 25
       targetPort: 25
+    - name: imap
+      port: 143
+      targetPort: 143
