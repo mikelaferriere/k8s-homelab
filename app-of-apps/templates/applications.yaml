@@ -16,7 +16,7 @@ items:
       path: {{ $app.path }}
       repoURL: {{ $.Values.spec.source.repoURL }}
       targetRevision: {{ $.Values.spec.source.targetRevision }}
-      plugin: {}
+      # plugin: {}
     destination:
       server: {{ $.Values.spec.destination.server }}
       namespace: {{ $app.destinationNamespace}}
