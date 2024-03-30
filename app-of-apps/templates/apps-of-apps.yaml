@@ -12,8 +12,6 @@ spec:
     path: ./app-of-apps/
     repoURL: {{ .Values.spec.source.repoURL }}
     targetRevision: {{ .Values.spec.source.targetRevision }}
-    plugin:
-      name: helm-config-map  # Delete this for auto-discovery (and set `plugin: {}` if `name` was the only value) or use proper sidecar plugin name
   destination:
     server: {{ .Values.spec.destination.server }}
     namespace: argo-cd
