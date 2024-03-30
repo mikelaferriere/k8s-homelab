@@ -27,7 +27,7 @@ argo-cd:
         my-plugin:
           init:
             command: [sh]
-            args: [-c, 'helm dependency update"']
+            args: [-c, 'helm dependency update']
           generate:
             command: [sh, -c]
             args:
