@@ -12,7 +12,7 @@ namespaces:
   # - immich
   - ingress-nginx
   - metallb-system
-  # - monitoring
+  - monitoring
   # - mosquitto
   - nfs-provisioner
   # - paperless-ngx
@@ -59,9 +59,9 @@ applications:
   # - name: paperless-ngx
   #   path: applications/paperless-ngx/
   #   destinationNamespace: paperless-ngx
-  # - name: prometheus
-  #   path: applications/prometheus/
-  #   destinationNamespace: monitoring
+  - name: prometheus
+    path: applications/prometheus/
+    destinationNamespace: monitoring
   # - name: promtail
   #   path: applications/promtail/
   #   destinationNamespace: monitoring
