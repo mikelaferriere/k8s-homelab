@@ -11,8 +11,6 @@ namespaces:
   - homelab
   - immich
   - ingress-nginx
-  - hairpin-proxy
-  - kubernetes-dashboard
   - metallb-system
   - monitoring
   - mosquitto
@@ -22,91 +20,88 @@ namespaces:
   - security
 
 applications:
-  - name: authentik
-    path: applications/authentik/
-    destinationNamespace: security
-  - name: cert-manager
-    path: applications/cert-manager/
-    destinationNamespace: cert-manager
-  - name: grafana
-    path: applications/grafana/
-    destinationNamespace: monitoring
-  - name: hashicorp-vault
-    path: applications/hashicorp-vault/
-    destinationNamespace: security
-    # see https://discuss.hashicorp.com/t/instaling-vault-through-argocd-workflow-agent-injector-cant-be-synced/32375/2
-    ignoreDifferences:
-      - group: admissionregistration.k8s.io
-        kind: MutatingWebhookConfiguration
-        jqPathExpressions:
-          - .webhooks[]?.clientConfig.caBundle
-  # - name: kubernetes-dashboard
-  #   path: applications/kubernetes-dashboard/
-  #   destinationNamespace: kubernetes-dashboard
-  - name: immich
-    path: applications/immich/
-    destinationNamespace: immich
-  - name: ingress-nginx
-    path: applications/ingress-controller/
-    destinationNamespace: ingress-nginx
-  - name: loki
-    path: applications/loki/
-    destinationNamespace: monitoring
-  - name: metallb
-    path: applications/metallb/
-    destinationNamespace: metallb-system
-  - name: nfs-provisioner-paperless
-    path: applications/nfs-provisioner-paperless/
-    destinationNamespace: nfs-provisioner
-  - name: nfs-provisioner
-    path: applications/nfs-provisioner/
-    destinationNamespace: nfs-provisioner
-  - name: paperless-ngx
-    path: applications/paperless-ngx/
-    destinationNamespace: paperless-ngx
-  - name: prometheus
-    path: applications/prometheus/
-    destinationNamespace: monitoring
-  - name: promtail
-    path: applications/promtail/
-    destinationNamespace: monitoring
-  - name: homelab-api
-    path: applications/homelab/api/
-    destinationNamespace: homelab
-  - name: homelab-event-bus
-    path: applications/homelab/event-bus/
-    destinationNamespace: homelab
-  - name: homelab-websocket
-    path: applications/homelab/websocket/
-    destinationNamespace: homelab
-  - name: homelab-speech-recognizer
-    path: applications/homelab/speech-recognizer/
-    destinationNamespace: homelab
-  - name: homelab-speech-python
-    path: applications/homelab/speech-python/
-    destinationNamespace: homelab
-  - name: homelab-scheduler
-    path: applications/homelab/scheduler/
-    destinationNamespace: homelab
-  - name: mosquitto
-    path: applications/mosquitto/
-    destinationNamespace: mosquitto
-  - name: pve-exporter
-    path: applications/pve-exporter/
-    destinationNamespace: monitoring
-  - name: jaeger
-    path: applications/jaeger/
-    destinationNamespace: monitoring
-  - name: diun
-    path: applications/diun/
-    destinationNamespace: monitoring
-  - name: external-services
-    path: applications/external-services/
-    destinationNamespace: homelab
-  - name: protonmail
-    path: applications/protonmail/
-    destinationNamespace: protonmail
-  - name: homepage
-    path: applications/homepage/
-    destinationNamespace: homelab
+  # - name: authentik
+  #   path: applications/authentik/
+  #   destinationNamespace: security
+  # - name: cert-manager
+  #   path: applications/cert-manager/
+  #   destinationNamespace: cert-manager
+  # - name: grafana
+  #   path: applications/grafana/
+  #   destinationNamespace: monitoring
+  # - name: hashicorp-vault
+  #   path: applications/hashicorp-vault/
+  #   destinationNamespace: security
+  #   # see https://discuss.hashicorp.com/t/instaling-vault-through-argocd-workflow-agent-injector-cant-be-synced/32375/2
+  #   ignoreDifferences:
+  #     - group: admissionregistration.k8s.io
+  #       kind: MutatingWebhookConfiguration
+  #       jqPathExpressions:
+  #         - .webhooks[]?.clientConfig.caBundle
+  # - name: immich
+  #   path: applications/immich/
+  #   destinationNamespace: immich
+  # - name: ingress-nginx
+  #   path: applications/ingress-controller/
+  #   destinationNamespace: ingress-nginx
+  # - name: loki
+  #   path: applications/loki/
+  #   destinationNamespace: monitoring
+  # - name: metallb
+  #   path: applications/metallb/
+  #   destinationNamespace: metallb-system
+  # - name: nfs-provisioner-paperless
+  #   path: applications/nfs-provisioner-paperless/
+  #   destinationNamespace: nfs-provisioner
+  # - name: nfs-provisioner
+  #   path: applications/nfs-provisioner/
+  #   destinationNamespace: nfs-provisioner
+  # - name: paperless-ngx
+  #   path: applications/paperless-ngx/
+  #   destinationNamespace: paperless-ngx
+  # - name: prometheus
+  #   path: applications/prometheus/
+  #   destinationNamespace: monitoring
+  # - name: promtail
+  #   path: applications/promtail/
+  #   destinationNamespace: monitoring
+  # - name: homelab-api
+  #   path: applications/homelab/api/
+  #   destinationNamespace: homelab
+  # - name: homelab-event-bus
+  #   path: applications/homelab/event-bus/
+  #   destinationNamespace: homelab
+  # - name: homelab-websocket
+  #   path: applications/homelab/websocket/
+  #   destinationNamespace: homelab
+  # - name: homelab-speech-recognizer
+  #   path: applications/homelab/speech-recognizer/
+  #   destinationNamespace: homelab
+  # - name: homelab-speech-python
+  #   path: applications/homelab/speech-python/
+  #   destinationNamespace: homelab
+  # - name: homelab-scheduler
+  #   path: applications/homelab/scheduler/
+  #   destinationNamespace: homelab
+  # - name: mosquitto
+  #   path: applications/mosquitto/
+  #   destinationNamespace: mosquitto
+  # - name: pve-exporter
+  #   path: applications/pve-exporter/
+  #   destinationNamespace: monitoring
+  # - name: jaeger
+  #   path: applications/jaeger/
+  #   destinationNamespace: monitoring
+  # - name: diun
+  #   path: applications/diun/
+  #   destinationNamespace: monitoring
+  # - name: external-services
+  #   path: applications/external-services/
+  #   destinationNamespace: homelab
+  # - name: protonmail
+  #   path: applications/protonmail/
+  #   destinationNamespace: protonmail
+  # - name: homepage
+  #   path: applications/homepage/
+  #   destinationNamespace: homelab
 
