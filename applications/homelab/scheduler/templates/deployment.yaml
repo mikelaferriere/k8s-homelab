@@ -31,7 +31,7 @@ spec:
               command:
                 - curl
                 - -f
-                - http://localhost:{{ .Values.app.port }}/
+                - http://localhost:{{ .Values.app.port }}/api/scheduler/
             failureThreshold: 5
             periodSeconds: 30
             timeoutSeconds: 10
