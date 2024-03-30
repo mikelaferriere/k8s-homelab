@@ -14,7 +14,7 @@ namespaces:
   - metallb-system
   # - monitoring
   # - mosquitto
-  # - nfs-provisioner
+  - nfs-provisioner
   # - paperless-ngx
   # - protonmail
   # - security
@@ -50,12 +50,12 @@ applications:
   - name: metallb
     path: applications/metallb/
     destinationNamespace: metallb-system
-  # - name: nfs-provisioner-paperless
-  #   path: applications/nfs-provisioner-paperless/
-  #   destinationNamespace: nfs-provisioner
-  # - name: nfs-provisioner
-  #   path: applications/nfs-provisioner/
-  #   destinationNamespace: nfs-provisioner
+  - name: nfs-provisioner-paperless
+    path: applications/nfs-provisioner-paperless/
+    destinationNamespace: nfs-provisioner
+  - name: nfs-provisioner
+    path: applications/nfs-provisioner/
+    destinationNamespace: nfs-provisioner
   # - name: paperless-ngx
   #   path: applications/paperless-ngx/
   #   destinationNamespace: paperless-ngx
