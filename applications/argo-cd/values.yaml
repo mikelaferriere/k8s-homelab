@@ -34,10 +34,9 @@ argo-cd:
               - |
                 echo "{\"kind\": \"ConfigMap\", \"apiVersion\": \"v1\", \"metadata\": { \"name\": \"$ARGOCD_APP_NAME\", \"namespace\": \"$ARGOCD_APP_NAMESPACE\", \"annotations\": {\"KubeVersion\": \"$KUBE_VERSION\", \"KubeApiVersion\": \"$KUBE_API_VERSIONS\"}}}"
           discover:
-            fileName: "./subdir/s*.yaml"
             find:
               glob: "**/Chart.yaml"
-              command: [sh, -c, find . -name env.yaml]
+              command: [sh, -c, 'echo hi']
 
   repoServer:
     extraContainers:
