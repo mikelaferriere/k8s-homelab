@@ -42,7 +42,7 @@ argo-cd:
       - name: cmp-helm-plugin
         command:
           - "/var/run/argocd/argocd-cmp-server"
-        image: busybox
+        image: alpine/helm
         securityContext:
           runAsNonRoot: true
           runAsUser: 999
