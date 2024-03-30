@@ -2,29 +2,9 @@
 authentik:
   global:
     addPrometheusAnnotations: true
-    env:
-      - name: AUTHENTIK_SECRET_KEY
-        value: file:///vault/secrets/secret-key
-      - name: POSTGRES_PASSWORD_FILE
-        value: /vault/secrets/postgresql-password
-
-    deploymentAnnotations:
-      vault.hashicorp.com/agent-inject: "true"
-      vault.hashicorp.com/agent-inject-status: "update"
-      vault.hashicorp.com/role: 'internal-app'
-      vault.hashicorp.com/agent-inject-template-secret-key: |
-        {{- with secret "kv/data/secrets/authentik" -}}
-        {{ .Data.AUTHENTIK_SECRET_KEY }}
-        {{- end }}
-      vault.hashicorp.com/agent-inject-template-postgresql-password: |
-        {{- with secret "kv/data/secrets/authentik" -}}
-        {{ .Data.PG_PASSWORD }}
-        {{- end }}
-
 
     podAnnotations:
       vault.hashicorp.com/agent-inject: "true"
-      vault.hashicorp.com/agent-inject-status: "update"
       vault.hashicorp.com/role: 'internal-app'
       vault.hashicorp.com/agent-inject-template-secret-key: |
         {{- with secret "kv/data/secrets/authentik" -}}
@@ -36,6 +16,11 @@ authentik:
         {{- end }}
 
   server:
+    env:
+      - name: AUTHENTIK_SECRET_KEY
+        value: file:///vault/secrets/secret-key
+      - name: AUTHENTIK_POSTGRESQL__PASSWORD
+        value: file:///vault/secrets/postgresql-password
     metrics:
       enabled: true
     service:
@@ -78,8 +63,8 @@ authentik:
     enabled: true
     image:
       tag: 16.2.0
-    auth:
-      usePasswordFiles: true
+    # auth:
+    #   usePasswordFiles: true
 
     primary:
       extraVolumes:
@@ -96,6 +81,8 @@ authentik:
       extraEnvVars:
         - name: ALLOW_EMPTY_PASSWORD
           value: "true"
+        - name: POSTGRES_PASSWORD_FILE
+          value: /mnt/secret-store/postgresql-password
 
   redis:
     enabled: true
