@@ -1,4 +1,8 @@
 ---
+prometheus-operator-crds:
+  crds:
+    annotations: {}
+
 prometheus:
   alertmanager:
     enabled: true
