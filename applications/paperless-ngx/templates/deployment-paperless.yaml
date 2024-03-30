@@ -21,6 +21,7 @@ spec:
       containers:
         - name: {{ .Values.app.name }}-scanner
           image: manuc66/node-hp-scan-to:latest
+          imagePullPolicy: IfNotPresent
           resources: {}
           envFrom:
           - configMapRef:
@@ -33,6 +34,7 @@ spec:
           - configMapRef:
               name: {{ .Values.app.name }}-config
           image: ghcr.io/paperless-ngx/paperless-ngx:2.6.3
+          imagePullPolicy: IfNotPresent
           livenessProbe:
             exec:
               command:
