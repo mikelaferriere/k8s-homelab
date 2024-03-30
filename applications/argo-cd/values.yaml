@@ -13,8 +13,8 @@ argo-cd:
     extraArgs:
       - --insecure
     service:
-      annotations:
-        metallb.universe.tf/loadBalancerIPs: 10.10.10.203
+      # annotations:
+      #   metallb.universe.tf/loadBalancerIPs: 10.10.10.203
       type: LoadBalancer
   controller:
     metrics:

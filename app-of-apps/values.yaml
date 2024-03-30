@@ -8,24 +8,24 @@ spec:
 
 namespaces:
   - cert-manager
-  - homelab
-  - immich
-  - ingress-nginx
+  # - homelab
+  # - immich
+  # - ingress-nginx
   - metallb-system
-  - monitoring
-  - mosquitto
-  - nfs-provisioner
-  - paperless-ngx
-  - protonmail
-  - security
+  # - monitoring
+  # - mosquitto
+  # - nfs-provisioner
+  # - paperless-ngx
+  # - protonmail
+  # - security
 
 applications:
   # - name: authentik
   #   path: applications/authentik/
   #   destinationNamespace: security
-  # - name: cert-manager
-  #   path: applications/cert-manager/
-  #   destinationNamespace: cert-manager
+  - name: cert-manager
+    path: applications/cert-manager/
+    destinationNamespace: cert-manager
   # - name: grafana
   #   path: applications/grafana/
   #   destinationNamespace: monitoring
