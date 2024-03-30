@@ -26,8 +26,9 @@ argo-cd:
       plugins:
         my-plugin:
           init:
-            command: [sh]
-            args: [-c, 'helm repo update']
+            command: [sh, -c]
+            args: []
+              # - 'helm repo add ${HELM_CHART_NAME} ${HELM_CHART_URL} && helm dependency update'
           generate:
             command: [sh, -c]
             args:
