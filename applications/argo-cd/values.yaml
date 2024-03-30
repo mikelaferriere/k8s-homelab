@@ -16,53 +16,52 @@ argo-cd:
       annotations:
         metallb.universe.tf/loadBalancerIPs: 10.10.10.203
       type: LoadBalancer
-  # controller:
-  #   metrics:
-  #     enabled: true
+  controller:
+    metrics:
+      enabled: true
 
-  # configs:
-  #   cmp:
-  #     create: true
-  #     plugins:
-  #       my-plugin:
-  #         init:
-  #           command: [sh]
-  #           args: [-c, 'helm dependency update']
-  #         generate:
-  #           command: [sh, -c]
-  #           args:
-  #             - |
-  #               echo "{\"kind\": \"ConfigMap\", \"apiVersion\": \"v1\", \"metadata\": { \"name\": \"$ARGOCD_APP_NAME\", \"namespace\": \"$ARGOCD_APP_NAMESPACE\", \"annotations\": {\"KubeVersion\": \"$KUBE_VERSION\", \"KubeApiVersion\": \"$KUBE_API_VERSIONS\"}}}"
-  #         discover:
-  #           find:
-  #             glob: "**/Chart.yaml"
-  #             command: [sh, -c, 'echo hi']
+  configs:
+    cmp:
+      create: true
+      plugins:
+        my-plugin:
+          init:
+            command: [sh]
+            args: [-c, 'helm dependency update']
+          generate:
+            command: [sh, -c]
+            args:
+              - |
+                echo "{\"kind\": \"ConfigMap\", \"apiVersion\": \"v1\", \"metadata\": { \"name\": \"$ARGOCD_APP_NAME\", \"namespace\": \"$ARGOCD_APP_NAMESPACE\", \"annotations\": {\"KubeVersion\": \"$KUBE_VERSION\", \"KubeApiVersion\": \"$KUBE_API_VERSIONS\"}}}"
+          discover:
+            find:
+              command: ["sh", "-c", "touch /tmp/plugin-discover-has-run && echo 'yes'"]
 
-  # repoServer:
-  #   extraContainers:
-  #     - name: cmp-helm-plugin
-  #       command:
-  #         - "/var/run/argocd/argocd-cmp-server"
-  #       image: busybox
-  #       securityContext:
-  #         runAsNonRoot: true
-  #         runAsUser: 999
-  #       volumeMounts:
-  #         - mountPath: /var/run/argocd
-  #           name: var-files
-  #         - mountPath: /home/argocd/cmp-server/plugins
-  #           name: plugins
-  #         # Remove this volumeMount if you've chosen to bake the config file into the sidecar image.
-  #         - mountPath: /home/argocd/cmp-server/config/plugin.yaml
-  #           subPath: my-plugin.yaml
-  #           name: argocd-cmp-cm
-  #         # Starting with v2.4, do NOT mount the same tmp volume as the repo-server container. The filesystem separation helps
-  #         # mitigate path traversal attacks.
-  #         - mountPath: /tmp
-  #           name: cmp-tmp
-  #   volumes:
-  #     - name: argocd-cmp-cm
-  #       configMap:
-  #         name: argocd-cmp-cm
-  #     - name: cmp-tmp
-  #       emptyDir: {}
+  repoServer:
+    extraContainers:
+      - name: cmp-helm-plugin
+        command:
+          - "/var/run/argocd/argocd-cmp-server"
+        image: busybox
+        securityContext:
+          runAsNonRoot: true
+          runAsUser: 999
+        volumeMounts:
+          - mountPath: /var/run/argocd
+            name: var-files
+          - mountPath: /home/argocd/cmp-server/plugins
+            name: plugins
+          # Remove this volumeMount if you've chosen to bake the config file into the sidecar image.
+          - mountPath: /home/argocd/cmp-server/config/plugin.yaml
+            subPath: my-plugin.yaml
+            name: argocd-cmp-cm
+          # Starting with v2.4, do NOT mount the same tmp volume as the repo-server container. The filesystem separation helps
+          # mitigate path traversal attacks.
+          - mountPath: /tmp
+            name: cmp-tmp
+    volumes:
+      - name: argocd-cmp-cm
+        configMap:
+          name: argocd-cmp-cm
+      - name: cmp-tmp
+        emptyDir: {}
