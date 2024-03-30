@@ -10,7 +10,7 @@ namespaces:
   - cert-manager
   # - homelab
   # - immich
-  # - ingress-nginx
+  - ingress-nginx
   - metallb-system
   # - monitoring
   # - mosquitto
@@ -41,9 +41,9 @@ applications:
   # - name: immich
   #   path: applications/immich/
   #   destinationNamespace: immich
-  # - name: ingress-nginx
-  #   path: applications/ingress-controller/
-  #   destinationNamespace: ingress-nginx
+  - name: ingress-nginx
+    path: applications/ingress-controller/
+    destinationNamespace: ingress-nginx
   # - name: loki
   #   path: applications/loki/
   #   destinationNamespace: monitoring
