@@ -23,8 +23,6 @@ items:
       automated:
         prune: true
         selfHeal: true
-      syncOptions:
-      - ServerSideApply=true
     {{- if $app.ignoreDifferences }}
     ignoreDifferences:
     {{- toYaml $app.ignoreDifferences | nindent 8 }}
