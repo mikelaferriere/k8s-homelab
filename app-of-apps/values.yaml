@@ -15,7 +15,7 @@ namespaces:
   - monitoring
   - mosquitto
   - nfs-provisioner
-  # - paperless-ngx
+  - paperless-ngx
   # - protonmail
   - security
 
@@ -56,9 +56,9 @@ applications:
   - name: nfs-provisioner
     path: applications/nfs-provisioner/
     destinationNamespace: nfs-provisioner
-  # - name: paperless-ngx
-  #   path: applications/paperless-ngx/
-  #   destinationNamespace: paperless-ngx
+  - name: paperless-ngx
+    path: applications/paperless-ngx/
+    destinationNamespace: paperless-ngx
   - name: prometheus
     path: applications/prometheus/
     destinationNamespace: monitoring
