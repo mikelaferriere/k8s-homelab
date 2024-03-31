@@ -1,7 +1,8 @@
 ---
 prometheus-operator-crds:
   crds:
-    annotations: {}
+    annotations:
+      argocd.argoproj.io/sync-options: ServerSideApply=true
 
 prometheus:
   alertmanager:
