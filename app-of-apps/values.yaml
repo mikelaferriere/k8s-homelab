@@ -101,7 +101,7 @@ applications:
   - name: protonmail
     path: applications/protonmail/
     destinationNamespace: protonmail
-  # - name: homepage
-  #   path: applications/homepage/
-  #   destinationNamespace: homelab
+  - name: homepage
+    path: applications/homepage/
+    destinationNamespace: homelab
 
