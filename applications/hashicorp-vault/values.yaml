@@ -15,6 +15,9 @@ vault:
           memory: 256Mi
           cpu: 250m
   server:
+    persistentVolumeClaimRetentionPolicy:
+      whenDeleted: Retain
+      whenScaled: Retain
     standalone:
       enabled: true
       config: |

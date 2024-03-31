@@ -63,8 +63,6 @@ authentik:
     enabled: true
     image:
       tag: 16.2.0
-    # auth:
-    #   usePasswordFiles: true
 
     primary:
       extraVolumes:
