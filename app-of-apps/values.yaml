@@ -89,9 +89,6 @@ applications:
   - name: pve-exporter
     path: applications/pve-exporter/
     destinationNamespace: monitoring
-  - name: jaeger
-    path: applications/jaeger/
-    destinationNamespace: monitoring
   - name: diun
     path: applications/diun/
     destinationNamespace: monitoring
