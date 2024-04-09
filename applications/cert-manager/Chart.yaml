@@ -3,7 +3,7 @@ name: cert-manager
 version: 1.0.0
 dependencies:
   - name: cert-manager
-    version: 1.14.3
+    version: 1.14.4
     repository: https://charts.jetstack.io
   - name: reflector
     version: 7.1.262
