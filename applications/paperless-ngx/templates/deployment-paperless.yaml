@@ -33,7 +33,7 @@ spec:
           envFrom:
           - configMapRef:
               name: {{ .Values.app.name }}-config
-          image: ghcr.io/paperless-ngx/paperless-ngx:2.6.3
+          image: ghcr.io/paperless-ngx/paperless-ngx:2.7.2
           imagePullPolicy: IfNotPresent
           livenessProbe:
             exec:
