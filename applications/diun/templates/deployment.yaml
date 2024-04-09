@@ -25,7 +25,7 @@ spec:
       serviceAccountName: diun
       containers:
         - name: diun
-          image: crazymax/diun:latest
+          image: crazymax/diun:4.28.0
           imagePullPolicy: Always
           command: ["sh", "-c", "source /vault/secrets/env_file && diun serve"]
           env:
