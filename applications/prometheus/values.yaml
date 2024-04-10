@@ -405,6 +405,12 @@ prometheus:
           - 192.168.6.216:9100
       metrics_path: /metrics
 
+    - job_name: gpu-server
+      static_configs:
+        - targets:
+          - 192.168.1.122:9100
+          - 192.168.1.122:9400
+      metrics_path: /metrics
 
 prometheus-postgres-exporter:
   serviceMonitor:
