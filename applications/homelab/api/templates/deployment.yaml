@@ -59,10 +59,10 @@ spec:
           resources:
             requests:
               memory: "750Mi"
-              cpu: "200m"
+              cpu: "500m"
             limits:
               memory: "1Gi"
-              cpu: "400m"
+              cpu: "1000m"
         {{- range $consumer := .Values.app.consumers }}
         - name: {{ $consumer }}
           envFrom:
