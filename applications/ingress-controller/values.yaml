@@ -12,6 +12,15 @@ ingress-nginx:
       # externalTrafficPolicy: Local
       annotations:
         metallb.universe.tf/address-pool: internal-ips
+        nginx.ingress.kubernetes.io/server-snippets: |
+          proxysetheader Upgrade $httpupgrade;
+          proxyhttpversion 1.1;
+          proxysetheader X-Forwarded-Host $httphost;
+          proxysetheader X-Forwarded-Proto $scheme;
+          proxysetheader X-Forwarded-For $remoteaddr;
+          proxysetheader Host $host;
+          proxysetheader Connection "upgrade";
+          proxycachebypass $httpupgrade;
   tcp:
     1883: "mosquitto/mosquitto:1883"
     9001: "mosquitto/mosquitto:9001"
