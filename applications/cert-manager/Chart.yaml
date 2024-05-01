@@ -3,9 +3,6 @@ name: cert-manager
 version: 1.0.0
 dependencies:
   - name: cert-manager
-    version: 1.14.4
+    version: 1.14.5
     repository: https://charts.jetstack.io
-  - name: reflector
-    version: 7.1.262
-    repository: https://emberstack.github.io/helm-charts
 

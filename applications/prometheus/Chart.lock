@@ -4,9 +4,9 @@ dependencies:
   version: 11.0.0
 - name: prometheus
   repository: https://prometheus-community.github.io/helm-charts
-  version: 25.19.1
+  version: 25.20.1
 - name: prometheus-postgres-exporter
   repository: https://prometheus-community.github.io/helm-charts
   version: 6.0.0
-digest: sha256:21693e020b49a66b04372c419513bae5bc0e8f4d580b0850234c569fe2204560
-generated: "2024-04-09T18:04:20.587246483Z"
+digest: sha256:fda09011962fe8897773a2b8174d23f493d8052e8781c41b2675e5bf1c16e700
+generated: "2024-05-01T13:28:56.323862646Z"

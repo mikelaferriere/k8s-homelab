@@ -31,7 +31,7 @@ spec:
     spec:
       containers:
         - name: {{ .Values.app.name }}
-          image: prompve/prometheus-pve-exporter:3.2.2
+          image: prompve/prometheus-pve-exporter:3.4.0
           command: 
             - /opt/prometheus-pve-exporter/bin/pve_exporter
             - --config.file=/vault/secrets/config.yml
