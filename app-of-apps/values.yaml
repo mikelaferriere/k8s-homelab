@@ -68,6 +68,9 @@ applications:
   - name: homelab-api
     path: applications/homelab/api/
     destinationNamespace: homelab
+  - name: homelab-dashboard
+    path: applications/homelab/dashboard/
+    destinationNamespace: homelab
   - name: homelab-event-bus
     path: applications/homelab/event-bus/
     destinationNamespace: homelab

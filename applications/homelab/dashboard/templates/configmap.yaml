@@ -1,0 +1,14 @@
+---
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: {{ .Values.app.name }}-config
+data:
+  ENVIRONMENT: production
+  EVENT_BUS_HOST: ws://192.168.1.2:10000
+  MQTT_BROKER: ws://192.168.1.2
+  PROXY_HOST: http://192.168.1.2
+  PGUSER: postgres
+  PGPASSWORD: postgres
+  PGDATABASE: postgres
+  PGHOST: postgresql
