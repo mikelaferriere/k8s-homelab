@@ -68,8 +68,8 @@ spec:
           envFrom:
           - configMapRef:
               name: {{ $.Values.app.name }}-config
-          image: 10.10.10.199:5000/typescript/nx/{{ $.Values.app.name }}:latest
-          command: ["sh", "-c", ". /vault/secrets/init && node /app/apps/api/src/consumer/{{ $consumer }}/index.js"]
+          image: "10.10.10.199:5000/typescript/nx/consumer:latest"
+          command: ["sh", "-c", ". /vault/secrets/init && npx serve -s {{ $consumer }}"]
           resources:
             requests:
               memory: "50Mi"
