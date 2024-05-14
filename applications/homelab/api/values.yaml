@@ -4,14 +4,14 @@ app:
   port: 8081
   consumers: [
     "calendar-events",
-    "fitbit-update",
-    "hue-rooms",
+    "fitbit-sync",
+    "hue-sync",
     "sports-fetch-new-scores",
-    "sports-scoreboard",
-    "sports-sync-scores",
-    "weather-current",
-    "weather-hourly",
-    "withings-update"
+    "sports-scoreboard-sync",
+    "sports-scores-sync",
+    "weather-current-sync",
+    "weather-hourly-sync",
+    "withings-sync"
   ]
 
 postgresql:
