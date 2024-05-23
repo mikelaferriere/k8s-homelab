@@ -24,8 +24,8 @@ spec:
           envFrom:
           - configMapRef:
               name: {{ .Values.app.name }}-config
-          image: 10.10.10.199:5000/typescript/{{ .Values.app.name }}:latest
-          command: ["sh", "-c", "node app/build/index.js"]
+          image: 10.10.10.199:5000/typescript/nx/{{ .Values.app.name }}:latest
+          command: ["sh", "-c", "node /app/main.js"]
           livenessProbe:
             exec:
               command:
