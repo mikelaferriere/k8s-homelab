@@ -40,10 +40,37 @@ spec:
             - containerPort: {{ .Values.app.port }}
           resources:
             requests:
-              memory: "15Gi"
-              cpu: "2250m"
+              memory: "1500Mi"
+              cpu: "500m"
             limits:
-              memory: "20Gi"
-              cpu: "3000m"
+              memory: "3Gi"
+              cpu: "1000m"
+        # {{- range $location := .Values.app.locations }}
+        # - name: {{ $location }}
+        #   envFrom:
+        #   - configMapRef:
+        #       name: {{ $.Values.app.name }}-config
+        #   image: 10.10.10.199:5000/typescript/nx/{{ $.Values.app.name }}:latest
+        #   command: ["sh", "-c", "node /app/main.js"]
+        #   livenessProbe:
+        #     exec:
+        #       command:
+        #         - websocat
+        #         - -q
+        #         - -uU
+        #         - ws://localhost:{{ $.Values.app.port }}
+        #     failureThreshold: 5
+        #     periodSeconds: 30
+        #     timeoutSeconds: 10
+        #   ports:
+        #     - containerPort: {{ $.Values.app.port }}
+        #   resources:
+        #     requests:
+        #       memory: "2Gi"
+        #       cpu: "500m"
+        #     limits:
+        #       memory: "4Gi"
+        #       cpu: "1000m"
+        # {{- end }}
       restartPolicy: Always
 status: {}
