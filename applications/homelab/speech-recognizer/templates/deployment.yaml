@@ -40,11 +40,11 @@ spec:
             - containerPort: {{ .Values.app.port }}
           resources:
             requests:
-              memory: "1500Mi"
-              cpu: "500m"
+              memory: "2Gi"
+              cpu: "2"
             limits:
-              memory: "3Gi"
-              cpu: "1000m"
+              memory: "4Gi"
+              cpu: "4"
         # {{- range $location := .Values.app.locations }}
         # - name: {{ $location }}
         #   envFrom:
