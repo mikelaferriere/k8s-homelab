@@ -33,9 +33,9 @@ prometheus:
       receivers:
         - name: discord
           # disable discord until fix gets merged
-          # discord_configs:
-          #   - webhook_url_file: /vault/secrets/discord_url
-          #     send_resolved: true
+          discord_configs:
+            - webhook_url_file: /vault/secrets/discord_url
+              send_resolved: true
     
   serverFiles:
     alerting_rules.yml:
