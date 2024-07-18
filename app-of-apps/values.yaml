@@ -92,9 +92,9 @@ applications:
   - name: pve-exporter
     path: applications/pve-exporter/
     destinationNamespace: monitoring
-  - name: diun
-    path: applications/diun/
-    destinationNamespace: monitoring
+  # - name: diun
+  #   path: applications/diun/
+  #   destinationNamespace: monitoring
   - name: external-services
     path: applications/external-services/
     destinationNamespace: homelab
