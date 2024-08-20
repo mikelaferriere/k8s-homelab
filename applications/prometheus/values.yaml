@@ -7,6 +7,11 @@ prometheus-operator-crds:
 prometheus:
   alertmanager:
     enabled: true
+    # overriding to main until a release > 0.27 is created for alert manager:
+    # https://github.com/prometheus/alertmanager
+    image:
+      tag: "main"
+
     podAnnotations:
       vault.hashicorp.com/agent-inject: "true"
       vault.hashicorp.com/role: internal-app
@@ -24,6 +29,11 @@ prometheus:
         receiver: discord
 
         routes:
+          # continue defaults to false, so the first match will end routing.
+          - match:
+              # This was previously named DeadMansSwitch
+              alertname: Watchdog
+            receiver: "null"
           - receiver: discord
             group_wait: 10s
             match_re:
@@ -31,11 +41,11 @@ prometheus:
             continue: true
 
       receivers:
+        - name: "null"
         - name: discord
-          # # disable discord until fix gets merged
-          # discord_configs:
-          #   - webhook_url_file: /vault/secrets/discord_url
-          #     send_resolved: true
+          # disable discord until fix gets merged
+          discord_configs:
+            - webhook_url_file: '/vault/secrets/discord_url'
     
   serverFiles:
     alerting_rules.yml:
@@ -51,7 +61,7 @@ prometheus:
               annotations:
                 summary: Prometheus too many restarts (instance {{ $labels.instance }})
                 description: "Prometheus has restarted more than twice in the last 15 minutes. It might be crashlooping.\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
-            - alert: PrometheusAlertmanagerE2eDeadManSwitch
+            - alert: Watchdog
               expr: vector(1)
               for: 0m
               labels:
