@@ -364,6 +364,17 @@ prometheus:
                 summary: Vault cluster health (instance {{ $labels.instance }})
                 description: "Vault cluster is not healthy {{ $labels.instance }}: {{ $value | printf \"%.2f\"}}%\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
 
+        - name: Pods
+          rules:
+            - alert: PodCrashLooping
+              annotations:
+                description: Pod {{ $labels.namespace }}/{{ $labels.pod }} ({{ $labels.container }}) is restarting {{ printf "%.2f" $value }} times / 5 minutes.
+                summary: Pod is crash looping.
+              expr: rate(kube_pod_container_status_restarts_total{job="kube-state-metrics",namespace=~".*"}[5m]) * 60 * 5 > 0
+              for: 5m
+              labels:
+                severity: critical
+
   server:
     podAnnotations:
       vault.hashicorp.com/agent-inject: "true"
