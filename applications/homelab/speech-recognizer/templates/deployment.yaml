@@ -15,7 +15,8 @@ spec:
     type: Recreate
   template:
     metadata:
-      annotations: {}
+      annotations:
+        diun.enable: "false"
       labels:
         app: {{ .Values.app.name }}
     spec:
@@ -45,32 +46,5 @@ spec:
             limits:
               memory: "4Gi"
               cpu: "4"
-        # {{- range $location := .Values.app.locations }}
-        # - name: {{ $location }}
-        #   envFrom:
-        #   - configMapRef:
-        #       name: {{ $.Values.app.name }}-config
-        #   image: 10.10.10.199:5000/typescript/nx/{{ $.Values.app.name }}:latest
-        #   command: ["sh", "-c", "node /app/main.js"]
-        #   livenessProbe:
-        #     exec:
-        #       command:
-        #         - websocat
-        #         - -q
-        #         - -uU
-        #         - ws://localhost:{{ $.Values.app.port }}
-        #     failureThreshold: 5
-        #     periodSeconds: 30
-        #     timeoutSeconds: 10
-        #   ports:
-        #     - containerPort: {{ $.Values.app.port }}
-        #   resources:
-        #     requests:
-        #       memory: "2Gi"
-        #       cpu: "500m"
-        #     limits:
-        #       memory: "4Gi"
-        #       cpu: "1000m"
-        # {{- end }}
       restartPolicy: Always
 status: {}

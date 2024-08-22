@@ -16,6 +16,7 @@ spec:
   template:
     metadata:
       annotations:
+        diun.enable: "false"
         vault.hashicorp.com/agent-inject: "true"
         vault.hashicorp.com/role: internal-app
         # vault.hashicorp.com/agent-inject-secret-defined: kv/data/secrets/homelab
