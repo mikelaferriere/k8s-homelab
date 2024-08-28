@@ -37,9 +37,12 @@ prometheus:
             receiver: "null"
           - receiver: discord
             group_wait: 10s
-            match_re:
-              severity: critical|warning
-            continue: true
+            match:
+              severity: warning
+          - receiver: discord
+            group_wait: 10s
+            match:
+              severity: warning
 
       receivers:
         - name: "null"
