@@ -1,0 +1,8 @@
+apiVersion: v1
+name: joplin
+version: 1.0.1
+dependencies:
+  - name: joplin-server
+    version: 5.5.5
+    repository: https://djjudas21.github.io/charts/
+

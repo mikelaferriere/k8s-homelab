@@ -11,6 +11,7 @@ namespaces:
   - homelab
   - immich
   - ingress-nginx
+  - joplin
   - metallb-system
   - monitoring
   - mosquitto
@@ -104,4 +105,7 @@ applications:
   - name: homepage
     path: applications/homepage/
     destinationNamespace: homelab
+  - name: joplin
+    path: applications/joplin/
+    destinationNamespace: joplin
 

@@ -1,0 +1,36 @@
+---
+joplin-server:
+
+  env:
+    # -- Set the container timezone
+    TZ: UTC
+    # -- joplin-server base URL
+    APP_BASE_URL: https://joplin.domain
+    # -- joplin-server listening port (same as Service port)
+    APP_PORT: 22300
+    # -- Use pg for postgres
+    DB_CLIENT: pg
+    # -- Postgres DB Host
+    POSTGRES_HOST: joplin-postgresql
+    # -- Postgres DB port
+    POSTGRES_PORT: "5432"
+    # -- Postgres DB name
+    POSTGRES_DATABASE: joplin
+    # -- Postgres DB Username
+    POSTGRES_USER: joplin
+    # -- Postgres DB password
+    POSTGRES_PASSWORD: joplin-pass
+
+  # -- Enable and configure postgresql database subchart under this key.
+  #    For more options see [postgresql chart documentation](https://github.com/bitnami/charts/tree/master/bitnami/postgresql)
+  # @default -- https://github.com/bitnami/charts/blob/master/bitnami/postgresql/values.yaml
+  postgresql:
+    enabled: true
+    metrics:
+      enabled: true
+    auth:
+      username: joplin
+      password: joplin-pass
+      database: joplin
+    persistence:
+      enabled: false

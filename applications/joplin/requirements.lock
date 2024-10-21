@@ -1,0 +1,6 @@
+dependencies:
+- name: joplin-server
+  repository: https://djjudas21.github.io/charts/
+  version: 5.5.5
+digest: sha256:11a0f1fabf3e0e491b9470fcf2e235125ade1b88b4e5940d3be74adf3bf5aba5
+generated: "2024-10-20T22:22:09.52001799-04:00"
