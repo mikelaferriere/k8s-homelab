@@ -12,6 +12,9 @@ prometheus:
     image:
       tag: "main"
 
+    alertmanagerSpec:
+      externalUrl: http://10.10.10.206
+
     podAnnotations:
       diun.enable: "false"
       vault.hashicorp.com/agent-inject: "true"
