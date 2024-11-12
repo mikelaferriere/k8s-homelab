@@ -3,8 +3,8 @@ cert-manager:
   installCRDs: true
   prometheus:
     enabled: true
-    serviceMonitor:
-      enabeld: true
+    servicemonitor:
+      enabled: true
   podDnsConfig:
     nameservers:
       - 1.1.1.1
