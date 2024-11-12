@@ -1,9 +1,9 @@
 dependencies:
 - name: authentik
   repository: https://charts.goauthentik.io/
-  version: 2024.8.3
+  version: 2024.10.1
 - name: secrets-store-csi-driver
   repository: https://kubernetes-sigs.github.io/secrets-store-csi-driver/charts
   version: 1.4.0
-digest: sha256:2c9b7d56108f10eb99cb356dda8931b954e04d56b8321bbc4a5ae686cededaf1
-generated: "2024-09-30T19:24:03.899206334-04:00"
+digest: sha256:e8182fd4a70ff1a2d62990e3e052b47f3cf168ee25163127185cea44de2a4d8f
+generated: "2024-11-12T21:28:28.526851983Z"
