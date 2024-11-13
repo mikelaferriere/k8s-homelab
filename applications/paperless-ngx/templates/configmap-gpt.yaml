@@ -6,10 +6,10 @@ metadata:
 data:
   PAPERLESS_BASE_URL: 'http://localhost:8000'
   LLM_PROVIDER: 'ollama' # or 'ollama'
-  LLM_MODEL: 'llama3.1'     # or 'llama2'
+  LLM_MODEL: 'mannix/llama3.1-8b-lexi:latest'     # or 'llama2'
   # OPENAI_API_KEY: 'your_openai_api_key' # Required if using OpenAI
   LLM_LANGUAGE: 'English' # Optional, default is 'English'
-  OLLAMA_HOST: 'http://192.168.1.122:11434' # If using Ollama
+  OLLAMA_HOST: 'http://192.168.1.122:11433' # If using Ollama
   VISION_LLM_PROVIDER: 'ollama' # Optional (for OCR) - ollama or openai
   VISION_LLM_MODEL: 'minicpm-v' # Optional (for OCR) - minicpm-v, for example for ollama, gpt-4o for openai
   LOG_LEVEL: 'info' # Optional or 'debug', 'warn', 'error'
