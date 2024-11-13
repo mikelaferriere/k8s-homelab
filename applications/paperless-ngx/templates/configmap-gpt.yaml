@@ -4,7 +4,7 @@ apiVersion: v1
 metadata:
   name: gpt-config
 data:
-  PAPERLESS_BASE_URL: 'http://paperless-ngx.paperless-ngx.app:8000'
+  PAPERLESS_BASE_URL: 'http://localhost:8000'
   LLM_PROVIDER: 'ollama' # or 'ollama'
   LLM_MODEL: 'llama3.1'     # or 'llama2'
   # OPENAI_API_KEY: 'your_openai_api_key' # Required if using OpenAI

@@ -21,7 +21,7 @@ spec:
         # vault.hashicorp.com/agent-inject-secret-defined: kv/data/secrets/homelab
         vault.hashicorp.com/agent-inject-template-gpt-init: |
           {{`{{- with secret "kv/data/secrets/paperless" -}}
-            export PAPERLESS_API_KEY={{ .Data.data.PAPERLESS_API_KEY }}
+            export PAPERLESS_API_TOKEN={{ .Data.data.PAPERLESS_API_KEY }}
           {{- end }}`}}
       labels:
         app: {{ .Values.app.name }}-app
@@ -38,15 +38,6 @@ spec:
           volumeMounts:
             - mountPath: /prompts
               name: paperless-gpt
-          livenessProbe:
-            exec:
-              command:
-                - curl
-                - -f
-                - http://localhost:8080
-            failureThreshold: 5
-            periodSeconds: 30
-            timeoutSeconds: 10
           ports:
             - containerPort: 8080
         - name: {{ .Values.app.name }}-scanner
