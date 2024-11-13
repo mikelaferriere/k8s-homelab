@@ -114,4 +114,8 @@ spec:
           nfs:
             server: 192.168.1.22
             path: /volume1/paperless/consume/scanner
+        - name: paperless-gpt
+          nfs:
+            server: 192.168.1.22
+            path: /volume1/paperless/gpt
 status: {}
