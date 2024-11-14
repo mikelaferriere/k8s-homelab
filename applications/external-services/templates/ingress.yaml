@@ -10,7 +10,7 @@ metadata:
         http://authentik-server.security.svc.cluster.local/outpost.goauthentik.io/auth/nginx
     # If you're using domain-level auth, use the authentication URL instead of the application URL
     nginx.ingress.kubernetes.io/auth-signin: |-
-        https://auth-k8s.laferriere.app/outpost.goauthentik.io/start?rd=$escaped_request_uri
+        https://zm.laferriere.app/outpost.goauthentik.io/start?rd=$escaped_request_uri
     nginx.ingress.kubernetes.io/auth-response-headers: |-
         Set-Cookie,X-authentik-username,X-authentik-groups,X-authentik-email,X-authentik-name,X-authentik-uid
     nginx.ingress.kubernetes.io/auth-snippet: |
@@ -79,52 +79,52 @@ spec:
             port:
               number: 32400
 
----
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: api-external-ingress
-  annotations:
-    # # This should be the in-cluster DNS name for the authentik outpost service
-    # # as when the external URL is specified here, nginx will overwrite some crucial headers
-    # nginx.ingress.kubernetes.io/auth-url: |-
-    #     http://authentik-server.security.svc.cluster.local/outpost.goauthentik.io/auth/nginx
-    # # If you're using domain-level auth, use the authentication URL instead of the application URL
-    # nginx.ingress.kubernetes.io/auth-signin: |-
-    #     https://auth-k8s.laferriere.app/outpost.goauthentik.io/start?rd=$escaped_request_uri
-    # nginx.ingress.kubernetes.io/auth-response-headers: |-
-    #     Set-Cookie,X-authentik-username,X-authentik-groups,X-authentik-email,X-authentik-name,X-authentik-uid
-    # nginx.ingress.kubernetes.io/auth-snippet: |
-    #     proxy_set_header X-Forwarded-Host $http_host;
-    kubernetes.io/ingress.class: "nginx"
-    cert-manager.io/cluster-issuer: letsencrypt-issuer-prod
-    nginx.ingress.kubernetes.io/use-regex: "true"
-spec:
-  ingressClassName: nginx
-  tls:
-  - hosts:
-      - sedrik.life
-      # - api.laferriere.app
-    secretName: api-external-prod
-  rules:
-  # - host: api.laferriere.app
-  #   http:
-  #     paths:
-  #     - path: /zm
-  #       pathType: Prefix
-  #       backend:
-  #         service:
-  #           name: zoneminder
-  #           port:
-  #             number: 80
-  - host: sedrik.life
-    http:
-      paths:
-      - path: /api/v1/(.*)/callback
-        pathType: Prefix
-        backend:
-          service:
-            name: docker-proxy
-            port:
-              number: 80
+# ---
+# apiVersion: networking.k8s.io/v1
+# kind: Ingress
+# metadata:
+#   name: api-external-ingress
+#   annotations:
+#     # # This should be the in-cluster DNS name for the authentik outpost service
+#     # # as when the external URL is specified here, nginx will overwrite some crucial headers
+#     # nginx.ingress.kubernetes.io/auth-url: |-
+#     #     http://authentik-server.security.svc.cluster.local/outpost.goauthentik.io/auth/nginx
+#     # # If you're using domain-level auth, use the authentication URL instead of the application URL
+#     # nginx.ingress.kubernetes.io/auth-signin: |-
+#     #     https://auth-k8s.laferriere.app/outpost.goauthentik.io/start?rd=$escaped_request_uri
+#     # nginx.ingress.kubernetes.io/auth-response-headers: |-
+#     #     Set-Cookie,X-authentik-username,X-authentik-groups,X-authentik-email,X-authentik-name,X-authentik-uid
+#     # nginx.ingress.kubernetes.io/auth-snippet: |
+#     #     proxy_set_header X-Forwarded-Host $http_host;
+#     kubernetes.io/ingress.class: "nginx"
+#     cert-manager.io/cluster-issuer: letsencrypt-issuer-prod
+#     nginx.ingress.kubernetes.io/use-regex: "true"
+# spec:
+#   ingressClassName: nginx
+#   tls:
+#   - hosts:
+#       - sedrik.life
+#       # - api.laferriere.app
+#     secretName: api-external-prod
+#   rules:
+#   # - host: api.laferriere.app
+#   #   http:
+#   #     paths:
+#   #     - path: /zm
+#   #       pathType: Prefix
+#   #       backend:
+#   #         service:
+#   #           name: zoneminder
+#   #           port:
+#   #             number: 80
+#   - host: sedrik.life
+#     http:
+#       paths:
+#       - path: /api/v1/(.*)/callback
+#         pathType: Prefix
+#         backend:
+#           service:
+#             name: docker-proxy
+#             port:
+#               number: 80
 
