@@ -7,6 +7,7 @@ spec:
     targetRevision: HEAD
 
 namespaces:
+  - baby-buddy
   - cert-manager
   - homelab
   - immich
@@ -24,6 +25,9 @@ applications:
   - name: authentik
     path: applications/authentik/
     destinationNamespace: security
+  - name: baby-buddy
+    path: applications/baby-buddy/
+    destinationNamespace: baby-buddy
   - name: cert-manager
     path: applications/cert-manager/
     destinationNamespace: cert-manager

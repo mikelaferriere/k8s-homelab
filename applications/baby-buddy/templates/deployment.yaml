@@ -1,0 +1,27 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.app_name }}-deployment
+spec:
+  selector:
+    matchLabels:
+      app: {{ .Values.app_name }}
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.app_name }}
+    spec:
+      containers:
+        - name: {{ .Values.app_name }}
+          image: lscr.io/linuxserver/babybuddy:latest
+          ports:
+            - containerPort: 8000
+          resources:
+            limits:
+              cpu: "1024m"
+              memory: "1024Mi"
+            requests:
+              memory: "512Mi"
+              cpu: "512m"
