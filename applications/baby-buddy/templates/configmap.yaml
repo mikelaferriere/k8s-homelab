@@ -1,0 +1,12 @@
+---
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: {{ .Values.app_name }}-config
+data:
+  DB_ENGINE: django.db.backends.postgresql
+  DB_HOST: postgresql
+  DB_NAME: postgres
+  DB_PASSWORD: postgres
+  DB_PORT: '5432'
+  DB_USER: postgres
