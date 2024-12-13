@@ -11,10 +11,10 @@ spec:
   tls:
   - hosts:
       - laferriere.app
-      - {{ .Values.app_name }}.laferriere.app
+      - {{ .Values.ingress_prefix }}.laferriere.app
     secretName: {{ .Values.app_name }}-secret-prod
   rules:
-  - host: {{ .Values.app_name }}.laferriere.app
+  - host: {{ .Values.ingress_prefix }}.laferriere.app
     http:
       paths:
       - path: /

@@ -1,2 +1,3 @@
 ---
 app_name: baby-buddy
+ingress_prefix: babybuddy
