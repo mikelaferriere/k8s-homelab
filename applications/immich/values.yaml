@@ -1,17 +1,25 @@
 ---
 immich:
   image:
-    tag: v1.121.0
+    tag: v1.123.0
 
   immich:
     persistence:
       library:
         existingClaim: nfs-photos
 
+  useDeprecatedPostgresChart: true
+
   postgresql:
     metrics:
       enabled: false
     enabled: true
+    primary:
+      resources:
+        limits: {}
+        requests:
+          cpu: 250m
+          memory: 256Mi
 
   redis:
     enabled: true
