@@ -8,11 +8,14 @@ immich:
       library:
         existingClaim: nfs-photos
 
+  useDeprecatedPostgresChart: true
+
   postgresql:
     metrics:
       enabled: false
     enabled: true
-
+    primary:
+      resourcesPreset: micro
   redis:
     enabled: true
 
