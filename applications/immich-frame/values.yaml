@@ -1,0 +1,7 @@
+---
+ingress_prefix: immich-frame
+
+app:
+  name: immich-frame
+  port: 8080
+
