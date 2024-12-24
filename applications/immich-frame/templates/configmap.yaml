@@ -12,7 +12,7 @@ data:
 
   # Image
   ImageZoom: "false"  
-  Interval: "15"
+  Interval: "30"
   TransitionDuration: "3"
 
   # Filters
@@ -26,7 +26,7 @@ data:
 
   # Clock
   ShowClock: "true"
-  ClockFormat: "HH:mm"
+  ClockFormat: "h:mm"
 
   # Weather
   # WeatherApiKey: "API-KEY"
@@ -36,10 +36,10 @@ data:
   # WeatherLatLong: "40.730610, -73.935242"
 
   # Metadata
-  # ShowImageDesc: "true"
-  # ShowImageLocation: "true"
+  ShowImageDesc: "false"
+  ShowImageLocation: "false"
   ShowPhotoDate: "true"
-  PhotoDateFormat: "yyyy-MM-dd"
+  PhotoDateFormat: "MM-dd-yyyy"
 
   # Caching
   RenewImagesDuration: "1"
@@ -47,7 +47,8 @@ data:
   RefreshAlbumPeopleInterval: "12"
 
   # UI
-  PrimaryColor: "#FF5733"
+  # PrimaryColor: "#FF5733"
+  PrimaryColor: "#FFF"
   BaseFontSize: "17px"
 
   # Misc
