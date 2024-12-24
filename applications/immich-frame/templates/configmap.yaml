@@ -11,9 +11,9 @@ data:
   # ApiKey: "KEY" // set with vault
 
   # Image
-  ImageZoom: "true"  
-  Interval: "30"
-  TransitionDuration: "2"
+  ImageZoom: "false"  
+  Interval: "15"
+  TransitionDuration: "3"
 
   # Filters
   Albums: "4ff5dba3-cdbe-432d-bd6a-f4e37ea5b464"
