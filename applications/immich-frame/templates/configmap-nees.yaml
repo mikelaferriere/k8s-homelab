@@ -5,7 +5,7 @@ metadata:
   name: {{ .Values.app.name }}-config-nees
 data:
   # Filters
-  Albums: "4ff5dba3-cdbe-432d-bd6a-f4e37ea5b464"
+  Albums: "4ff5dba3-cdbe-432d-bd6a-f4e37ea5b464,ba8c5579-37f0-4959-b8af-0eeff0e001c9"
   # ExcludedAlbums: "ALBUM3,ALBUM4"
   # People: "PERSON1,PERSON2"
   ShowMemories: "false"

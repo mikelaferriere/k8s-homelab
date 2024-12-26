@@ -5,7 +5,7 @@ metadata:
   name: {{ .Values.app.name }}-config-laferriere
 data:
   # Filters
-  Albums: "4ff5dba3-cdbe-432d-bd6a-f4e37ea5b464"
+  Albums: "4ff5dba3-cdbe-432d-bd6a-f4e37ea5b464,d4c0eba2-a549-4756-b0f3-e44a540141c3"
   # ExcludedAlbums: "ALBUM3,ALBUM4"
   # People: "PERSON1,PERSON2"
   ShowMemories: "false"
