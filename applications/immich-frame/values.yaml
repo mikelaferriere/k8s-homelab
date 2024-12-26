@@ -3,5 +3,7 @@ ingress_prefix: immich-frame
 
 app:
   name: immich-frame
-  port: 8080
+  port: 
+    laferriere: 8081
+    nees: 8082
 

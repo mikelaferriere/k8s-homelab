@@ -15,15 +15,6 @@ data:
   Interval: "30"
   TransitionDuration: "3"
 
-  # Filters
-  Albums: "4ff5dba3-cdbe-432d-bd6a-f4e37ea5b464"
-  # ExcludedAlbums: "ALBUM3,ALBUM4"
-  # People: "PERSON1,PERSON2"
-  ShowMemories: "false"
-  ImagesFromDays: ""
-  ImagesFromDate: ""
-  ImagesUntilDate: ""
-
   # Clock
   ShowClock: "true"
   ClockFormat: "h:mm"

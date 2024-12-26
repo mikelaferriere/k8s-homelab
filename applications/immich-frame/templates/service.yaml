@@ -4,13 +4,31 @@ kind: Service
 metadata:
   annotations: {}
   labels:
-    app: {{ .Values.app.name }}
-  name: {{ .Values.app.name }}
+    app: {{ .Values.app.name }}-laferriere
+  name: {{ .Values.app.name }}-laferriere
 spec:
   type: LoadBalancer
   ports:
     - name: http
-      port: {{ .Values.app.port }}
-      targetPort: {{ .Values.app.port }}
+      port: {{ .Values.app.port.laferriere }}
+      targetPort: 8080
   selector:
-    app: {{ .Values.app.name }}
+    app: {{ .Values.app.name }}-laferriere
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  annotations: {}
+  labels:
+    app: {{ .Values.app.name }}-nees
+  name: {{ .Values.app.name }}-nees
+spec:
+  type: LoadBalancer
+  ports:
+    - name: http
+      port: {{ .Values.app.port.nees }}
+      targetPort: 8080
+  selector:
+    app: {{ .Values.app.name }}-nees
+

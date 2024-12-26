@@ -6,21 +6,40 @@ metadata:
   annotations:
     kubernetes.io/ingress.class: "nginx"
     cert-manager.io/cluster-issuer: letsencrypt-issuer-prod
+    # nginx.ingress.kubernetes.io/rewrite-target: /$1
+    # nginx.ingress.kubernetes.io/use-regex: "true"
+    # nginx.ingress.kubernetes.io/configuration-snippet: |
+    #   proxy_set_header Host $host;
+    #   proxy_set_header X-Real-IP $remote_addr;
+    #   proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    #   proxy_set_header X-Forwarded-Host $server_name;
 spec:
   ingressClassName: nginx
   tls:
   - hosts:
       - laferriere.app
-      - {{ .Values.ingress_prefix }}.laferriere.app
+      - {{ .Values.ingress_prefix }}-laf.laferriere.app
+      - {{ .Values.ingress_prefix }}-nees.laferriere.app
     secretName: {{ .Values.app.name }}-secret-prod
   rules:
-  - host: {{ .Values.ingress_prefix }}.laferriere.app
+  - host: {{ .Values.ingress_prefix }}-laf.laferriere.app
     http:
       paths:
       - path: /
         pathType: Prefix
         backend:
           service:
-            name: {{ .Values.app.name }}
+            name: {{ .Values.app.name }}-laferriere
             port:
-              number: {{ .Values.app.port }}
+              number: {{ .Values.app.port.laferriere }}
+  - host: {{ .Values.ingress_prefix }}-nees.laferriere.app
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: {{ .Values.app.name }}-nees
+            port:
+              number: {{ .Values.app.port.nees }}
+
