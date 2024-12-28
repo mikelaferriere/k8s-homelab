@@ -19,6 +19,20 @@ spec:
       labels:
         app: {{ .Values.app.name }}-app
     spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: dedicated
+                operator: In
+                values:
+                - gpu
+      tolerations:
+      - key: "dedicated"
+        operator: "Equal"
+        value: "gpu"
+        effect: "NoSchedule"
       containers:
         - name: {{ .Values.app.name }}
           image: lscr.io/linuxserver/plex:latest
