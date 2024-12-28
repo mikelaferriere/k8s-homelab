@@ -6,7 +6,6 @@ metadata:
     app: {{ .Values.app.name }}
   name: config-claim
 spec:
-  storageClassName: {{ .Values.app.storageClass }}
   accessModes:
     - ReadWriteOnce
   resources:
@@ -22,7 +21,6 @@ metadata:
     app: {{ .Values.app.name }}
   name: transcode-claim
 spec:
-  storageClassName: {{ .Values.app.storageClass }}
   accessModes:
     - ReadWriteOnce
   resources:

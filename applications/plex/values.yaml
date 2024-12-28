@@ -1,4 +1,3 @@
 ---
 app:
   name: "plex"
-  storageClass: "nfs-plex"
