@@ -4,20 +4,24 @@ kind: Deployment
 metadata:
   annotations: {}
   labels:
-    app: {{ .Values.app.name }}-app
-  name: {{ .Values.app.name }}-app
+    app: {{ .Values.app.name }}
+  name: {{ .Values.app.name }}
 spec:
   replicas: 1
+  revisionHistoryLimit: 5
+  strategy:
+    rollingUpdate:
+      maxSurge: 0
+      maxUnavailable: 1
+    type: RollingUpdate
   selector:
     matchLabels:
-      app: {{ .Values.app.name }}-app
-  strategy:
-    type: Recreate
+      app: {{ .Values.app.name }}
   template:
     metadata:
       annotations: {}
       labels:
-        app: {{ .Values.app.name }}-app
+        app: {{ .Values.app.name }}
     spec:
       affinity:
         nodeAffinity:
@@ -29,15 +33,21 @@ spec:
                 values:
                 - gpu
       tolerations:
-      - key: "dedicated"
-        operator: "Equal"
-        value: "gpu"
-        effect: "NoSchedule"
+        - key: "dedicated"
+          operator: "Equal"
+          value: "gpu"
+          effect: "NoSchedule"
       containers:
         - name: {{ .Values.app.name }}
-          image: lscr.io/linuxserver/plex:latest
-          imagePullPolicy: IfNotPresent
-          resources: {}
+          image: plexinc/pms-docker:plexpass
+          imagePullPolicy: Always
+          resources:
+            limits:
+              cpu: "1024m"
+              memory: "6Gi"
+            requests:
+              memory: "5Gi"
+              cpu: "512m"
           envFrom:
           - configMapRef:
               name: {{ .Values.app.name }}-config
@@ -49,16 +59,30 @@ spec:
             - mountPath: /data/media
               name: nfs-media
           livenessProbe:
-            exec:
-              command:
-                - curl
-                - -f
-                - http://localhost:32400
-            failureThreshold: 5
-            periodSeconds: 30
-            timeoutSeconds: 10
+            initialDelaySeconds: 60
+            periodSeconds: 5
+            tcpSocket:
+              port: 32400
           ports:
-            - containerPort: 32400
+            - name: plex-port
+              containerPort: 32400
+            #   protocol: TCP
+            # - containerPort: 1900
+            #   protocol: UDP
+            # - containerPort: 32469
+            #   protocol: TCP
+            # - containerPort: 5353
+            #   protocol: UDP
+            # - containerPort: 8324
+            #   protocol: TCP
+            # - containerPort: 32410
+            #   protocol: UDP
+            # - containerPort: 32412
+            #   protocol: UDP
+            # - containerPort: 32413
+            #   protocol: UDP
+            # - containerPort: 32414
+            #   protocol: UDP
       restartPolicy: Always
       volumes:
         - name: transcode-claim

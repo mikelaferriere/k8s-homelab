@@ -4,6 +4,9 @@ apiVersion: v1
 metadata:
   name: {{ .Values.app.name }}-config
 data:
+  PUID: "1000"
+  PGID: "1000"
   TZ: America/New_York
   VERSION: docker
-#  PLEX_CLAIM: "" # optional
+  PLEX_CLAIM: "" # optional
+  ADVERTISE_IP: https://plex.laferriere.media

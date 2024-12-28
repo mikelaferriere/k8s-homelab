@@ -2,34 +2,44 @@
 apiVersion: v1
 kind: Service
 metadata:
+  name: {{ .Values.app.name }}-tcp
   annotations:
-    metallb.universe.tf/loadBalancerIPs: 10.10.10.215
-  labels:
-    app: {{ .Values.app.name }}-app
-  name: {{ .Values.app.name }}-app
+    metallb.universe.tf/allow-shared-ip: plex  # < annotation name to combine the Service IP, make sure it's same name as in the service UDP yaml
 spec:
   type: LoadBalancer
   ports:
-    - name: http # Plex Media Server
+    - name: plex-port # Plex Media Server
       port: 32400
       targetPort: 32400
-      protocol: TCP
-    - name: dnla-udp-port # Plex DLNA Server
-      port: 1900
-      targetPort: 1900
-      protocol: UDP
     - name: dnla-tcp-port # Plex DLNA Server
       port: 32469
       targetPort: 32469
       protocol: TCP
-    - name: bon-avahi-port # Bonjour/Avahi network discovery
-      port: 5353
-      targetPort: 5353
-      protocol: UDP
     - name: roku-port # Plex for Roku via Plex Companion
       port: 8324
       targetPort: 8324
       protocol: TCP
+  selector:
+    app: {{ .Values.app.name }}
+
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.app.name }}-udp
+  annotations:
+    metallb.universe.tf/allow-shared-ip: plex  # < annotation name to combine the Service IP, make sure it's same name as in the service UDP yaml
+spec:
+  ports:
+    - name: dnla-udp-port # Plex DLNA Server
+      port: 1900
+      targetPort: 1900
+      protocol: UDP
+    - name: bon-avahi-port # Bonjour/Avahi network discovery
+      port: 5353
+      targetPort: 5353
+      protocol: UDP
     - name: gdm-port-1 # GDM network discovery
       port: 32410
       targetPort: 32410
@@ -47,5 +57,4 @@ spec:
       targetPort: 32414
       protocol: UDP
   selector:
-    app: {{ .Values.app.name }}-app
-
+    app: {{ .Values.app.name }}
