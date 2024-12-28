@@ -1,0 +1,61 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations: {}
+  labels:
+    app: {{ .Values.app.name }}-app
+  name: {{ .Values.app.name }}-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ .Values.app.name }}-app
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      annotations: {}
+      labels:
+        app: {{ .Values.app.name }}-app
+    spec:
+      containers:
+        - name: {{ .Values.app.name }}
+          image: lscr.io/linuxserver/plex:latest
+          imagePullPolicy: IfNotPresent
+          resources: {}
+          envFrom:
+          - configMapRef:
+              name: {{ .Values.app.name }}-config
+          volumeMounts:
+            - mountPath: /config
+              name: config-claim
+            - mountPath: /transcode
+              name: transcode-claim
+            - mountPath: /data/media
+              name: nfs-media
+          livenessProbe:
+            exec:
+              command:
+                - curl
+                - -f
+                - http://localhost:32400
+            failureThreshold: 5
+            periodSeconds: 30
+            timeoutSeconds: 10
+          ports:
+            - containerPort: 32400
+      restartPolicy: Always
+      volumes:
+        - name: transcode-claim
+          persistentVolumeClaim:
+            claimName: transcode-claim
+        - name: config-claim
+          persistentVolumeClaim:
+            claimName: config-claim
+        - name: nfs-media
+          nfs:
+            server: 192.168.1.22
+            path: /volume1/Shared
+status: {}
+

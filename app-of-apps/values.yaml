@@ -19,6 +19,7 @@ namespaces:
   - mosquitto
   - nfs-provisioner
   - paperless-ngx
+  - streaming
   - protonmail
   - security
 
@@ -68,6 +69,9 @@ applications:
   - name: paperless-ngx
     path: applications/paperless-ngx/
     destinationNamespace: paperless-ngx
+  - name: plex
+    path: applications/plex/
+    destinationNamespace: streaming
   - name: prometheus
     path: applications/prometheus/
     destinationNamespace: monitoring
