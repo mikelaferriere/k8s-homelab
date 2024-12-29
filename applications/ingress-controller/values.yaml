@@ -1,7 +1,7 @@
 ---
 ingress-nginx:
   controller:
-    kind: DaemonSet
+    # kind: DaemonSet
     metrics:
       enabled: true
     podAnnotations:
