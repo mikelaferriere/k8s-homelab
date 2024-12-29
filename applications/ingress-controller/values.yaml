@@ -1,6 +1,7 @@
 ---
 ingress-nginx:
   controller:
+    kind: DaemonSet
     metrics:
       enabled: true
     podAnnotations:
@@ -12,6 +13,10 @@ ingress-nginx:
       # externalTrafficPolicy: Local
       annotations:
         metallb.universe.tf/address-pool: internal-ips
+        # for the default ingress-nginx
+        nginx.ingress.kubernetes.io/proxy-connect-timeout: "3600"
+        nginx.ingress.kubernetes.io/proxy-read-timeout: "3600"
+        nginx.ingress.kubernetes.io/proxy-send-timeout: "3600"
         nginx.ingress.kubernetes.io/server-snippets: |
           proxysetheader Upgrade $httpupgrade;
           proxyhttpversion 1.1;
@@ -21,6 +26,12 @@ ingress-nginx:
           proxysetheader Host $host;
           proxysetheader Connection "upgrade";
           proxycachebypass $httpupgrade;
+    # tolerations:
+    #   - key: "dedicated"
+    #     operator: "Equal"
+    #     value: "gpu"
+    #     effect: "NoSchedule"
+
   tcp:
     1883: "mosquitto/mosquitto:1883"
     9001: "mosquitto/mosquitto:9001"
