@@ -8,3 +8,9 @@ metallb:
         effect: "NoSchedule"
     nodeSelector:
       node-role.kubernetes.io/control-plane: ""
+  speaker:
+    tolerations:
+      - key: "dedicated"
+        operator: "Equal"
+        value: "gpu"
+        effect: "NoSchedule"
