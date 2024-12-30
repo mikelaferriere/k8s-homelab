@@ -4,6 +4,7 @@ kind: Service
 metadata:
   name: {{ .Values.app.name }}-tcp
   annotations:
+    metallb.universe.tf/loadBalancerIPs: 10.10.10.216
     metallb.universe.tf/allow-shared-ip: plex  # < annotation name to combine the Service IP, make sure it's same name as in the service UDP yaml
 spec:
   type: LoadBalancer
@@ -29,8 +30,10 @@ kind: Service
 metadata:
   name: {{ .Values.app.name }}-udp
   annotations:
+    metallb.universe.tf/loadBalancerIPs: 10.10.10.216
     metallb.universe.tf/allow-shared-ip: plex  # < annotation name to combine the Service IP, make sure it's same name as in the service UDP yaml
 spec:
+  type: LoadBalancer
   ports:
     - name: dnla-udp-port # Plex DLNA Server
       port: 1900
