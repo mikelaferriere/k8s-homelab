@@ -14,6 +14,11 @@ vault:
         limits:
           memory: 256Mi
           cpu: 250m
+    tolerations:
+      - key: "dedicated"
+        operator: "Equal"
+        value: "gpu"
+        effect: "NoSchedule"
   server:
     persistentVolumeClaimRetentionPolicy:
       whenDeleted: Retain
@@ -74,3 +79,9 @@ vault:
       enabled: true
   csi:
     enabled: true
+    pod:
+      tolerations:
+        - key: "dedicated"
+          operator: "Equal"
+          value: "gpu"
+          effect: "NoSchedule"
