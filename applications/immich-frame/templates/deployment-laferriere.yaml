@@ -8,11 +8,15 @@ metadata:
   name: {{ .Values.app.name }}-laferriere
 spec:
   replicas: 1
+  revisionHistoryLimit: 3
+  strategy:
+    rollingUpdate:
+      maxSurge: 2
+      maxUnavailable: 0
+    type: RollingUpdate
   selector:
     matchLabels:
       app: {{ .Values.app.name }}-laferriere
-  strategy:
-    type: Recreate
   template:
     metadata:
       annotations:
@@ -37,6 +41,16 @@ spec:
           command: ["sh", "-c", ". /vault/secrets/init && dotnet ImmichFrame.WebApi.dll"]
           ports:
             - containerPort: 8080
+          livenessProbe:
+            tcpSocket:
+              port: 8080
+            initialDelaySeconds: 30
+            periodSeconds: 5
+          readinessProbe:
+            tcpSocket:
+              port: 8080
+            initialDelaySeconds: 30
+            periodSeconds: 5
           resources:
             requests:
               memory: "100Mi"
