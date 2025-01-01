@@ -1,7 +1,7 @@
 ---
 ingress-nginx:
   controller:
-    # kind: DaemonSet
+    kind: DaemonSet
     metrics:
       enabled: true
     podAnnotations:
@@ -38,3 +38,4 @@ ingress-nginx:
     10000: "homelab/event-bus:10000"
     10001: "homelab/speech-recognizer:10001"
     10002: "homelab/websocket:10002"
+
