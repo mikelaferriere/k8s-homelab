@@ -26,11 +26,11 @@ ingress-nginx:
           proxysetheader Host $host;
           proxysetheader Connection "upgrade";
           proxycachebypass $httpupgrade;
-    tolerations:
-      - key: "dedicated"
-        operator: "Equal"
-        value: "gpu"
-        effect: "NoSchedule"
+    # tolerations:
+    #   - key: "dedicated"
+    #     operator: "Equal"
+    #     value: "gpu"
+    #     effect: "NoSchedule"
 
   tcp:
     1883: "mosquitto/mosquitto:1883"
