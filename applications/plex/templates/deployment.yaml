@@ -8,11 +8,11 @@ metadata:
   name: {{ .Values.app.name }}
 spec:
   replicas: 1
-  revisionHistoryLimit: 5
+  revisionHistoryLimit: 2
   strategy:
     rollingUpdate:
-      maxSurge: 0
-      maxUnavailable: 1
+      maxSurge: 2
+      maxUnavailable: 0
     type: RollingUpdate
   selector:
     matchLabels:

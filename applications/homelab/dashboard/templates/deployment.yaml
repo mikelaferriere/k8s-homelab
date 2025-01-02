@@ -8,11 +8,15 @@ metadata:
   name: {{ .Values.app.name }}
 spec:
   replicas: 1
+  revisionHistoryLimit: 3
+  strategy:
+    rollingUpdate:
+      maxSurge: 2
+      maxUnavailable: 0
+    type: RollingUpdate
   selector:
     matchLabels:
       app: {{ .Values.app.name }}
-  strategy:
-    type: Recreate
   template:
     metadata:
       annotations:
@@ -27,14 +31,15 @@ spec:
               name: {{ .Values.app.name }}-config
           image: 10.10.10.199:5000/typescript/nx/{{ .Values.app.name }}:latest
           livenessProbe:
-            exec:
-              command:
-                - curl
-                - -f
-                - http://localhost:{{ .Values.app.port }}
-            failureThreshold: 5
-            periodSeconds: 30
-            timeoutSeconds: 10
+            tcpSocket:
+              port: {{ .Values.app.port }}
+            initialDelaySeconds: 30
+            periodSeconds: 5
+          readinessProbe:
+            tcpSocket:
+              port: {{ .Values.app.port }}
+            initialDelaySeconds: 30
+            periodSeconds: 5
           ports:
             - containerPort: {{ .Values.app.port }}
           resources:
