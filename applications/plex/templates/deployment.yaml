@@ -39,7 +39,7 @@ spec:
           effect: "NoSchedule"
       containers:
         - name: {{ .Values.app.name }}
-          image: plexinc/pms-docker:plexpass
+          image: plexinc/pms-docker:latest
           imagePullPolicy: Always
           resources:
             limits:
