@@ -7,12 +7,12 @@ spec:
   selector:
     matchLabels:
       app: {{ .Values.app_name }}
-  replicas: 2
+  replicas: 1
   revisionHistoryLimit: 2
   strategy:
     rollingUpdate:
-      maxSurge: 3
-      maxUnavailable: 1
+      maxSurge: 2
+      maxUnavailable: 0
     type: RollingUpdate
   template:
     metadata:
@@ -29,8 +29,8 @@ spec:
             - containerPort: 8000
           resources:
             limits:
-              cpu: "1024m"
+              cpu: "2048m"
               memory: "1024Mi"
             requests:
               memory: "512Mi"
-              cpu: "512m"
+              cpu: "1024m"
