@@ -7,7 +7,13 @@ spec:
   selector:
     matchLabels:
       app: {{ .Values.app_name }}
-  replicas: 1
+  replicas: 2
+  revisionHistoryLimit: 2
+  strategy:
+    rollingUpdate:
+      maxSurge: 3
+      maxUnavailable: 1
+    type: RollingUpdate
   template:
     metadata:
       labels:
