@@ -36,14 +36,15 @@ spec:
             - /opt/prometheus-pve-exporter/bin/pve_exporter
             - --config.file=/vault/secrets/config.yml
           livenessProbe:
-            exec:
-              command:
-                - curl
-                - -f
-                - http://localhost:9221
-            failureThreshold: 5
-            periodSeconds: 30
-            timeoutSeconds: 10
+            tcpSocket:
+              port: 9221
+            initialDelaySeconds: 30
+            periodSeconds: 5
+          readinessProbe:
+            tcpSocket:
+              port: 9221
+            initialDelaySeconds: 30
+            periodSeconds: 5
           ports:
             - containerPort: 9221
           resources: {}
