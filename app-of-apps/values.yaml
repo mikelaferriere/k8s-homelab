@@ -45,6 +45,9 @@ applications:
         kind: MutatingWebhookConfiguration
         jqPathExpressions:
           - .webhooks[]?.clientConfig.caBundle
+  - name: headlamp
+    path: applications/headlamp/
+    destinationNamespace: monitoring
   - name: immich
     path: applications/immich/
     destinationNamespace: immich
