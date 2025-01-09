@@ -1,1 +1,6 @@
 ---
+headlamp:
+  config:
+    baseUrl: /
+  service:
+    type: LoadBalancer
