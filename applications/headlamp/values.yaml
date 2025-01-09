@@ -1,6 +1,19 @@
 ---
 headlamp:
-  config:
-    baseUrl: /
   service:
     type: LoadBalancer
+
+  volumeMounts:
+    - mountPath: /headlamp/plugins/kubeconfig-plugin
+      name: kubeconfig-plugin
+    - mountPath: /headlamp/plugins/sidebar_prometheus
+      name: sidebar-prometheus
+
+  volumes:
+    - configMap:
+        name: kubeconfig-plugin
+      name: kubeconfig-plugin
+    - configMap:
+        name: sidebar-prometheus
+      name: sidebar-prometheus
+
