@@ -63,6 +63,9 @@ applications:
   - name: metallb
     path: applications/metallb/
     destinationNamespace: metallb-system
+  - name: metrics-server
+    path: applications/metrics-server/
+    destinationNamespace: monitoring
   - name: nfs-provisioner-paperless
     path: applications/nfs-provisioner-paperless/
     destinationNamespace: nfs-provisioner
