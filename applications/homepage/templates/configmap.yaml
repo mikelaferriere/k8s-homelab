@@ -27,6 +27,10 @@ data:
         - My First Service:
             href: http://localhost/
             description: Homepage is awesome
+        - baby-buddy:
+            icon: baby-buddy.png
+            widget:
+              type: baby-buddy
 
     - My Second Group:
         - My Second Service:
