@@ -23,14 +23,14 @@ data:
             - abbr: GH
               href: https://github.com/
   services.yaml: |
-    - Photos:
-        - My First Service:
-            href: http://localhost/
-            description: Homepage is awesome
-        - baby-buddy:
-            icon: baby-buddy.png
+    - Media:
+        - Plex:
+            icon: plex.png
+            href: https://plex.laferriere.app
             widget:
-              type: baby-buddy
+              type: plex
+              url: http://plex.streaming:32400
+              key: mytokenhere # see https://www.plexopedia.com/plex-media-server/general/plex-token/
 
     - My Second Group:
         - My Second Service:
