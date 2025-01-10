@@ -1,1 +1,1 @@
-https://github.com/jameswynn/helm-charts/tree/main/charts/homepage
+https://github.com/gethomepage/homepage

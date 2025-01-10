@@ -1,5 +1,3 @@
 ---
-homepage:
-  service:
-    main: 
-      type: LoadBalancer
+app:
+  name: homepage

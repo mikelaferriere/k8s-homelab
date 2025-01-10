@@ -1,0 +1,79 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.app.name }}-deployment
+spec:
+  selector:
+    matchLabels:
+      app: {{ .Values.app.name }}
+  replicas: 1
+  revisionHistoryLimit: 2
+  strategy:
+    rollingUpdate:
+      maxSurge: 2
+      maxUnavailable: 0
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.app.name }}
+    spec:
+      serviceAccountName: {{ .Values.app.name }}
+      automountServiceAccountToken: true
+      dnsPolicy: ClusterFirst
+      enableServiceLinks: true
+      containers:
+        - name: {{ .Values.app.name }}
+          image: ghcr.io/gethomepage/homepage:latest
+          envFrom:
+          - configMapRef:
+              name: {{ .Values.app.name }}-config
+          ports:
+            - containerPort: 3000
+          resources:
+            requests:
+              cpu: "256m"
+              memory: "128Mi"
+            limits:
+              cpu: "512m"
+              memory: "256Mi"
+          volumeMounts:
+            - mountPath: /app/config/custom.js
+              name: {{ .Values.app.name }}-config
+              subPath: custom.js
+            - mountPath: /app/config/custom.css
+              name: {{ .Values.app.name }}-config
+              subPath: custom.css
+            - mountPath: /app/config/bookmarks.yaml
+              name: {{ .Values.app.name }}-config
+              subPath: bookmarks.yaml
+            - mountPath: /app/config/docker.yaml
+              name: {{ .Values.app.name }}-config
+              subPath: docker.yaml
+            - mountPath: /app/config/kubernetes.yaml
+              name: {{ .Values.app.name }}-config
+              subPath: kubernetes.yaml
+            - mountPath: /app/config/services.yaml
+              name: {{ .Values.app.name }}-config
+              subPath: services.yaml
+            - mountPath: /app/config/settings.yaml
+              name: {{ .Values.app.name }}-config
+              subPath: settings.yaml
+            - mountPath: /app/config/widgets.yaml
+              name: {{ .Values.app.name }}-config
+              subPath: widgets.yaml
+            - mountPath: /app/config/logs
+              name: logs
+          livenessProbe:
+            initialDelaySeconds: 5
+            periodSeconds: 5
+            tcpSocket:
+              port: 3000
+      volumes:
+        - name: {{ .Values.app.name }}-config
+          configMap:
+            name: {{ .Values.app.name }}-config
+        - name: logs
+          emptyDir: {}
+
