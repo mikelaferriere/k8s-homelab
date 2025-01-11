@@ -8,14 +8,12 @@ metadata:
     app.kubernetes.io/name: {{ .Values.app.name }}
 data:
   LOG_LEVEL: debug
-  # kubernetes.yaml: ""
+#   kubernetes.yaml: ""
   kubernetes.yaml: |
     mode: cluster
-  settings.yaml: ""
-  #settings.yaml: |
-  #  providers:
-  #    longhorn:
-  #      url: https://longhorn.my.network
+#   settings.yaml: ""
+  settings.yaml: |
+    headerStyle: boxed
   custom.css: ""
   custom.js: ""
   bookmarks.yaml: |
@@ -35,113 +33,146 @@ data:
       - Proxmox:
           icon: proxmox.png
           href: https://192.168.1.7:8006
+          siteMonitor: https://192.168.1.7:8006
       - Argocd:
           icon: argo-cd.png
           href: http://10.10.10.203
+          siteMonitor: http://10.10.10.203
       - Authentik:
           - Local:
               icon: authentik.png
               href: http://10.10.10.208
+              siteMonitor: http://10.10.10.208
           - Public:
               icon: authentik.png
               href: https://auth-k8s.laferriere.app
+              siteMonitor: https://auth-k8s.laferriere.app
       - BabyBuddy:
           icon: babybuddy.png
           href: https://babybuddy.laferriere.app
+          siteMonitor: https://babybuddy.laferriere.app
       - Grafana:
           - Local:
               icon: grafana.png
               href: http://10.10.10.205
+              siteMonitor: http://10.10.10.205
           - Public:
               icon: grafana.png
               href: https://grafana.laferriere.app
+              siteMonitor: https://grafana.laferriere.app
       - HashicorpVault:
           - Local:
               icon: hashicorp-vault.png
               href: http://10.10.10.204:8200
+              siteMonitor: http://10.10.10.204:8200
           - Public:
               icon: hashicorp-vault.png
               href: https://vault.laferriere.app
+              siteMonitor: https://vault.laferriere.app
       - Headlamp:
           icon: kubernetes-dashboard.png
           href: http://10.10.10.105
+          siteMonitor: http://10.10.10.105
       - Immich:
         - Local:
             icon: immich.png
-            href: http://10.10.10.201:3001
+            href: http://10.10.10.201:2283
+            siteMonitor: http://10.10.10.201:2283
         - Public:
             icon: immich.png
             href: https://immich.laferriere.app
+            siteMonitor: https://immich.laferriere.app
       - ImmichFrame:
         - Laferriere:
             icon: immich-frame.png
             href: https://immich-frame-laf.laferriere.app
+            siteMonitor: https://immich-frame-laf.laferriere.app
         - Nees:
             icon: immich-frame.png
             href: https://immich-frame-nees.laferriere.app
+            siteMonitor: https://immich-frame-nees.laferriere.app
       - Prometheus:
           icon: prometheus.png
           href: http://10.10.10.206
+          siteMonitor: http://10.10.10.206
       - Paperless-ngx:
         - Local:
             icon: paperless-ngx.png
             href: http://10.10.10.202
+            siteMonitor: http://10.10.10.202
         - Public:
             icon: paperless-ngx.png
             href: https://paperless.laferriere.app
+            siteMonitor: https://paperless.laferriere.app
       - Zoneminder:
           icon: zoneminder.png
           href: https://zm.laferriere.app/zm
+          siteMonitor: https://zm.laferriere.app/zm
     - Tor:
       - Radarr:
           icon: radarr.png
           href: http://10.10.10.52:7878/tv
+          siteMonitor: http://10.10.10.52:7878/tv
       - Sonarr:
           icon: sonarr.png
           href: http://10.10.10.52:8989/movie
+          siteMonitor: http://10.10.10.52:8989/movie
       - Prowlarr:
           icon: prowlarr.png
           href: http://10.10.10.52:9696
+          siteMonitor: http://10.10.10.52:9696
       - Autobrr:
           icon: autobrr.png
           href: http://10.10.10.52:7474
+          siteMonitor: http://10.10.10.52:7474
       - QBittorrent:
           icon: qbittorrent.png
           href: http://10.10.10.52:8080
+          siteMonitor: http://10.10.10.52:8080
       - NZBGet:
           icon: nzbget.png
           href: http://10.10.10.52:6789
+          siteMonitor: http://10.10.10.52:6789
       - NZBGeek:
           icon: nzbget.png
           href: https://www.nzbgeek.info
+          siteMonitor: https://www.nzbgeek.info
       - Transmission:
           icon: transmission.png
           href: http://10.10.10.52:9091/tranmission/web
+          siteMonitor: http://10.10.10.52:9091/tranmission/web
     - Networking:
       - Adguard Home:
           icon: adguard-home.png
           href: http://192.168.1.203
+          siteMonitor: http://192.168.1.203
       - Ubiquiti:
           icon: ubiquiti.png
           href: http://192.168.1.1
+          ping: http://192.168.1.1
       - Wireguard:
         - Homelab:
             icon: wireguard.png
             href: http://192.168.1.49:51821/
+            siteMonitor: http://192.168.1.49:51821/
         - AWS:
             icon: wireguard.png
             href: http://54.176.3.194:51821/
+            siteMonitor: http://54.176.3.194:51821/
         - PfCloud:
             icon: wireguard.png
             href: http://154.213.186.127:51821/
+            siteMonitor: http://154.213.186.127:51821/
     - AI:
       - Open WebUI:
           icon: open-webui-light
           href: http://192.168.1.122:8081
+          siteMonitor: http://192.168.1.122:8081
     - Media:
       - Plex:
           icon: plex.png
           href: https://plex.laferriere.media
+          siteMonitor: https://plex.laferriere.media
           # widget:
           #   type: plex
           #   url: http://plex.streaming:32400
@@ -149,6 +180,7 @@ data:
       - Synology:
           icon: synology.png
           href: http://192.168.1.22:5000/
+          siteMonitor: http://192.168.1.22:5000/
 
   widgets.yaml: |
     - kubernetes:
