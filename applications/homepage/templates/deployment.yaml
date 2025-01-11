@@ -18,6 +18,13 @@ spec:
     metadata:
       annotations:
         checksum/config: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
+        checksum/config-secrets: {{ include (print $.Template.BasePath "/configmap-secrets.yaml") . | sha256sum }}
+        vault.hashicorp.com/agent-inject: "true"
+        vault.hashicorp.com/role: internal-app
+        vault.hashicorp.com/agent-inject-template-plex_key: |
+          {{`{{- with secret "kv/data/secrets/homepage" -}}
+            {{ .Data.data.PLEX_API_KEY }}
+          {{- end }}`}}
       labels:
         app: {{ .Values.app.name }}
     spec:
@@ -31,6 +38,8 @@ spec:
           envFrom:
           - configMapRef:
               name: {{ .Values.app.name }}-config
+          - configMapRef:
+              name: {{ .Values.app.name }}-config-secrets
           ports:
             - containerPort: 3000
           resources:

@@ -7,7 +7,6 @@ metadata:
   labels:
     app.kubernetes.io/name: {{ .Values.app.name }}
 data:
-  LOG_LEVEL: debug
 #   kubernetes.yaml: ""
   kubernetes.yaml: |
     mode: cluster
@@ -173,10 +172,10 @@ data:
           icon: plex.png
           href: https://plex.laferriere.media
           siteMonitor: https://plex.laferriere.media
-          # widget:
-          #   type: plex
-          #   url: http://plex.streaming:32400
-          #   key: mytokenhere # see https://www.plexopedia.com/plex-media-server/general/plex-token/
+          widget:
+            type: plex
+            url: http://plex.streaming:32400
+            key: {{ "{{" }}HOMEPAGE_FILE_PLEX_KEY_PATH{{ "}}" }} # see https://www.plexopedia.com/plex-media-server/general/plex-token/
       - Synology:
           icon: synology.png
           href: http://192.168.1.22:5000/
