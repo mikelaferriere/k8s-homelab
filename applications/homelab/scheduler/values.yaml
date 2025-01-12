@@ -2,3 +2,32 @@
 app:
   name: scheduler
   port: 3000
+  jobs:
+    calendar-events: 
+      schedule: "*/5 * * * *"
+      command: "node calendar-events/main.js"
+    fitbit-update:
+      schedule: "*/1 * * * *"
+      command: "node fitbit-update/main.js"
+    hue-update:
+      schedule: "* * * * *"
+      command: "(sleep 10; node hue-update/main.js)"
+    sports-fetch-new-scores:
+      schedule: "* * * * *"
+      command: "(sleep 10; node sports-fetch-new-scores/main.js)"
+    sports-scoreboard:
+      schedule: "* * * * *"
+      command: "(sleep 5; node sports-scoreboard/main.js)"
+    sports-sync-scores:
+      schedule: "* * * * *"
+      command: "(sleep 20; node sports-sync-scores/main.js)"
+    weather-current:
+      schedule: "*/5 * * * *"
+      command: "node weather-current/main.js"
+    weather-hourly:
+      schedule: "*/10 * * * *"
+      command: "node weather-hourly/main.js"
+    withings-update:
+      schedule: "*/1 * * * *"
+      command: "node withings-update/main.js"
+
