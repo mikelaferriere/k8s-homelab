@@ -17,6 +17,8 @@ app:
 postgresql:
   metrics:
     enabled: true
+    serviceMonitor:
+      enabled: true
   fullnameOverride: postgresql
   auth:
     username: postgres
