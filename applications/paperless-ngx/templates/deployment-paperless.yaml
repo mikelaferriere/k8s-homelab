@@ -30,7 +30,7 @@ spec:
         - name: {{ .Values.app.name }}-gpt
           image: icereed/paperless-gpt:latest
           command: ["sh", "-c", ". /vault/secrets/gpt-init && /app/paperless-gpt"]
-          imagePullPolicy: IfNotPresent
+          imagePullPolicy: Always
           resources: {}
           envFrom:
           - configMapRef:
@@ -42,7 +42,7 @@ spec:
             - containerPort: 8080
         - name: {{ .Values.app.name }}-scanner
           image: manuc66/node-hp-scan-to:latest
-          imagePullPolicy: IfNotPresent
+          imagePullPolicy: Always
           resources: {}
           envFrom:
           - configMapRef:
@@ -54,7 +54,7 @@ spec:
           envFrom:
           - configMapRef:
               name: {{ .Values.app.name }}-config
-          image: ghcr.io/paperless-ngx/paperless-ngx:2.13.5
+          image: ghcr.io/paperless-ngx/paperless-ngx:latest
           imagePullPolicy: IfNotPresent
           livenessProbe:
             exec:
