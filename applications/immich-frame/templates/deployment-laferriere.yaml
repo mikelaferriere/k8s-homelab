@@ -38,6 +38,7 @@ spec:
           - configMapRef:
               name: {{ .Values.app.name }}-config-laferriere
           image: ghcr.io/immichframe/immichframe:latest
+          imagePullPolicy: Always
           command: ["sh", "-c", ". /vault/secrets/init && dotnet ImmichFrame.WebApi.dll"]
           ports:
             - containerPort: 8080
@@ -53,10 +54,10 @@ spec:
             periodSeconds: 5
           resources:
             requests:
-              memory: "100Mi"
-              cpu: "30m"
+              memory: 100Mi
+              cpu: 30m
             limits:
-              memory: "200Mi"
-              cpu: "60m"
+              memory: 200Mi
+              cpu: 60m
       restartPolicy: Always
 status: {}

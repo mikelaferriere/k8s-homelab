@@ -38,6 +38,7 @@ spec:
           - configMapRef:
               name: {{ .Values.app.name }}-config-nees
           image: ghcr.io/immichframe/immichframe:latest
+          imagePullPolicy: Always
           command: ["sh", "-c", ". /vault/secrets/init && dotnet ImmichFrame.WebApi.dll"]
           ports:
             - containerPort: 8080
