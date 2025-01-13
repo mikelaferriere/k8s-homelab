@@ -49,6 +49,7 @@ spec:
           - configMapRef:
               name: {{ .Values.app.name }}-config
           image: 10.10.10.199:5000/typescript/nx/{{ .Values.app.name }}:latest
+          imagePullPolicy: Always
           command: ["sh", "-c", ". /vault/secrets/init && node /app/index.js"]
           livenessProbe:
             tcpSocket:
