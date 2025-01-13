@@ -10,3 +10,4 @@ data:
   DB_PASSWORD: postgres
   DB_PORT: '5432'
   DB_USER: postgres
+  FILE__SECRET_KEY: /vault/secrets/secret_key

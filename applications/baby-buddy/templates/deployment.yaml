@@ -7,15 +7,22 @@ spec:
   selector:
     matchLabels:
       app: {{ .Values.app_name }}
-  replicas: 1
-  revisionHistoryLimit: 2
+  replicas: 3
+  revisionHistoryLimit: 3
   strategy:
     rollingUpdate:
-      maxSurge: 2
-      maxUnavailable: 0
+      maxSurge: 4
+      maxUnavailable: 1
     type: RollingUpdate
   template:
     metadata:
+      annotations:
+        vault.hashicorp.com/agent-inject: "true"
+        vault.hashicorp.com/role: internal-app
+        # vault.hashicorp.com/agent-inject-secret-defined: kv/data/secrets/homelab
+        vault.hashicorp.com/agent-inject-template-secret_key: |
+          {{`{{- with secret "kv/data/secrets/babybuddy" -}}
+          {{ .Data.data.SECRET_KEY }}{{- end }}`}}
       labels:
         app: {{ .Values.app_name }}
     spec:
@@ -28,11 +35,21 @@ spec:
               name: {{ .Values.app_name }}-config
           ports:
             - containerPort: 8000
+          livenessProbe:
+            tcpSocket:
+              port: 8000
+            initialDelaySeconds: 30
+            periodSeconds: 5
+          readinessProbe:
+            tcpSocket:
+              port: 8000
+            initialDelaySeconds: 30
+            periodSeconds: 5
           resources:
             requests:
-              memory: "512Mi"
-              cpu: "1024m"
+              memory: "256Mi"
+              cpu: "300m"
             limits:
-              memory: "1024Mi"
-              cpu: "2048m"
+              memory: "512Mi"
+              cpu: "600m"
 
