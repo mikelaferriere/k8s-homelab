@@ -22,15 +22,17 @@ spec:
       containers:
         - name: {{ .Values.app_name }}
           image: lscr.io/linuxserver/babybuddy:latest
+          imagePullPolicy: Always
           envFrom:
           - configMapRef:
               name: {{ .Values.app_name }}-config
           ports:
             - containerPort: 8000
           resources:
-            limits:
-              cpu: "2048m"
-              memory: "1024Mi"
             requests:
               memory: "512Mi"
               cpu: "1024m"
+            limits:
+              memory: "1024Mi"
+              cpu: "2048m"
+

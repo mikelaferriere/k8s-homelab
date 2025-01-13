@@ -34,21 +34,21 @@ spec:
           livenessProbe:
             tcpSocket:
               port: {{ .Values.app.port }}
-            initialDelaySeconds: 30
+            initialDelaySeconds: 5
             periodSeconds: 5
           readinessProbe:
             tcpSocket:
               port: {{ .Values.app.port }}
-            initialDelaySeconds: 30
+            initialDelaySeconds: 5
             periodSeconds: 5
           ports:
             - containerPort: {{ .Values.app.port }}
           resources:
             requests:
-              memory: "50Mi"
+              memory: "100Mi"
               cpu: "30m"
             limits:
-              memory: "100Mi"
+              memory: "200Mi"
               cpu: "60m"
       restartPolicy: Always
 status: {}
