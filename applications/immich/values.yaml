@@ -23,9 +23,6 @@ immich:
 
   redis:
     enabled: true
-    commonConfiguration: |-
-      # Enable AOF https://redis.io/topics/persistence#append-only-file
-      appendonly no
 
   server:
     service:

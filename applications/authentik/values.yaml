@@ -67,11 +67,6 @@ authentik:
       tag: 16.2.0
 
     primary:
-      resources:
-        limits: {}
-        requests:
-          cpu: 250m
-          memory: 256Mi
       extraVolumes:
         - name: secrets-store-inline
           csi:
@@ -94,10 +89,7 @@ authentik:
     securityContext:
       runAsUser: 0
       fsGroup: 2000
-    commonConfiguration: |-
-      # Enable AOF https://redis.io/topics/persistence#append-only-file
-      appendonly no
-      
+
 secret-store-csi-driver:
   syncSecret:
     enabled: true

@@ -35,7 +35,6 @@ spec:
       containers:
         - name: {{ .Values.app.name }}
           image: ghcr.io/gethomepage/homepage:latest
-          imagePullPolicy: Always
           envFrom:
           - configMapRef:
               name: {{ .Values.app.name }}-config
@@ -43,6 +42,13 @@ spec:
               name: {{ .Values.app.name }}-config-secrets
           ports:
             - containerPort: 3000
+          resources:
+            requests:
+              cpu: "256m"
+              memory: "128Mi"
+            limits:
+              cpu: "512m"
+              memory: "256Mi"
           volumeMounts:
             - mountPath: /app/config/custom.js
               name: {{ .Values.app.name }}-config

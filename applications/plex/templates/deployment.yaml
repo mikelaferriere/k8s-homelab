@@ -7,12 +7,12 @@ metadata:
     app: {{ .Values.app.name }}
   name: {{ .Values.app.name }}
 spec:
-  replicas: 1
+  replicas: 2
   revisionHistoryLimit: 2
   strategy:
     rollingUpdate:
-      maxSurge: 2
-      maxUnavailable: 0
+      maxSurge: 3
+      maxUnavailable: 1
     type: RollingUpdate
   selector:
     matchLabels:
@@ -41,6 +41,13 @@ spec:
         - name: {{ .Values.app.name }}
           image: plexinc/pms-docker:latest
           imagePullPolicy: Always
+          resources:
+            limits:
+              cpu: "1024m"
+              memory: "6Gi"
+            requests:
+              memory: "5Gi"
+              cpu: "512m"
           envFrom:
           - configMapRef:
               name: {{ .Values.app.name }}-config

@@ -42,5 +42,12 @@ spec:
             periodSeconds: 5
           ports:
             - containerPort: {{ .Values.app.port }}
+          resources:
+            requests:
+              memory: "150Mi"
+              cpu: "150m"
+            limits:
+              memory: "300Mi"
+              cpu: "300m"
       restartPolicy: Always
 status: {}

@@ -20,28 +20,28 @@ spec:
     spec:
       containers:
         - name: gotenberg
-          image: docker.io/gotenberg/gotenberg:latest
-          imagePullPolicy: Always
+          image: docker.io/gotenberg/gotenberg:8.13.0
           command:
             - "gotenberg"
             - "--chromium-disable-javascript=true"
             - "--chromium-allow-list=file:///tmp/."
+          resources:
+            limits:
+              cpu: 500m
+            requests:
+              cpu: 200m
           ports:
             - containerPort: 3000
-          livenessProbe:
-            tcpSocket:
-              port: 3000
-            initialDelaySeconds: 10
-            periodSeconds: 5
-          readinessProbe:
-            tcpSocket:
-              port: 3000
-            initialDelaySeconds: 10
-            periodSeconds: 5
+          resources: {}
         - name: tika
           image: ghcr.io/paperless-ngx/tika:2.9.1-full
-          imagePullPolicy: Always
+          resources:
+            limits:
+              cpu: 500m
+            requests:
+              cpu: 200m
           ports:
             - containerPort: 9998
+          resources: {}
       restartPolicy: Always
 status: {}

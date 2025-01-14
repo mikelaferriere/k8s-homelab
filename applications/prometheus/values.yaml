@@ -466,7 +466,6 @@ prometheus:
       annotations:
         metallb.universe.tf/loadBalancerIPs: 10.10.10.206
       type: LoadBalancer
-      
   extraScrapeConfigs: |
     - job_name: 'cert-manager'
       metrics_path: "/metrics"

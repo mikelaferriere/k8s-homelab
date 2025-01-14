@@ -30,7 +30,8 @@ spec:
         - name: {{ .Values.app.name }}-gpt
           image: icereed/paperless-gpt:latest
           command: ["sh", "-c", ". /vault/secrets/gpt-init && /app/paperless-gpt"]
-          imagePullPolicy: Always
+          imagePullPolicy: IfNotPresent
+          resources: {}
           envFrom:
           - configMapRef:
               name: gpt-config
@@ -41,7 +42,8 @@ spec:
             - containerPort: 8080
         - name: {{ .Values.app.name }}-scanner
           image: manuc66/node-hp-scan-to:latest
-          imagePullPolicy: Always
+          imagePullPolicy: IfNotPresent
+          resources: {}
           envFrom:
           - configMapRef:
               name: scanner-config
@@ -52,10 +54,20 @@ spec:
           envFrom:
           - configMapRef:
               name: {{ .Values.app.name }}-config
-          image: ghcr.io/paperless-ngx/paperless-ngx:2.14.1
+          image: ghcr.io/paperless-ngx/paperless-ngx:2.13.5
           imagePullPolicy: IfNotPresent
+          livenessProbe:
+            exec:
+              command:
+                - curl
+                - -f
+                - http://localhost:8000
+            failureThreshold: 5
+            periodSeconds: 30
+            timeoutSeconds: 10
           ports:
             - containerPort: 8000
+          resources: {}
           volumeMounts:
             - mountPath: /usr/src/paperless/data
               name: data-claim
