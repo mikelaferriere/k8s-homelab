@@ -56,3 +56,9 @@ joplin-server:
       database: joplin
     persistence:
       enabled: false
+    primary:
+      resources:
+        limits: {}
+        requests:
+          cpu: 250m
+          memory: 256Mi

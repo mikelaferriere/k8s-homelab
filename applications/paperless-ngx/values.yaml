@@ -16,6 +16,12 @@ postgresql:
       usePasswordFiles: true
 
     primary:
+      resources:
+        limits: {}
+        requests:
+          cpu: 250m
+          memory: 256Mi
+
       extraVolumes:
         - name: vault-database
           csi:
