@@ -38,24 +38,10 @@ spec:
               port: 3000
             initialDelaySeconds: 10
             periodSeconds: 5
-          resources:
-            requests:
-              memory: 25Mi
-              cpu: 50m
-            limits:
-              memory: 50Mi
-              cpu: 100m
         - name: tika
           image: ghcr.io/paperless-ngx/tika:2.9.1-full
           imagePullPolicy: Always
           ports:
             - containerPort: 9998
-          resources:
-            requests:
-              memory: 200Mi
-              cpu: 25m
-            limits:
-              memory: 400Mi
-              cpu: 50m
       restartPolicy: Always
 status: {}

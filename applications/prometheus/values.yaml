@@ -466,13 +466,6 @@ prometheus:
       annotations:
         metallb.universe.tf/loadBalancerIPs: 10.10.10.206
       type: LoadBalancer
-    resources:
-      requests:
-        memory: "750Mi"
-        cpu: 100m
-      limits:
-        memory: "1500Mi"
-        cpu: 200m
       
   extraScrapeConfigs: |
     - job_name: 'cert-manager'

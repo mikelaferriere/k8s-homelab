@@ -47,6 +47,5 @@ spec:
             periodSeconds: 5
           ports:
             - containerPort: 9221
-          resources: {}
       restartPolicy: Always
 status: {}

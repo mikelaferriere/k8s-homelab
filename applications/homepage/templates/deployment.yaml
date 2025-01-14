@@ -43,13 +43,6 @@ spec:
               name: {{ .Values.app.name }}-config-secrets
           ports:
             - containerPort: 3000
-          resources:
-            requests:
-              cpu: 50m
-              memory: 200Mi
-            limits:
-              cpu: 100m
-              memory: 400Mi
           volumeMounts:
             - mountPath: /app/config/custom.js
               name: {{ .Values.app.name }}-config

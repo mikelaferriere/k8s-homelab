@@ -16,6 +16,11 @@ postgresql:
       usePasswordFiles: true
 
     primary:
+      resources:
+        limits: {}
+        requests:
+          cpu: 250m
+          memory: 256Mi
       extraVolumes:
         - name: vault-database
           csi:
@@ -37,3 +42,6 @@ redis:
   architecture: standalone
   auth:
     enabled: false
+  commonConfiguration: |-
+    # Enable AOF https://redis.io/topics/persistence#append-only-file
+    appendonly no

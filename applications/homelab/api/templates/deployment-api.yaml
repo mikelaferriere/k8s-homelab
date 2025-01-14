@@ -7,12 +7,12 @@ metadata:
     app: {{ .Values.app.name }}
   name: {{ .Values.app.name }}
 spec:
-  replicas: 3
+  replicas: 1
   revisionHistoryLimit: 3
   strategy:
     rollingUpdate:
-      maxSurge: 5
-      maxUnavailable: 1
+      maxSurge: 2
+      maxUnavailable: 0
     type: RollingUpdate
   selector:
     matchLabels:
@@ -63,12 +63,5 @@ spec:
             periodSeconds: 5
           ports:
             - containerPort: {{ .Values.app.port }}
-          resources:
-            requests:
-              memory: 150Mi
-              cpu: 100m
-            limits:
-              memory: 300Mi
-              cpu: 200m
       restartPolicy: Always
 status: {}
