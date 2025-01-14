@@ -29,7 +29,6 @@ spec:
       containers:
         - name: {{ .Values.app_name }}
           image: lscr.io/linuxserver/babybuddy:latest
-          imagePullPolicy: Always
           envFrom:
           - configMapRef:
               name: {{ .Values.app_name }}-config
@@ -46,7 +45,6 @@ spec:
             initialDelaySeconds: 30
             periodSeconds: 5
           resources:
-            requests:
               memory: "256Mi"
               cpu: "300m"
             limits:
