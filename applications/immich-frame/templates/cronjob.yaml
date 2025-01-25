@@ -1,0 +1,78 @@
+---
+kind: ServiceAccount
+apiVersion: v1
+metadata:
+  name: restart-frame
+
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: restart-frame
+rules:
+  - apiGroups: ["apps", "extensions"]
+    resources: ["deployments"]
+    verbs: ["get", "patch"]
+
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: restart-frame
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: restart-frame
+subjects:
+  - kind: ServiceAccount
+    name: restart-frame
+
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: restart-nees-frame
+spec:
+  concurrencyPolicy: Forbid # Do not run concurrently!
+  schedule: '0 0 * * *'     # Run each day at midnight
+  jobTemplate:
+    spec:
+      backoffLimit: 2 
+      activeDeadlineSeconds: 600 
+      template:
+        spec:
+          serviceAccountName: restart-frame # Run under the service account created above
+          restartPolicy: Never
+          containers:
+            - name: kubectl
+              image: raspbernetes/kubectl # Specify the kubectl image
+              command: # The kubectl command to execute
+                - 'kubectl'
+                - 'rollout'
+                - 'restart'
+                - 'deployment/immich-frame-nees'
+
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: restart-laferriere-frame
+spec:
+  concurrencyPolicy: Forbid # Do not run concurrently!
+  schedule: '0 0 * * *'     # Run each day at midnight
+  jobTemplate:
+    spec:
+      backoffLimit: 2 
+      activeDeadlineSeconds: 600 
+      template:
+        spec:
+          serviceAccountName: restart-frame # Run under the service account created above
+          restartPolicy: Never
+          containers:
+            - name: kubectl
+              image: raspbernetes/kubectl # Specify the kubectl image
+              command: # The kubectl command to execute
+                - 'kubectl'
+                - 'rollout'
+                - 'restart'
+                - 'deployment/immich-frame-laferriere'
