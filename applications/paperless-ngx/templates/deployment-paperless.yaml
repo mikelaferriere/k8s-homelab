@@ -8,11 +8,15 @@ metadata:
   name: {{ .Values.app.name }}-app
 spec:
   replicas: 1
+  revisionHistoryLimit: 2
+  strategy:
+    rollingUpdate:
+      maxSurge: 2
+      maxUnavailable: 0
+    type: RollingUpdate
   selector:
     matchLabels:
       app: {{ .Values.app.name }}-app
-  strategy:
-    type: Recreate
   template:
     metadata:
       annotations:
@@ -27,34 +31,24 @@ spec:
         app: {{ .Values.app.name }}-app
     spec:
       containers:
-        - name: {{ .Values.app.name }}-gpt
-          image: icereed/paperless-gpt:latest
-          command: ["sh", "-c", ". /vault/secrets/gpt-init && /app/paperless-gpt"]
-          imagePullPolicy: IfNotPresent
-          resources: {}
-          envFrom:
-          - configMapRef:
-              name: gpt-config
-          volumeMounts:
-            - mountPath: /prompts
-              name: paperless-gpt
-          ports:
-            - containerPort: 8080
-        - name: {{ .Values.app.name }}-scanner
-          image: manuc66/node-hp-scan-to:latest
-          imagePullPolicy: IfNotPresent
-          resources: {}
-          envFrom:
-          - configMapRef:
-              name: scanner-config
-          volumeMounts:
-            - mountPath: /scan
-              name: paperless-scanner
+        # - name: {{ .Values.app.name }}-gpt
+        #   image: icereed/paperless-gpt:latest
+        #   command: ["sh", "-c", ". /vault/secrets/gpt-init && /app/paperless-gpt"]
+        #   imagePullPolicy: IfNotPresent
+        #   resources: {}
+        #   envFrom:
+        #   - configMapRef:
+        #       name: gpt-config
+        #   volumeMounts:
+        #     - mountPath: /prompts
+        #       name: paperless-gpt
+        #   ports:
+        #     - containerPort: 8080
         - name: {{ .Values.app.name }}-app
           envFrom:
           - configMapRef:
               name: {{ .Values.app.name }}-config
-          image: ghcr.io/paperless-ngx/paperless-ngx:2.13.5
+          image: ghcr.io/paperless-ngx/paperless-ngx:2.14.5
           imagePullPolicy: IfNotPresent
           livenessProbe:
             exec:
