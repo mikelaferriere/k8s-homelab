@@ -160,8 +160,8 @@ data:
             siteMonitor: http://54.176.3.194:51821/
         - PfCloud:
             icon: wireguard.png
-            href: http://154.213.186.127:51821/
-            siteMonitor: http://154.213.186.127:51821/
+            href: http://156.229.233.13:51821/
+            siteMonitor: http://156.229.233.13:51821/
     - AI:
       - Open WebUI:
           icon: open-webui-light
