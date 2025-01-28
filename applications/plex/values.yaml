@@ -2,24 +2,6 @@
 app:
   name: plex
 
-plex-media-server:
-  image:
-    tag: plexpass
-    affinity:
-      nodeAffinity:
-        requiredDuringSchedulingIgnoredDuringExecution:
-          nodeSelectorTerms:
-          - matchExpressions:
-            - key: dedicated
-              operator: In
-              values:
-              - gpu
-    tolerations:
-    - key: "dedicated"
-      operator: "Equal"
-      value: "gpu"
-      effect: "NoSchedule"
-
   ingress:
     enabled: true
     ingressClassName: nginx
