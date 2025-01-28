@@ -15,9 +15,9 @@ vault:
           memory: 256Mi
           cpu: 250m
     tolerations:
-      - key: "dedicated"
+      - key: "nvidia.com/gpu"
         operator: "Equal"
-        value: "gpu"
+        value: "true"
         effect: "NoSchedule"
   server:
     persistentVolumeClaimRetentionPolicy:
@@ -81,7 +81,7 @@ vault:
     enabled: true
     pod:
       tolerations:
-        - key: "dedicated"
+        - key: "nvidia.com/gpu"
           operator: "Equal"
-          value: "gpu"
+          value: "true"
           effect: "NoSchedule"

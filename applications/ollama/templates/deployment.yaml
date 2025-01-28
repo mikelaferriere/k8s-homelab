@@ -5,6 +5,12 @@ metadata:
   name: {{ .Values.app.name }}
 spec:
   replicas: 1
+  revisionHistoryLimit: 2
+  strategy:
+    rollingUpdate:
+      maxSurge: 2
+      maxUnavailable: 0
+    type: RollingUpdate
   selector:
     matchLabels:
       name: {{ .Values.app.name }}
@@ -14,21 +20,19 @@ spec:
         name: {{ .Values.app.name }}
     spec:
       runtimeClassName: nvidia
-      nodeSelector:
-        kubernetes.io/hostname: k8s-gpu-godzilla
       affinity:
         nodeAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
             nodeSelectorTerms:
             - matchExpressions:
-              - key: dedicated
+              - key: "nvidia.com/gpu"
                 operator: In
                 values:
-                  - gpu
+                  - "true"
       tolerations:
-        - key: "dedicated"
+        - key: "nvidia.com/gpu"
           operator: "Equal"
-          value: "gpu"
+          value: "true"
           effect: "NoSchedule"
       containers:
       - name: {{ .Values.app.name }}

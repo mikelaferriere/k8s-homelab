@@ -10,7 +10,7 @@ metallb:
       node-role.kubernetes.io/control-plane: ""
   speaker:
     tolerations:
-      - key: "dedicated"
+      - key: "nvidia.com/gpu"
         operator: "Equal"
-        value: "gpu"
+        value: "true"
         effect: "NoSchedule"
