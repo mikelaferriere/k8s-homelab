@@ -22,6 +22,7 @@ namespaces:
   - streaming
   - protonmail
   - security
+  - ai
 
 applications:
   - name: authentik
@@ -126,4 +127,7 @@ applications:
   - name: joplin
     path: applications/joplin/
     destinationNamespace: joplin
+  - name: ollama
+    path: applications/ollama/
+    destinationNamespace: ai
 
