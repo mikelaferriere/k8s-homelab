@@ -2,19 +2,16 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  labels:
-    app: open-webui
-  name: open-webui
-  namespace: ollama
+  name: {{ .Values.app.name }}
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: open-webui
+      name: {{ .Values.app.name }}
   template:
     metadata:
       labels:
-        app: open-webui
+        name: {{ .Values.app.name }}
     spec:  
       volumes:
       - name: webui-data
@@ -22,12 +19,16 @@ spec:
           claimName: open-webui-claim
       containers:
       - image: ghcr.io/open-webui/open-webui
-        name: open-webui
+        name: {{ .Values.app.name }}
         ports:
-        - containerPort: 8080
+        - name: http
+          containerPort: 8080
+          protocol: TCP
         env:
+        - name: ENABLE_SIGNUP
+          value: "true"
         - name: OLLAMA_BASE_URL
-          value: http://ollama.svc:11434
+          value: http://ollama:11434
         volumeMounts:
           - name: webui-data
             mountPath: /app/backend/data

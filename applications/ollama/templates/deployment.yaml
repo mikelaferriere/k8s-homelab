@@ -7,10 +7,7 @@ spec:
   replicas: 1
   revisionHistoryLimit: 2
   strategy:
-    rollingUpdate:
-      maxSurge: 2
-      maxUnavailable: 0
-    type: RollingUpdate
+    type: Recreate
   selector:
     matchLabels:
       name: {{ .Values.app.name }}
@@ -47,7 +44,7 @@ spec:
           protocol: TCP
         env:
         - name: PRELOAD_MODELS
-          value: "llama3.1"
+          value: "llama3.2 deepseek-r1:14b deepseek-r1:32b"
         - name: OLLAMA_KEEP_ALIVE
           value: "12h"
         lifecycle:
@@ -55,8 +52,42 @@ spec:
             exec:
               command: ["/bin/sh", "-c", "for model in $PRELOAD_MODELS; do ollama run $model \"\"; done"]
         resources:
-          limits:
-            nvidia.com/gpu: 1
+          requests:
+            cpu: 2
+            memory: 20Gi
+          limits: 
+            cpu: 4
+            memory: 40Gi
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 11434
+            scheme: HTTP
+          initialDelaySeconds: 5
+          timeoutSeconds: 2
+          periodSeconds: 10
+          successThreshold: 1
+          failureThreshold: 5
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 11434
+            scheme: HTTP
+          initialDelaySeconds: 5
+          timeoutSeconds: 2
+          periodSeconds: 5
+          successThreshold: 1
+          failureThreshold: 3
+        startupProbe:
+          httpGet:
+            path: /
+            port: 11434
+            scheme: HTTP
+          initialDelaySeconds: 5
+          timeoutSeconds: 2
+          periodSeconds: 5
+          successThreshold: 1
+          failureThreshold: 30
       volumes:
         - name: models-claim
           persistentVolumeClaim:
