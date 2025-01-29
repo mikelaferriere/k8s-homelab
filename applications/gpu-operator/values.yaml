@@ -1,2 +1,22 @@
 ---
-gpu-operator: {}
+gpu-operator:
+  driver: 
+    enabled: true
+  toolkit:
+    enabled: true
+  devicePlugin:
+    config:
+      name: device-plugin-config
+      create: true
+      data:
+        default: |-
+            version: v1
+            flags:
+              migStrategy: none
+            sharing:
+              timeSlicing:
+                renameByDefault: false
+                failRequestsGreaterThanOne: false
+                resources:
+                  - name: nvidia.com/gpu
+                    replicas: 2
