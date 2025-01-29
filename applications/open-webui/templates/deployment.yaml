@@ -34,11 +34,11 @@ spec:
             mountPath: /app/backend/data
         resources:
           requests:
-            cpu: 1000m
-            memory: 128Mi
-          limits: 
-            cpu: 2000m
+            cpu: 200m
             memory: 1Gi
+          limits: 
+            cpu: 400m
+            memory: 2Gi
         livenessProbe:
           httpGet:
             path: /
