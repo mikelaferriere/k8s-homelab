@@ -29,14 +29,13 @@ spec:
           effect: "NoSchedule"
       containers:
         - name: nvidia-smi
-          image: nvidia/cuda:12.8.0-base-ubuntu24.04
+          image: nvidia/cuda:12.4.0-base-ubuntu22.04
           command: ["nvidia-smi"]
           imagePullPolicy: Always
-        #   resources:
-        #     requests:
-        #       nvidia.com/gpu: 1
-        #     limits:
-        #       nvidia.com/gpu: 2
+        - name: nvidia-smi-uuids
+          image: nvidia/cuda:12.4.0-base-ubuntu22.04
+          command: ["nvidia-smi", "--query-gpu=gpu_name,uuid", "--format=csv"]
+          imagePullPolicy: Always
       restartPolicy: Never
 status: {}
 
@@ -71,7 +70,7 @@ spec:
           effect: "NoSchedule"
       containers:
         - name: nvidia-device-test
-          image: nvcr.io/nvidia/k8s/cuda-sample:vectoradd-cuda12.5.0
+          image: nvcr.io/nvidia/k8s/cuda-sample:vectoradd-cuda11.7.1-ubuntu20.04
           imagePullPolicy: Always
         #   resources:
         #     requests:

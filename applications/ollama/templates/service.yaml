@@ -12,3 +12,18 @@ spec:
       name: http
       targetPort: http
       protocol: TCP
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.app.name }}-code
+spec:
+  selector:
+    name: {{ .Values.app.name }}-code
+  type: LoadBalancer
+  ports:
+    - port: 11434
+      name: http
+      targetPort: http
+      protocol: TCP

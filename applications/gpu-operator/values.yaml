@@ -1,22 +1,25 @@
+# https://docs.nvidia.com/datacenter/cloud-native/gpu-operator/24.9.2/getting-started.html
 ---
 gpu-operator:
+  nfd:
+    enabled: true
   driver: 
     enabled: true
   toolkit:
     enabled: true
-  devicePlugin:
-    config:
-      name: device-plugin-config
-      create: true
-      data:
-        default: |-
-            version: v1
-            flags:
-              migStrategy: none
-            sharing:
-              timeSlicing:
-                renameByDefault: false
-                failRequestsGreaterThanOne: false
-                resources:
-                  - name: nvidia.com/gpu
-                    replicas: 2
+  # devicePlugin:
+  #   config:
+  #     name: device-plugin-config
+  #     create: true
+  #     data:
+  #       any: |-
+  #           version: v1
+  #           flags:
+  #             migStrategy: none
+  #           sharing:
+  #             timeSlicing:
+  #               renameByDefault: true
+  #               failRequestsGreaterThanOne: false
+  #               resources:
+  #                 - name: nvidia.com/gpu
+  #                   replicas: 5
