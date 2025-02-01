@@ -21,14 +21,12 @@ spec:
       - image: ghcr.io/open-webui/open-webui
         name: {{ .Values.app.name }}
         ports:
-        - name: http
-          containerPort: 8080
-          protocol: TCP
-        env:
-        - name: ENABLE_SIGNUP
-          value: "true"
-        - name: OLLAMA_BASE_URL
-          value: http://ollama:11434
+          - name: http
+            containerPort: 8080
+            protocol: TCP
+        envFrom:
+          - configMapRef:
+              name: {{ .Values.app.name }}-config
         volumeMounts:
           - name: webui-data
             mountPath: /app/backend/data

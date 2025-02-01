@@ -1,0 +1,42 @@
+# https://docs.openwebui.com/getting-started/env-configuration
+---
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: {{ .Values.app.name }}-config
+data:
+  ENABLE_SIGNUP: "true"
+
+  # ollama
+  ENABLE_OLLAMA_API: "true"
+  OLLAMA_BASE_URL: "http://ollama:11434"
+  USE_OLLAMA_DOCKER: "false"
+
+  # openai
+  ENABLE_OPENAI_API: "false"
+
+  WEBUI_URL: "https://chat.laferriere.ai"
+  USE_CUDA_DOCKER: "false"
+
+  # rag
+  RAG_EMBEDDING_ENGINE: "ollama"
+  RAG_EMBEDDING_MODEL: "mxbai-embed-large"
+  ENABLE_RAG_HYBRID_SEARCH: "true"
+  RAG_OLLAMA_BASE_URL: "http://ollama:11434"
+
+  # web search
+  ENABLE_RAG_WEB_SEARCH: "true"
+  ENABLE_SEARCH_QUERY_GENERATION: "true"
+  RAG_WEB_SEARCH_ENGINE: "duckduckgo"
+
+  # image generation
+  ENABLE_IMAGE_GENERATION: "false"
+  IMAGE_GENERATION_ENGINE: "automatic1111"
+
+  # OIDC
+  ENABLE_OAUTH_SIGNUP: "false"
+  OAUTH_CLIENT_ID: ""
+  OAUTH_CLIENT_SECRET: ""
+  OPENID_PROVIDER_URL: ""
+  OAUTH_PROVIDER_NAME: ""
+  OPENID_REDIRECT_URI: ""
