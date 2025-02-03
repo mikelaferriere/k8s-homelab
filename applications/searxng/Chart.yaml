@@ -1,0 +1,7 @@
+apiVersion: v1
+name: searxng
+version: 1.0.1
+dependencies:
+  - name: searxng
+    version: 1.0.0
+    repository: https://charts.searxng.org

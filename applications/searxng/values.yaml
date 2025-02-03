@@ -1,0 +1,27 @@
+---
+searxng:
+  env: 
+    AUTOCOMPLETE: "true"
+  service:
+    main:
+      type: LoadBalancer
+  searxng:
+    # https://github.com/searxng/searxng/blob/master/searx/settings.yml
+    config:
+      server:
+        limiter: false
+      redis:
+        url: redis://searxng-redis:6379/0
+      search:
+        formats:
+          - html
+          - json
+  persistence:
+    limiter:
+      enabled: true
+      type: configMap
+      name: configmap-searxng-limiter
+      mountPath: /etc/searxng/limiter.toml
+      subPath: limiter.toml
+  redis:
+    enabled: true

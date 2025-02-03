@@ -103,6 +103,10 @@ data:
             icon: paperless-ngx.png
             href: https://paperless.laferriere.app
             siteMonitor: https://paperless.laferriere.app
+        - GPT:
+            icon: paperless-ngx.png
+            href: http://10.10.10.202:8080
+            siteMonitor: http://10.10.10.202:8080
       - Zoneminder:
           icon: zoneminder.png
           href: https://zm.laferriere.app/zm
@@ -163,10 +167,22 @@ data:
             href: http://156.229.233.13:51821/
             siteMonitor: http://156.229.233.13:51821/
     - AI:
+      - Ollama:
+          icon: ollama
+          href: https://api.laferriere.ai
+          siteMonitor: https://api.laferriere.ai
+      - Ollama Code:
+          icon: ollama
+          href: https://code.laferriere.ai
+          siteMonitor: https://code.laferriere.ai
       - Open WebUI:
           icon: open-webui-light
-          href: http://192.168.1.122:8081
-          siteMonitor: http://192.168.1.122:8081
+          href: https://chat.laferriere.ai
+          siteMonitor: https://chat.laferriere.ai
+      - Searxng:
+          icon: searxng
+          href: http://10.10.10.108:8080
+          siteMonitor: http://10.10.10.108:8080
     - Media:
       - Plex:
           icon: plex.png

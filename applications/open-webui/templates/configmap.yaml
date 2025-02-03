@@ -27,16 +27,21 @@ data:
   # web search
   ENABLE_RAG_WEB_SEARCH: "true"
   ENABLE_SEARCH_QUERY_GENERATION: "true"
-  RAG_WEB_SEARCH_ENGINE: "duckduckgo"
+  RAG_WEB_SEARCH_ENGINE: "searxng"
+
+  # searxng
+  SEARXNG_QUERY_URL: http://searxng.ai:8080/search?q=<query>
 
   # image generation
   ENABLE_IMAGE_GENERATION: "false"
   IMAGE_GENERATION_ENGINE: "automatic1111"
 
   # OIDC
-  ENABLE_OAUTH_SIGNUP: "false"
-  OAUTH_CLIENT_ID: ""
-  OAUTH_CLIENT_SECRET: ""
-  OPENID_PROVIDER_URL: ""
-  OAUTH_PROVIDER_NAME: ""
-  OPENID_REDIRECT_URI: ""
+  ENABLE_OAUTH_SIGNUP: "true"
+  OAUTH_MERGE_ACCOUNTS_BY_EMAIL: "true"
+#   OAUTH_CLIENT_ID: ""
+#   OAUTH_CLIENT_SECRET: ""
+  OAUTH_SCOPES: "openid email profile"
+  OPENID_PROVIDER_URL: "https://auth-k8s.laferriere.app/application/o/open-webui/.well-known/openid-configuration"
+  OAUTH_PROVIDER_NAME: "Authentik"
+  OPENID_REDIRECT_URI: "https://chat.laferriere.ai/oauth/oidc/callback"

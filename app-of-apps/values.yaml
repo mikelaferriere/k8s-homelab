@@ -136,4 +136,7 @@ applications:
   - name: open-webui
     path: applications/open-webui/
     destinationNamespace: ai
+  - name: searxng
+    path: applications/searxng/
+    destinationNamespace: ai
 
