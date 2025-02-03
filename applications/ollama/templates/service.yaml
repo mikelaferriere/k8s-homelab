@@ -6,7 +6,6 @@ metadata:
 spec:
   selector:
     name: {{ .Values.app.name }}
-  type: LoadBalancer
   ports:
     - port: 11434
       name: http
@@ -21,7 +20,6 @@ metadata:
 spec:
   selector:
     name: {{ .Values.app.name }}-code
-  type: LoadBalancer
   ports:
     - port: 11434
       name: http

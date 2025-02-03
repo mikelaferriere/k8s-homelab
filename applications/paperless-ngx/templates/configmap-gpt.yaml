@@ -4,12 +4,15 @@ apiVersion: v1
 metadata:
   name: gpt-config
 data:
-  PAPERLESS_BASE_URL: 'http://localhost:8000'
+  PAPERLESS_BASE_URL: http://{{ .Values.app.name }}-app
   LLM_PROVIDER: 'ollama' # or 'ollama'
-  LLM_MODEL: 'mannix/llama3.1-8b-lexi:latest'     # or 'llama2'
+  LLM_MODEL: 'deepseek-r1:32b'     # or 'llama2'
   # OPENAI_API_KEY: 'your_openai_api_key' # Required if using OpenAI
   LLM_LANGUAGE: 'English' # Optional, default is 'English'
-  OLLAMA_HOST: 'http://ai.ollama.svc:11434' # If using Ollama
+  OLLAMA_HOST: 'http://ollama.ai:11434' # If using Ollama
   VISION_LLM_PROVIDER: 'ollama' # Optional (for OCR) - ollama or openai
-  VISION_LLM_MODEL: 'minicpm-v' # Optional (for OCR) - minicpm-v, for example for ollama, gpt-4o for openai
+  VISION_LLM_MODEL: 'llama3.2-vision' # Optional (for OCR) - minicpm-v, for example for ollama, gpt-4o for openai
   LOG_LEVEL: 'info' # Optional or 'debug', 'warn', 'error'
+  MANUAL_TAG: scanner
+  AUTO_TAG: scanner-auto
+  AUTO_OCR_TAG: scanner-auto

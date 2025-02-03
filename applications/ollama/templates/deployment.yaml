@@ -44,7 +44,7 @@ spec:
           protocol: TCP
         env:
         - name: NVIDIA_VISIBLE_DEVICES
-          value: GPU-8b6de0bb-89ad-1f78-1c8b-34f0e740e1ca,GPU-93546bb2-97df-8ac3-2941-6e8be8aef53c
+          value: GPU-8b6de0bb-89ad-1f78-1c8b-34f0e740e1ca,GPU-93546bb2-97df-8ac3-2941-6e8be8aef53c,GPU-9652988c-23cb-3d44-92f1-fe4b3189f334
         - name: OLLAMA_KEEP_ALIVE
           value: "12h"
         lifecycle:

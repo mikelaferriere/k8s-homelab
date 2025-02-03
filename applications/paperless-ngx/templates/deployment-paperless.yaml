@@ -31,19 +31,19 @@ spec:
         app: {{ .Values.app.name }}-app
     spec:
       containers:
-        # - name: {{ .Values.app.name }}-gpt
-        #   image: icereed/paperless-gpt:latest
-        #   command: ["sh", "-c", ". /vault/secrets/gpt-init && /app/paperless-gpt"]
-        #   imagePullPolicy: IfNotPresent
-        #   resources: {}
-        #   envFrom:
-        #   - configMapRef:
-        #       name: gpt-config
-        #   volumeMounts:
-        #     - mountPath: /prompts
-        #       name: paperless-gpt
-        #   ports:
-        #     - containerPort: 8080
+        - name: {{ .Values.app.name }}-gpt
+          image: icereed/paperless-gpt:latest
+          command: ["sh", "-c", ". /vault/secrets/gpt-init && /app/paperless-gpt"]
+          imagePullPolicy: IfNotPresent
+          resources: {}
+          envFrom:
+          - configMapRef:
+              name: gpt-config
+          volumeMounts:
+            - mountPath: /prompts
+              name: paperless-gpt
+          ports:
+            - containerPort: 8080
         - name: {{ .Values.app.name }}-app
           envFrom:
           - configMapRef:
