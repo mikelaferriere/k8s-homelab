@@ -46,18 +46,18 @@ spec:
         - name: NVIDIA_VISIBLE_DEVICES
           value: GPU-8b6de0bb-89ad-1f78-1c8b-34f0e740e1ca,GPU-93546bb2-97df-8ac3-2941-6e8be8aef53c,GPU-9652988c-23cb-3d44-92f1-fe4b3189f334
         - name: OLLAMA_KEEP_ALIVE
-          value: "48h"
+          value: "10m"
         lifecycle:
           postStart:
             exec:
-              command: ["/bin/sh", "-c", "ollama run deepseek-r1:14b"]
+              command: ["/bin/sh", "-c", "ollama run deepseek-r1:14b /set parameter num_ctx 131072"]
         resources:
           requests:
-            cpu: 2
-            memory: 10Gi
-          limits: 
-            cpu: 4
+            cpu: 4000m
             memory: 20Gi
+          limits: 
+            cpu: 8000m
+            memory: 40Gi
         livenessProbe:
           httpGet:
             path: /
@@ -148,11 +148,11 @@ spec:
               command: ["/bin/sh", "-c", "ollama run starcoder2:15b"]
         resources:
           requests:
-            cpu: 1
-            memory: 5Gi
-          limits: 
-            cpu: 2
+            cpu: 2000m
             memory: 10Gi
+          limits: 
+            cpu: 4000m
+            memory: 20Gi
         livenessProbe:
           httpGet:
             path: /
