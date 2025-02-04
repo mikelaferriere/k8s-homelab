@@ -142,6 +142,8 @@ spec:
           value: GPU-f4851ba6-bfc9-c5c1-7d62-102cfd4de311,GPU-c5bc98c1-e7c9-a438-3cc5-56362e4eab24
         - name: OLLAMA_KEEP_ALIVE
           value: "12h"
+        - name: OLLAMA_NUM_PARALLEL
+          value: "1"
         lifecycle:
           postStart:
             exec:
