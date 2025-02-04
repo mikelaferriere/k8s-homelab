@@ -29,20 +29,20 @@ spec:
       labels:
         app: {{ .Values.app.name }}
     spec:  
+      affinty:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: "nvidia.com/gpu"
+                operator: In
+                values:
+                  - "true"
       tolerations:
         - key: "nvidia.com/gpu"
           operator: "Equal"
           value: "true"
           effect: "NoSchedule"
-      # affinty:
-      #   nodeAffinity:
-      #     requiredDuringSchedulingIgnoredDuringExecution:
-      #       nodeSelectorTerms:
-      #       - matchExpressions:
-      #         - key: "nvidia.com/gpu"
-      #           operator: In
-      #           values:
-      #             - "true"
       volumes:
       - name: webui-data
         persistentVolumeClaim:
