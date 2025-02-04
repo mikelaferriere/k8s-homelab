@@ -1,0 +1,123 @@
+---
+open-webui:
+  annotations:
+    vault.hashicorp.com/agent-inject: "true"
+    vault.hashicorp.com/role: internal-app
+    vault.hashicorp.com/agent-inject-template-config: |
+      {{`{{- with secret "kv/data/secrets/open-webui" -}}
+        export OAUTH_CLIENT_ID={{ .Data.data.OAUTH_CLIENT_ID }}
+        export OAUTH_CLIENT_SECRET={{ .Data.data.OAUTH_CLIENT_SECRET }}
+      {{- end }}`}}
+  ollama:
+    enabled: false
+  image:
+    tag: 0.5.7
+  ollamaUrls:
+    - http://ollama:11434
+  websocket:
+    enabled: true
+  redis-cluster:
+    enabled: true
+  ingress:
+    enabled: true
+    annotations:
+      kubernetes.io/ingress.class: "nginx"
+      cert-manager.io/cluster-issuer: letsencrypt-issuer-prod
+      nginx.ingress.kubernetes.io/proxy-connect-timeout: "3600"
+      nginx.ingress.kubernetes.io/proxy-read-timeout: "3600"
+      nginx.ingress.kubernetes.io/proxy-send-timeout: "3600"
+      nginx.ingress.kubernetes.io/server-snippets: |
+        proxysetheader Upgrade $httpupgrade;
+        proxyhttpversion 1.1;
+        proxysetheader X-Forwarded-Host $httphost;
+        proxysetheader X-Forwarded-Proto $scheme;
+        proxysetheader X-Forwarded-For $remoteaddr;
+        proxysetheader Host $host;
+        proxysetheader Connection "upgrade";
+        proxycachebypass $httpupgrade;
+    class: nginx
+    host: chat.laferriere.ai
+    tls:
+      - hosts:
+          - chat.laferriere.ai
+        secretName: open-webui-prod
+  tolerations:
+    - key: "nvidia.com/gpu"
+      operator: "Equal"
+      value: "true"
+      effect: "NoSchedule"
+  affinty:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: "nvidia.com/gpu"
+            operator: In
+            values:
+              - "true"
+  extraEnvVars:
+    - name: BASH_ENV
+      value: /vault/secrets/config
+    - name: ENABLE_SIGNUP
+      value: "true"
+
+    # ollama
+    # ENABLE_OLLAMA_API: "true"
+    # OLLAMA_BASE_URL: "http://ollama:11434"
+    - name: USE_OLLAMA_DOCKER
+      value: "false"
+
+    # openai
+    - name: ENABLE_OPENAI_API
+      value: "false"
+
+    - name: WEBUI_URL
+      value: "https://chat.laferriere.ai"
+    - name: USE_CUDA_DOCKER
+      value: "false"
+
+    # rag
+    - name: RAG_EMBEDDING_ENGINE
+      value: "ollama"
+    - name: RAG_EMBEDDING_MODEL
+      value: "mxbai-embed-large"
+    - name: ENABLE_RAG_HYBRID_SEARCH
+      value: "true"
+    - name: RAG_OLLAMA_BASE_URL
+      value: "http://ollama:11434"
+
+    # web search
+    - name: ENABLE_RAG_WEB_SEARCH
+      value: "true"
+    - name: ENABLE_SEARCH_QUERY_GENERATION
+      value: "true"
+    - name: RAG_WEB_SEARCH_ENGINE
+      value: "searxng"
+
+    # searxng
+    - name: SEARXNG_QUERY_URL
+      value: http://searxng.ai:8080/search?q=<query>
+
+    # image generation
+    - name: ENABLE_IMAGE_GENERATION
+      value: "false"
+    - name: IMAGE_GENERATION_ENGINE
+      value: "automatic1111"
+
+    # OIDC
+    - name: ENABLE_OAUTH_SIGNUP
+      value: "true"
+    - name: OAUTH_MERGE_ACCOUNTS_BY_EMAIL
+      value: "true"
+  #   OAUTH_CLIENT_ID: ""
+  #   OAUTH_CLIENT_SECRET: ""
+    - name: OAUTH_SCOPES
+      value: "openid email profile"
+    - name: OPENID_PROVIDER_URL
+      value: "https://auth-k8s.laferriere.app/application/o/open-webui/.well-known/openid-configuration"
+    - name: OAUTH_PROVIDER_NAME
+      value: "Authentik"
+    - name: OPENID_REDIRECT_URI
+      value: "https://chat.laferriere.ai/oauth/oidc/callback"
+    
+

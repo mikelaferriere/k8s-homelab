@@ -1,2 +1,26 @@
 ---
-open-webui: {}
+app:
+  name: open-webui
+
+# -- Deploys a Redis cluster with subchart 'redis' from bitnami
+redis-cluster:
+  # -- Enable Redis installation
+  enabled: true
+  # -- Redis cluster name (recommended to be 'open-webui-redis')
+  # - In this case, redis url will be 'redis://open-webui-redis-master:6379/0' or 'redis://[:<password>@]open-webui-redis-master:6379/0'
+  fullnameOverride: open-webui-redis
+  # -- Redis Authentication
+  auth:
+    # -- Enable Redis authentication (disabled by default). For your security, we strongly suggest that you switch to 'auth.enabled=true'
+    enabled: false
+  # -- Replica configuration for the Redis cluster
+  replica:
+    # -- Number of Redis replica instances
+    replicaCount: 3
+
+pipelines:
+  # -- Automatically install Pipelines chart to extend Open WebUI functionality using Pipelines: https://github.com/open-webui/pipelines
+  enabled: true
+  # -- This section can be used to pass required environment variables to your pipelines (e.g. Langfuse hostname)
+  extraEnvVars: []
+  fullnameOverride: open-webui-pipelines

@@ -6,17 +6,22 @@ metadata:
   name: {{ .Values.app.name }}-config
 data:
   ENABLE_SIGNUP: "true"
+  WEBUI_URL: "https://chat.laferriere.ai"
+
+  # websocket support
+  ENABLE_WEBSOCKET_SUPPORT: "true"
+  WEBSOCKET_MANAGER: redis
+  WEBSOCKET_REDIS_URL: redis://open-webui-redis:6379/0
 
   # ollama
   ENABLE_OLLAMA_API: "true"
-  OLLAMA_BASE_URL: "http://ollama:11434"
+  OLLAMA_BASE_URLS: "http://ollama:11434"
   USE_OLLAMA_DOCKER: "false"
+  USE_CUDA_DOCKER: "false"
 
   # openai
   ENABLE_OPENAI_API: "false"
-
-  WEBUI_URL: "https://chat.laferriere.ai"
-  USE_CUDA_DOCKER: "false"
+  OPENAI_API_BASE_URL: http://open-webui-pipelines.ai:9099
 
   # rag
   RAG_EMBEDDING_ENGINE: "ollama"
@@ -39,8 +44,8 @@ data:
   # OIDC
   ENABLE_OAUTH_SIGNUP: "true"
   OAUTH_MERGE_ACCOUNTS_BY_EMAIL: "true"
-#   OAUTH_CLIENT_ID: ""
-#   OAUTH_CLIENT_SECRET: ""
+  # OAUTH_CLIENT_ID: ""
+  # OAUTH_CLIENT_SECRET: ""
   OAUTH_SCOPES: "openid email profile"
   OPENID_PROVIDER_URL: "https://auth-k8s.laferriere.app/application/o/open-webui/.well-known/openid-configuration"
   OAUTH_PROVIDER_NAME: "Authentik"

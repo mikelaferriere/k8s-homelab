@@ -1,6 +1,12 @@
 dependencies:
-- name: open-webui
-  repository: https://helm.openwebui.com/
-  version: 5.4.0
-digest: sha256:6d8cd50e419b4099bc5a39ac22e279b43d285e740ff40ecd257ba9da10045bb5
-generated: "2025-02-04T00:12:26.484000733-05:00"
+- name: pipelines
+  repository: https://helm.openwebui.com
+  version: 0.0.6
+- name: tika
+  repository: https://apache.jfrog.io/artifactory/tika
+  version: 2.9.0
+- name: redis
+  repository: https://charts.bitnami.com/bitnami
+  version: 20.7.0
+digest: sha256:d7baa75266d10d74e935fb4cfe33ffba0df371eb5a8656353cb7937adaa1af56
+generated: "2025-02-04T13:20:35.152004436-05:00"

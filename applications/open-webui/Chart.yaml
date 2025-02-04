@@ -2,7 +2,19 @@ apiVersion: v1
 name: open-webui
 version: 1.0.1
 dependencies:
-  - name: open-webui
-    repository: https://helm.openwebui.com/
-    version: 5.4.0
-
+  - name: pipelines
+    repository: https://helm.openwebui.com
+    version: '>=0.0.1'
+    import-values:
+      - child: service
+        parent: pipelines.service
+    condition: pipelines.enabled
+  - name: tika
+    repository: https://apache.jfrog.io/artifactory/tika
+    version: '>=2.9.0'
+    condition: tika.enabled
+  - name: redis
+    repository: https://charts.bitnami.com/bitnami
+    version: '>=20.6.2'
+    alias: redis-cluster
+    condition: redis-cluster.enabled

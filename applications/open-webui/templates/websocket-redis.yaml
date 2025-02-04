@@ -1,0 +1,44 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.app.name }}-redis
+  labels: {}
+  annotations: {}
+spec:
+  selector:
+    matchLabels:
+      name: {{ .Values.app.name }}-redis
+  template:
+    metadata:
+      labels: 
+        name: {{ .Values.app.name }}-redis
+    spec:
+      containers:
+      - name: open-webui-redis
+        image: redis:7.4.2-alpine3.21
+        imagePullPolicy: IfNotPresent
+        command: []
+        args: []
+        ports:
+        - name: http
+          containerPort: 6379
+        resources: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.app.name }}-redis
+  labels:
+    name: {{ .Values.app.name }}-redis
+  annotations: {}
+spec:
+  selector:
+    name: {{ .Values.app.name }}-redis
+  type: ClusterIP
+  ports:
+  - protocol: TCP
+    name: http
+    port: 6379
+    targetPort: http
+

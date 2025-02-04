@@ -4,13 +4,14 @@ kind: PersistentVolumeClaim
 metadata:
   labels:
     app: {{ .Values.app.name }}
-  name: open-webui-claim
+    name: {{ .Values.app.name }}
+  name: {{ .Values.app.name }}-claim
 spec:
   accessModes:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 1Gi
+      storage: 2Gi
 status: {}
 
 
