@@ -5,9 +5,9 @@ dependencies:
   - name: pipelines
     repository: https://helm.openwebui.com
     version: '>=0.0.1'
-    import-values:
-      - child: service
-        parent: pipelines.service
+    # import-values:
+    #   - child: service
+    #     parent: pipelines.service
     condition: pipelines.enabled
   - name: tika
     repository: https://apache.jfrog.io/artifactory/tika

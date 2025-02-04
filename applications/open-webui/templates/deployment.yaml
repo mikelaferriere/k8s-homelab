@@ -2,6 +2,8 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
+  labels:
+    app: {{ .Values.app.name }}
   name: {{ .Values.app.name }}
 spec:
   replicas: 1
@@ -32,15 +34,15 @@ spec:
           operator: "Equal"
           value: "true"
           effect: "NoSchedule"
-      affinty:
-        nodeAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-            nodeSelectorTerms:
-            - matchExpressions:
-              - key: "nvidia.com/gpu"
-                operator: In
-                values:
-                  - "true"
+      # affinty:
+      #   nodeAffinity:
+      #     requiredDuringSchedulingIgnoredDuringExecution:
+      #       nodeSelectorTerms:
+      #       - matchExpressions:
+      #         - key: "nvidia.com/gpu"
+      #           operator: In
+      #           values:
+      #             - "true"
       volumes:
       - name: webui-data
         persistentVolumeClaim:
@@ -64,7 +66,7 @@ spec:
             cpu: 500m
             memory: 2Gi
           limits: 
-            cpu: 1000m
+            cpu: '1'
             memory: 4Gi
         livenessProbe:
           httpGet:

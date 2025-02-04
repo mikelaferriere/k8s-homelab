@@ -23,4 +23,4 @@ pipelines:
   enabled: true
   # -- This section can be used to pass required environment variables to your pipelines (e.g. Langfuse hostname)
   extraEnvVars: []
-  fullnameOverride: open-webui-pipelines
+  nameOverride: open-webui-pipelines
