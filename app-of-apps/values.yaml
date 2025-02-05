@@ -130,6 +130,7 @@ applications:
   - name: gpu-operator
     path: applications/gpu-operator/
     destinationNamespace: ai
+
   - name: ollama
     path: applications/ollama/
     destinationNamespace: ai
