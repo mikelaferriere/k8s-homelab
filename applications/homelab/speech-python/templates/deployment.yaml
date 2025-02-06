@@ -44,14 +44,20 @@ spec:
             httpGet:
               port: {{ .Values.app.port }}
               path: /api/v2/speech/status
-            initialDelaySeconds: 60
+            failureThreshold: 5
             periodSeconds: 5
           readinessProbe:
             httpGet:
               port: {{ .Values.app.port }}
               path: /api/v2/speech/status
-            initialDelaySeconds: 60
+            failureThreshold: 5
             periodSeconds: 5
+          startupProbe:
+            httpGet:
+              port: {{ .Values.app.port }}
+              path: /api/v2/speech/status
+            failureThreshold: 30
+            periodSeconds: 10
           ports:
             - containerPort: {{ .Values.app.port }}
           resources:

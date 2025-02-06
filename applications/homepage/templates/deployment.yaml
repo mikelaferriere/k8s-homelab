@@ -40,15 +40,30 @@ spec:
               name: {{ .Values.app.name }}-config
           - configMapRef:
               name: {{ .Values.app.name }}-config-secrets
+          livenessProbe:
+            tcpSocket:
+              port: 3000
+            failureThreshold: 5
+            periodSeconds: 5
+          readinessProbe:
+            tcpSocket:
+              port: 3000
+            failureThreshold: 5
+            periodSeconds: 5
+          startupProbe:
+            tcpSocket:
+              port: 3000
+            failureThreshold: 30
+            periodSeconds: 10
           ports:
             - containerPort: 3000
           resources:
             requests:
-              cpu: "256m"
-              memory: "128Mi"
+              cpu: "100m"
+              memory: "250Mi"
             limits:
-              cpu: "512m"
-              memory: "256Mi"
+              cpu: "200m"
+              memory: "500Mi"
           volumeMounts:
             - mountPath: /app/config/custom.js
               name: {{ .Values.app.name }}-config
@@ -76,11 +91,6 @@ spec:
               subPath: widgets.yaml
             - mountPath: /app/config/logs
               name: logs
-          livenessProbe:
-            initialDelaySeconds: 5
-            periodSeconds: 5
-            tcpSocket:
-              port: 3000
       volumes:
         - name: {{ .Values.app.name }}-config
           configMap:

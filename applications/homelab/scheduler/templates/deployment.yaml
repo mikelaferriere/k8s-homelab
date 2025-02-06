@@ -32,17 +32,20 @@ spec:
           image: 10.10.10.199:5000/typescript/nx/{{ .Values.app.name }}:latest
           command: ["sh", "-c", "node /app/main.js"]
           livenessProbe:
-            httpGet:
+            tcpSocket:
               port: {{ .Values.app.port }}
-              path: /api/scheduler
-            initialDelaySeconds: 30
+            failureThreshold: 5
             periodSeconds: 5
           readinessProbe:
-            httpGet:
+            tcpSocket:
               port: {{ .Values.app.port }}
-              path: /api/scheduler
-            initialDelaySeconds: 30
+            failureThreshold: 5
             periodSeconds: 5
+          startupProbe:
+            tcpSocket:
+              port: {{ .Values.app.port }}
+            failureThreshold: 30
+            periodSeconds: 10
           ports:
             - containerPort: {{ .Values.app.port }}
           resources:
