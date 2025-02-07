@@ -3,6 +3,7 @@ app:
   name: api
   port: 8081
   consumers: [
+    "baby-buddy",
     "calendar-events",
     "fitbit-sync",
     "hue-sync",

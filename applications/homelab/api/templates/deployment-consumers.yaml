@@ -4,21 +4,28 @@ kind: Deployment
 metadata:
   annotations: {}
   labels:
-    app: consumers
-  name: consumers
+    app: consumer
+  name: consumer
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: consumers
+      app: consumer
   strategy:
     type: Recreate
   template:
     metadata:
       annotations:
         diun.enable: "false"
+        vault.hashicorp.com/agent-inject: "true"
+        vault.hashicorp.com/role: internal-app
+        # vault.hashicorp.com/agent-inject-secret-defined: kv/data/secrets/homelab
+        vault.hashicorp.com/agent-inject-template-init: |
+          {{`{{- with secret "kv/data/secrets/babybuddy" -}}
+            export BABY_BUDDY_TOKEN={{ .Data.data.API_TOKEN }}
+          {{- end }}`}}
       labels:
-        app: consumers
+        app: consumer
     spec:
       containers:
         {{- range $consumer := .Values.app.consumers }}
@@ -27,7 +34,7 @@ spec:
           - configMapRef:
               name: {{ $.Values.app.name }}-config
           image: 10.10.10.199:5000/typescript/nx/consumer:latest
-          command: ["sh", "-c", "node {{ $consumer }}/main.js"]
+          command: ["sh", "-c", ". /vault/secrets/init && node {{ $consumer }}/main.js"]
           resources:
             requests:
               memory: "50Mi"
