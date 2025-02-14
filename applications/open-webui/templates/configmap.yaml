@@ -7,12 +7,17 @@ metadata:
 data:
   ENABLE_SIGNUP: "true"
   WEBUI_URL: "https://chat.laferriere.ai"
+  ENABLE_CHANNELS: "true"
 
   # postgresql
   DATABASE_URL: postgresql://postgres:postgres@postgresql:5432/postgres
 
+  # tika
+  CONTENT_EXTRACTION_ENGINE: "Tika"
+  TIKA_SERVER_URL: http://{{ .Values.app.name }}-tika:9998  
+
   # websocket support
-  ENABLE_WEBSOCKET_SUPPORT: "true"
+  ENABLE_WEBSOCKET_SUPPORT: "True"
   WEBSOCKET_MANAGER: redis
   WEBSOCKET_REDIS_URL: redis://open-webui-redis:6379/0
 
@@ -22,18 +27,23 @@ data:
   USE_OLLAMA_DOCKER: "false"
   USE_CUDA_DOCKER: "false"
 
-  # openai
-  ENABLE_OPENAI_API: "false"
-  OPENAI_API_BASE_URL: http://open-webui-pipelines.ai:9099
+  # openai (use pipelines instead of actual openai)
+  ENABLE_OPENAI_API: "true"
+  OPENAI_API_KEY: "0p3n-w3bu!"
+  OPENAI_API_BASE_URL: http://open-webui-pipelines:9099
 
   # rag
-  RAG_EMBEDDING_ENGINE: "ollama"
-  RAG_EMBEDDING_MODEL: "mxbai-embed-large"
+  # RAG_EMBEDDING_ENGINE: "ollama"
+  # RAG_EMBEDDING_MODEL: "mxbai-embed-large"
   ENABLE_RAG_HYBRID_SEARCH: "true"
   RAG_OLLAMA_BASE_URL: "http://ollama:11434"
+  RAG_EMBEDDING_OPENAI_BATCH_SIZE: "20"
+  RAG_EMBEDDING_BATCH_SIZE: "20"
 
   # web search
   ENABLE_RAG_WEB_SEARCH: "true"
+  RAG_WEB_SEARCH_RESULT_COUNT: "10"
+  RAG_WEB_SEARCH_CONCURRENT_REQUESTS: "10"
   ENABLE_SEARCH_QUERY_GENERATION: "true"
   RAG_WEB_SEARCH_ENGINE: "searxng"
 

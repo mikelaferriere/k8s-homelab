@@ -10,6 +10,10 @@ metadata:
     nginx.ingress.kubernetes.io/proxy-read-timeout: "3600"
     nginx.ingress.kubernetes.io/proxy-send-timeout: "3600"
     nginx.ingress.kubernetes.io/server-snippets: |
+      proxy_buffering off;
+      proxy_cache off;
+      chunked_transfer_encoding off;
+
       proxysetheader Upgrade $httpupgrade;
       proxyhttpversion 1.1;
       proxysetheader X-Forwarded-Host $httphost;
