@@ -11,8 +11,12 @@ data:
   # postgresql
   DATABASE_URL: postgresql://postgres:postgres@postgresql:5432/postgres
 
+  # tika
+  CONTENT_EXTRACTION_ENGINE: "Tika"
+  TIKA_SERVER_URL: http://{{ .Values.app.name }}-tika:9998  
+
   # websocket support
-  ENABLE_WEBSOCKET_SUPPORT: "true"
+  ENABLE_WEBSOCKET_SUPPORT: "True"
   WEBSOCKET_MANAGER: redis
   WEBSOCKET_REDIS_URL: redis://open-webui-redis:6379/0
 
@@ -24,7 +28,8 @@ data:
 
   # openai
   ENABLE_OPENAI_API: "false"
-  OPENAI_API_BASE_URL: http://open-webui-pipelines.ai:9099
+  OPENAI_API_KEY: "0p3n-w3bu!"
+  OPENAI_API_BASE_URL: http://open-webui-pipelines:9099
 
   # rag
   RAG_EMBEDDING_ENGINE: "ollama"
