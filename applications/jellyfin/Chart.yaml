@@ -1,0 +1,8 @@
+apiVersion: v1
+name: jellyfin
+version: 1.0.0
+dependencies:
+  - name: jellyfin
+    version: 2.1.0
+    repository: https://jellyfin.github.io/jellyfin-helm
+

@@ -58,6 +58,9 @@ applications:
   - name: ingress-nginx
     path: applications/ingress-controller/
     destinationNamespace: ingress-nginx
+  - name: jellyfin
+    path: applications/jellyfin/
+    destinationNamespace: streaming
   - name: loki
     path: applications/loki/
     destinationNamespace: monitoring

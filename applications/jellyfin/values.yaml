@@ -1,0 +1,91 @@
+---
+jellyfin:
+  # env:
+  #   JELLYFIN_DATA_DIR: /nfs
+
+  image:
+    tag: latest
+    respository: jellyfin/jellyfin
+
+  ingress:
+    enabled: true
+    annotations:
+      kubernetes.io/ingress.class: "nginx"
+      cert-manager.io/cluster-issuer: letsencrypt-issuer-prod
+    ingressClassName: nginx
+    tls:
+      - hosts:
+        - jellyfin.laferriere.media
+        secretName: jellyfin-secret
+    hosts:
+      - host: jellyfin.laferriere.media
+        paths:
+          - path: /
+            pathType: ImplementationSpecific
+
+  tolerations:
+    - key: "nvidia.com/gpu"
+      operator: "Equal"
+      value: "true"
+      effect: "NoSchedule"
+  affinty:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: "nvidia.com/gpu"
+            operator: In
+            values:
+              - "true"
+  metrics:
+    # this needs to be false at first run to create the proper config files first
+    enabled: false
+
+  securityContext:
+    capabilities:
+      add:
+        - "SYS_ADMIN"
+      drop:
+        - "ALL"
+    privileged: false
+
+  # persistence:
+  #   config:
+  #     enabled: false
+  #   media:
+  #     enabled: false
+
+  volumes:
+    - name: hwa
+      hostPath:
+        path: /dev/dri
+    - name: media2
+      nfs:
+        server: 192.168.1.22
+        path: /volume1/Shared
+
+  volumeMounts:
+    - name: hwa
+      mountPath: /dev/dri
+    - name: media2
+      mountPath: /nfs/media
+
+  # # -- Enable and configure postgresql database subchart under this key.
+  # #    For more options see [postgresql chart documentation](https://github.com/bitnami/charts/tree/master/bitnami/postgresql)
+  # # @default -- https://github.com/bitnami/charts/blob/master/bitnami/postgresql/values.yaml
+  # postgresql:
+  #   enabled: true
+  #   metrics:
+  #     enabled: true
+  #   auth:
+  #     username: joplin
+  #     password: joplin-pass
+  #     database: joplin
+  #   persistence:
+  #     enabled: false
+  #   primary:
+  #     resources:
+  #       limits: {}
+  #       requests:
+  #         cpu: 250m
+  #         memory: 256Mi
