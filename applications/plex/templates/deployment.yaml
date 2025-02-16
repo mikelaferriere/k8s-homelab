@@ -53,7 +53,7 @@ spec:
               name: {{ .Values.app.name }}-config
           volumeMounts:
             - mountPath: /config
-              name: config-claim
+              name: config
             - mountPath: /transcode
               name: transcode-claim
             - mountPath: /data/media
@@ -88,9 +88,10 @@ spec:
         - name: transcode-claim
           persistentVolumeClaim:
             claimName: transcode-claim
-        - name: config-claim
-          persistentVolumeClaim:
-            claimName: config-claim
+        - name: config
+          nfs:
+            server: 192.168.1.22
+            path: /volume1/Shared/plex-config
         - name: nfs-media
           nfs:
             server: 192.168.1.22
