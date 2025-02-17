@@ -143,4 +143,7 @@ applications:
   - name: searxng
     path: applications/searxng/
     destinationNamespace: ai
+  - name: text-to-speech
+    path: applications/tts/
+    destinationNamespace: ai
 
