@@ -6,6 +6,7 @@ jellyfin:
   image:
     tag: latest
     respository: jellyfin/jellyfin
+    pullPolicy: Always
 
   ingress:
     enabled: true
