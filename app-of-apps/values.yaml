@@ -130,10 +130,10 @@ applications:
   - name: joplin
     path: applications/joplin/
     destinationNamespace: joplin
+
   - name: gpu-operator
     path: applications/gpu-operator/
     destinationNamespace: ai
-
   - name: ollama
     path: applications/ollama/
     destinationNamespace: ai

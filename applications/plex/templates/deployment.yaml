@@ -46,8 +46,8 @@ spec:
               memory: "1500Mi"
               cpu: "500m"
             limits:
-              cpu: "1000m"
-              memory: "3000Mi"
+              cpu: "3"
+              memory: "6000Mi"
           envFrom:
           - configMapRef:
               name: {{ .Values.app.name }}-config
