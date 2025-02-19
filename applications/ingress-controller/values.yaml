@@ -29,6 +29,7 @@ ingress-nginx:
 
   tcp:
     1883: "mosquitto/mosquitto:1883"
+    8096: "streaming/jellyfin:8096"
     8880: "ai/tts:8880"
     9001: "mosquitto/mosquitto:9001"
     10000: "homelab/event-bus:10000"
