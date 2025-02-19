@@ -2,10 +2,12 @@
 jellyfin:
   jellyfin:
     env:
-      - name: JELLYFIN_CONFIG_DIR
-        value: /config
-      - name: JELLYFIN_CACHE_DIR
-        value: /cache-host
+      - name: JELLYFIN_DATA_DIR
+        value: /data-host
+      # - name: JELLYFIN_CONFIG_DIR
+      #   value: /config-host
+      # - name: JELLYFIN_CACHE_DIR
+      #   value: /cache-host
   #   JELLYFIN_DATA_DIR: /nfs
 
   image:
@@ -57,23 +59,27 @@ jellyfin:
 
   persistence:
     config:
-      enabled: false
+      enabled: true
     media:
-      enabled: false
+      enabled: true
 
   volumes:
     - name: hwa
       hostPath:
         path: /dev/dri
-    - name: config-host
+    # - name: config-host
+    #   hostPath:
+    #     path: /mnt/jellyfin/config
+    #     type: Directory
+    # - name: cache-host
+    #   hostPath:
+    #     path: /mnt/jellyfin/cache
+    #     type: Directory
+    - name: data-host
       hostPath:
-        path: /mnt/jellyfin/config
+        path: /mnt/jellyfin/data
         type: Directory
-    - name: cache-host
-      hostPath:
-        path: /mnt/jellyfin/cache
-        type: Directory
-    - name: media2
+    - name: media-nfs
       nfs:
         server: 192.168.1.22
         path: /volume1/Shared
@@ -81,12 +87,14 @@ jellyfin:
   volumeMounts:
     - name: hwa
       mountPath: /dev/dri
-    - name: config-host
-      mountPath: /config
-    - name: cache-host
-      mountPath: /cache-host
-    - name: media
-      mountPath: /nfs/media
+    - name: data-host
+      mountPath: /data-host
+    # - name: config-host
+    #   mountPath: /config-host
+    # - name: cache-host
+    #   mountPath: /cache-host
+    - name: media-nfs
+      mountPath: /media-nfs
 
   # # -- Enable and configure postgresql database subchart under this key.
   # #    For more options see [postgresql chart documentation](https://github.com/bitnami/charts/tree/master/bitnami/postgresql)
