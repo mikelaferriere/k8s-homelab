@@ -1,6 +1,11 @@
 ---
 jellyfin:
-  # env:
+  jellyfin:
+    env:
+      - name: JELLYFIN_CONFIG_DIR
+        value: /config
+      - name: JELLYFIN_CACHE_DIR
+        value: /cache-host
   #   JELLYFIN_DATA_DIR: /nfs
 
   image:
@@ -50,16 +55,24 @@ jellyfin:
         - "ALL"
     privileged: false
 
-  # persistence:
-  #   config:
-  #     enabled: false
-  #   media:
-  #     enabled: false
+  persistence:
+    config:
+      enabled: false
+    media:
+      enabled: false
 
   volumes:
     - name: hwa
       hostPath:
         path: /dev/dri
+    - name: config-host
+      hostPath:
+        path: /mnt/jellyfin/config
+        type: Directory
+    - name: cache-host
+      hostPath:
+        path: /mnt/jellyfin/cache
+        type: Directory
     - name: media2
       nfs:
         server: 192.168.1.22
@@ -68,7 +81,11 @@ jellyfin:
   volumeMounts:
     - name: hwa
       mountPath: /dev/dri
-    - name: media2
+    - name: config-host
+      mountPath: /config
+    - name: cache-host
+      mountPath: /cache-host
+    - name: media
       mountPath: /nfs/media
 
   # # -- Enable and configure postgresql database subchart under this key.
