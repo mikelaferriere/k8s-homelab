@@ -1,0 +1,103 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.app.name }}
+spec:
+  replicas: 1
+  revisionHistoryLimit: 2
+  strategy:
+    rollingUpdate:
+      maxSurge: 2
+      maxUnavailable: 0
+    type: RollingUpdate
+  selector:
+    matchLabels:
+      name: {{ .Values.app.name }}
+  template:
+    metadata:
+      labels:
+        name: {{ .Values.app.name }}
+    spec:
+      runtimeClassName: nvidia
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: "nvidia.com/gpu"
+                operator: In
+                values:
+                  - "true"
+      tolerations:
+        - key: "nvidia.com/gpu"
+          operator: "Equal"
+          value: "true"
+          effect: "NoSchedule"
+      containers:
+      - name: {{ .Values.app.name }}
+        image: elestio/gpt-researcher:latest
+        volumeMounts:
+          - mountPath: /usr/src/app/my-docs
+            name: docs-claim
+          - mountPath: /usr/src/app/outputs
+            name: outputs-claim
+        imagePullPolicy: Always
+        ports:
+          - name: http
+            containerPort: 8000
+            protocol: TCP
+        env:
+          - name: EMBEDDING
+            value: ollama:mxbai-embed-large
+          - name: RETRIEVER
+            value: searx
+          - name: FAST_LLM
+            value: ollama:deepseek-r1:14b
+          - name: SMART_LLM
+            value: ollama:deepseek-r1:14b
+          - name: STRATEGIC_LLM
+            value: ollama:deepseek-r1:14b
+          - name: OLLAMA_BASE_URL
+            value: http://ollama:11434
+          - name: SEARX_URL
+            value: http://searxng:8080
+        resources:
+          requests:
+            cpu: 500m
+            memory: 2Gi
+          limits: 
+            cpu: 2
+            memory: 4Gi
+        livenessProbe:
+          tcpSocket:
+            port: 8000
+          initialDelaySeconds: 5
+          timeoutSeconds: 2
+          periodSeconds: 10
+          successThreshold: 1
+          failureThreshold: 5
+        readinessProbe:
+          tcpSocket:
+            port: 8000
+          initialDelaySeconds: 5
+          timeoutSeconds: 2
+          periodSeconds: 5
+          successThreshold: 1
+          failureThreshold: 3
+        startupProbe:
+          tcpSocket:
+            port: 8000
+          initialDelaySeconds: 5
+          timeoutSeconds: 2
+          periodSeconds: 5
+          successThreshold: 1
+          failureThreshold: 30
+      volumes:
+        - name: docs-claim
+          persistentVolumeClaim:
+            claimName: docs-claim
+        - name: outputs-claim
+          persistentVolumeClaim:
+            claimName: outputs-claim
+

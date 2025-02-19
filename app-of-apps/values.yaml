@@ -146,4 +146,7 @@ applications:
   - name: text-to-speech
     path: applications/tts/
     destinationNamespace: ai
+  - name: gpt-researcher
+    path: applications/gpt-researcher/
+    destinationNamespace: ai
 
