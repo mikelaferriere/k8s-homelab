@@ -46,11 +46,11 @@ spec:
               value: GPU-988d240c-f178-4b8f-eb54-d831f3d0f1a5
           resources:
             requests:
-              memory: "4000Mi"
-              cpu: "500m"
+              memory: 2Gi
+              cpu: 125m
             limits:
-              cpu: "1"
-              memory: "6000Mi"
+              cpu: 500m
+              memory: 7Gi
           envFrom:
           - configMapRef:
               name: {{ .Values.app.name }}-config
