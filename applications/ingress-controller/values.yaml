@@ -35,6 +35,7 @@ ingress-nginx:
     10000: "homelab/event-bus:10000"
     10001: "homelab/speech-recognizer:10001"
     10002: "homelab/websocket:10002"
-    11434: "ai/ollama-code:11434"
+    11434: "ai/ollama:11434"
+    11435: "ai/ollama-code:11434"
     32400: "streaming/plex:32400"
 

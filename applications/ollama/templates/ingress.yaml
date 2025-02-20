@@ -46,3 +46,5 @@ spec:
             name: {{ .Values.app.name }}-code
             port:
               number: 11434
+
+
