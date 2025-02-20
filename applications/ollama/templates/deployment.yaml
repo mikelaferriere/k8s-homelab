@@ -44,7 +44,9 @@ spec:
           protocol: TCP
         env:
         - name: NVIDIA_VISIBLE_DEVICES
-          value: GPU-8b6de0bb-89ad-1f78-1c8b-34f0e740e1ca,GPU-93546bb2-97df-8ac3-2941-6e8be8aef53c,GPU-9652988c-23cb-3d44-92f1-fe4b3189f334
+          value: GPU-8b6de0bb-89ad-1f78-1c8b-34f0e740e1ca,GPU-93546bb2-97df-8ac3-2941-6e8be8aef53c,GPU-9652988c-23cb-3d44-92f1-fe4b3189f334,GPU-f4851ba6-bfc9-c5c1-7d62-102cfd4de311,GPU-c5bc98c1-e7c9-a438-3cc5-56362e4eab24
+        # - name: OLLAMA_NUM_PARALLEL
+        #   value: "1"
         # - name: OLLAMA_KEEP_ALIVE
         #   value: "10m"
         resources:
@@ -89,96 +91,96 @@ spec:
           persistentVolumeClaim:
             claimName: models-claim
 
----
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: {{ .Values.app.name }}-code
-spec:
-  replicas: 1
-  revisionHistoryLimit: 2
-  strategy:
-    type: Recreate
-  selector:
-    matchLabels:
-      name: {{ .Values.app.name }}-code
-  template:
-    metadata:
-      labels:
-        name: {{ .Values.app.name }}-code
-    spec:
-      runtimeClassName: nvidia
-      affinity:
-        nodeAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-            nodeSelectorTerms:
-            - matchExpressions:
-              - key: "nvidia.com/gpu"
-                operator: In
-                values:
-                  - "true"
-      tolerations:
-        - key: "nvidia.com/gpu"
-          operator: "Equal"
-          value: "true"
-          effect: "NoSchedule"
-      containers:
-      - name: {{ .Values.app.name }}-code
-        image: ollama/ollama:latest
-        volumeMounts:
-          - mountPath: /root/.ollama
-            name: models-claim
-        imagePullPolicy: Always
-        ports:
-        - name: http
-          containerPort: 11434
-          protocol: TCP
-        env:
-        - name: NVIDIA_VISIBLE_DEVICES
-          value: GPU-f4851ba6-bfc9-c5c1-7d62-102cfd4de311,GPU-c5bc98c1-e7c9-a438-3cc5-56362e4eab24
-        - name: OLLAMA_KEEP_ALIVE
-          value: "12h"
-        - name: OLLAMA_NUM_PARALLEL
-          value: "1"
-        resources:
-          requests:
-            cpu: 500m
-            memory: 15Gi
-          limits: 
-            cpu: 4
-            memory: 30Gi
-        livenessProbe:
-          httpGet:
-            path: /
-            port: 11434
-            scheme: HTTP
-          initialDelaySeconds: 5
-          timeoutSeconds: 2
-          periodSeconds: 10
-          successThreshold: 1
-          failureThreshold: 5
-        readinessProbe:
-          httpGet:
-            path: /
-            port: 11434
-            scheme: HTTP
-          initialDelaySeconds: 5
-          timeoutSeconds: 2
-          periodSeconds: 5
-          successThreshold: 1
-          failureThreshold: 3
-        startupProbe:
-          httpGet:
-            path: /
-            port: 11434
-            scheme: HTTP
-          initialDelaySeconds: 5
-          timeoutSeconds: 2
-          periodSeconds: 5
-          successThreshold: 1
-          failureThreshold: 30
-      volumes:
-        - name: models-claim
-          persistentVolumeClaim:
-            claimName: models-claim
+# ---
+# apiVersion: apps/v1
+# kind: Deployment
+# metadata:
+#   name: {{ .Values.app.name }}-code
+# spec:
+#   replicas: 1
+#   revisionHistoryLimit: 2
+#   strategy:
+#     type: Recreate
+#   selector:
+#     matchLabels:
+#       name: {{ .Values.app.name }}-code
+#   template:
+#     metadata:
+#       labels:
+#         name: {{ .Values.app.name }}-code
+#     spec:
+#       runtimeClassName: nvidia
+#       affinity:
+#         nodeAffinity:
+#           requiredDuringSchedulingIgnoredDuringExecution:
+#             nodeSelectorTerms:
+#             - matchExpressions:
+#               - key: "nvidia.com/gpu"
+#                 operator: In
+#                 values:
+#                   - "true"
+#       tolerations:
+#         - key: "nvidia.com/gpu"
+#           operator: "Equal"
+#           value: "true"
+#           effect: "NoSchedule"
+#       containers:
+#       - name: {{ .Values.app.name }}-code
+#         image: ollama/ollama:latest
+#         volumeMounts:
+#           - mountPath: /root/.ollama
+#             name: models-claim
+#         imagePullPolicy: Always
+#         ports:
+#         - name: http
+#           containerPort: 11434
+#           protocol: TCP
+#         env:
+#         - name: NVIDIA_VISIBLE_DEVICES
+#           value: GPU-f4851ba6-bfc9-c5c1-7d62-102cfd4de311,GPU-c5bc98c1-e7c9-a438-3cc5-56362e4eab24
+#         - name: OLLAMA_KEEP_ALIVE
+#           value: "12h"
+#         - name: OLLAMA_NUM_PARALLEL
+#           value: "1"
+#         resources:
+#           requests:
+#             cpu: 500m
+#             memory: 15Gi
+#           limits: 
+#             cpu: 4
+#             memory: 30Gi
+#         livenessProbe:
+#           httpGet:
+#             path: /
+#             port: 11434
+#             scheme: HTTP
+#           initialDelaySeconds: 5
+#           timeoutSeconds: 2
+#           periodSeconds: 10
+#           successThreshold: 1
+#           failureThreshold: 5
+#         readinessProbe:
+#           httpGet:
+#             path: /
+#             port: 11434
+#             scheme: HTTP
+#           initialDelaySeconds: 5
+#           timeoutSeconds: 2
+#           periodSeconds: 5
+#           successThreshold: 1
+#           failureThreshold: 3
+#         startupProbe:
+#           httpGet:
+#             path: /
+#             port: 11434
+#             scheme: HTTP
+#           initialDelaySeconds: 5
+#           timeoutSeconds: 2
+#           periodSeconds: 5
+#           successThreshold: 1
+#           failureThreshold: 30
+#       volumes:
+#         - name: models-claim
+#           persistentVolumeClaim:
+#             claimName: models-claim
 

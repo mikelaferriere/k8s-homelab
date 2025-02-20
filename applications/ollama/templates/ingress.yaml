@@ -23,7 +23,7 @@ spec:
   tls:
   - hosts:
       - api.laferriere.ai
-      - code.laferriere.ai
+      # - code.laferriere.ai
     secretName: {{ .Values.app.name }}-prod
   rules:
   - host: api.laferriere.ai
@@ -36,15 +36,15 @@ spec:
             name: {{ .Values.app.name }}
             port:
               number: 11434
-  - host: code.laferriere.ai
-    http:
-      paths:
-      - path: /
-        pathType: Prefix
-        backend:
-          service:
-            name: {{ .Values.app.name }}-code
-            port:
-              number: 11434
+  # - host: code.laferriere.ai
+  #   http:
+  #     paths:
+  #     - path: /
+  #       pathType: Prefix
+  #       backend:
+  #         service:
+  #           name: {{ .Values.app.name }}-code
+  #           port:
+  #             number: 11434
 
 
