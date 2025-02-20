@@ -35,13 +35,14 @@ spec:
               name: {{ $.Values.app.name }}-config
           image: 10.10.10.199:5000/typescript/nx/consumer:latest
           command: ["sh", "-c", ". /vault/secrets/init && node {{ $consumer }}/main.js"]
+          imagePullPolicy: Always
           resources:
             requests:
-              memory: "50Mi"
-              cpu: "50m"
+              memory: 100Mi
+              cpu: 100m
             limits:
-              memory: "100Mi"
-              cpu: "100m"
+              memory: 200Mi
+              cpu: 200m
         {{- end }}
       restartPolicy: Always
 status: {}

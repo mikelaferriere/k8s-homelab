@@ -34,18 +34,27 @@ spec:
           livenessProbe:
             tcpSocket:
               port: {{ .Values.app.port }}
-            failureThreshold: 5
+            initialDelaySeconds: 5
+            timeoutSeconds: 2
             periodSeconds: 5
+            successThreshold: 1
+            failureThreshold: 30
           readinessProbe:
             tcpSocket:
               port: {{ .Values.app.port }}
-            failureThreshold: 5
+            initialDelaySeconds: 5
+            timeoutSeconds: 2
             periodSeconds: 5
+            successThreshold: 1
+            failureThreshold: 30
           startupProbe:
             tcpSocket:
               port: {{ .Values.app.port }}
+            initialDelaySeconds: 5
+            timeoutSeconds: 2
+            periodSeconds: 5
+            successThreshold: 1
             failureThreshold: 30
-            periodSeconds: 10
           ports:
             - containerPort: {{ .Values.app.port }}
           resources:
