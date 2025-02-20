@@ -100,9 +100,6 @@ applications:
   - name: homelab-websocket
     path: applications/homelab/websocket/
     destinationNamespace: homelab
-  - name: homelab-speech-recognizer
-    path: applications/homelab/speech-recognizer/
-    destinationNamespace: homelab
   - name: homelab-speech-python
     path: applications/homelab/speech-python/
     destinationNamespace: homelab
