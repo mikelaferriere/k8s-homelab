@@ -8,7 +8,6 @@ jellyfin:
       #   value: /config-host
       # - name: JELLYFIN_CACHE_DIR
       #   value: /cache-host
-  #   JELLYFIN_DATA_DIR: /nfs
 
   image:
     tag: latest
@@ -45,6 +44,8 @@ jellyfin:
             operator: In
             values:
               - "true"
+  nodeName: "k8s-gpu-godzilla"
+
   metrics:
     # this needs to be false at first run to create the proper config files first
     enabled: false
@@ -96,22 +97,3 @@ jellyfin:
     - name: media-nfs
       mountPath: /media-nfs
 
-  # # -- Enable and configure postgresql database subchart under this key.
-  # #    For more options see [postgresql chart documentation](https://github.com/bitnami/charts/tree/master/bitnami/postgresql)
-  # # @default -- https://github.com/bitnami/charts/blob/master/bitnami/postgresql/values.yaml
-  # postgresql:
-  #   enabled: true
-  #   metrics:
-  #     enabled: true
-  #   auth:
-  #     username: joplin
-  #     password: joplin-pass
-  #     database: joplin
-  #   persistence:
-  #     enabled: false
-  #   primary:
-  #     resources:
-  #       limits: {}
-  #       requests:
-  #         cpu: 250m
-  #         memory: 256Mi

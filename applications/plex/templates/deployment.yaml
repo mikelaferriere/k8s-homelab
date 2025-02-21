@@ -23,6 +23,7 @@ spec:
       labels:
         app: {{ .Values.app.name }}
     spec:
+      nodeName: "k8s-gpu-godzilla"
       affinity:
         nodeAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
