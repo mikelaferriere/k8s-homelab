@@ -39,11 +39,11 @@ spec:
           effect: "NoSchedule"
       containers:
         - name: {{ .Values.app.name }}
-          image: ghcr.io/remsky/kokoro-fastapi-gpu:v0.2.0
+          image: ghcr.io/remsky/kokoro-fastapi-cpu:v0.2.0
           imagePullPolicy: Always
-          env:
-            - name: NVIDIA_VISIBLE_DEVICES
-              value: GPU-988d240c-f178-4b8f-eb54-d831f3d0f1a5
+          # env:
+          #   - name: NVIDIA_VISIBLE_DEVICES
+          #     value: GPU-988d240c-f178-4b8f-eb54-d831f3d0f1a5
           resources:
             requests:
               memory: 2Gi
