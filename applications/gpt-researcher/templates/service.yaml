@@ -13,16 +13,17 @@ spec:
       targetPort: http
       protocol: TCP
 
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: {{ .Values.app.name }}-nextjs
-spec:
-  selector:
-    name: {{ .Values.app.name }}-nextjs
-  ports:
-    - port: 3000
-      name: http
-      targetPort: http
-      protocol: TCP
+# ---
+# apiVersion: v1
+# kind: Service
+# metadata:
+#   name: {{ .Values.app.name }}-nextjs
+# spec:
+#   selector:
+#     name: {{ .Values.app.name }}-nextjs
+#   type: LoadBalancer
+#   ports:
+#     - port: 3000
+#       name: http
+#       targetPort: http
+#       protocol: TCP
