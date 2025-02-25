@@ -1,7 +1,7 @@
 ---
 immich:
   image:
-    tag: v1.125.2
+    tag: v1.126.1
 
   immich:
     persistence:
@@ -18,8 +18,8 @@ immich:
       resources:
         limits: {}
         requests:
-          cpu: 250m
-          memory: 256Mi
+          cpu: 512m
+          memory: 1024Mi
 
   redis:
     enabled: true
