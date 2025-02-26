@@ -1,0 +1,15 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: {{ .Values.app.name }}-gpt
+  name: {{ .Values.app.name }}-gpt
+spec:
+  type: LoadBalancer
+  ports:
+    - name: gpt-port
+      port: 8080
+      targetPort: 8080
+  selector:
+    app: {{ .Values.app.name }}-gpt

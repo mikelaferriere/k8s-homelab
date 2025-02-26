@@ -31,49 +31,6 @@ spec:
         app: {{ .Values.app.name }}-app
     spec:
       containers:
-        - name: {{ .Values.app.name }}-gpt
-          image: icereed/paperless-gpt:latest
-          command: ["sh", "-c", ". /vault/secrets/gpt-init && /app/paperless-gpt"]
-          imagePullPolicy: Always
-          envFrom:
-          - configMapRef:
-              name: gpt-config
-          volumeMounts:
-            - mountPath: /prompts
-              name: paperless-gpt
-          ports:
-            - containerPort: 8080
-          resources:
-            requests:
-              cpu: 100m
-              memory: 20Mi
-            limits: 
-              cpu: 500m
-              memory: 500Mi
-          livenessProbe:
-            tcpSocket:
-              port: 8080
-            initialDelaySeconds: 5
-            timeoutSeconds: 2
-            periodSeconds: 10
-            successThreshold: 1
-            failureThreshold: 5
-          readinessProbe:
-            tcpSocket:
-              port: 8080
-            initialDelaySeconds: 5
-            timeoutSeconds: 2
-            periodSeconds: 5
-            successThreshold: 1
-            failureThreshold: 3
-          startupProbe:
-            tcpSocket:
-              port: 8080
-            initialDelaySeconds: 5
-            timeoutSeconds: 2
-            periodSeconds: 5
-            successThreshold: 1
-            failureThreshold: 30
         - name: {{ .Values.app.name }}-app
           envFrom:
           - configMapRef:
@@ -150,8 +107,4 @@ spec:
           nfs:
             server: 192.168.1.22
             path: /volume1/paperless/consume/scanner
-        - name: paperless-gpt
-          nfs:
-            server: 192.168.1.22
-            path: /volume1/paperless/gpt
 status: {}
