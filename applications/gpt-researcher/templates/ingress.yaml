@@ -32,7 +32,14 @@ spec:
         pathType: Prefix
         backend:
           service:
-            name: {{ .Values.app.name }}
+            name: {{ .Values.app.name }}-frontend
+            port:
+              number: 3000
+      - path: /ws
+        pathType: Prefix
+        backend:
+          service:
+            name: {{ .Values.app.name }}-backend
             port:
               number: 8000
 

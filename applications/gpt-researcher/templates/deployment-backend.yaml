@@ -2,7 +2,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ .Values.app.name }}
+  name: {{ .Values.app.name }}-backend
 spec:
   replicas: 1
   revisionHistoryLimit: 2
@@ -13,11 +13,11 @@ spec:
     type: RollingUpdate
   selector:
     matchLabels:
-      name: {{ .Values.app.name }}
+      name: {{ .Values.app.name }}-backend
   template:
     metadata:
       labels:
-        name: {{ .Values.app.name }}
+        name: {{ .Values.app.name }}-backend
     spec:
       runtimeClassName: nvidia
       affinity:
@@ -35,7 +35,7 @@ spec:
           value: "true"
           effect: "NoSchedule"
       containers:
-        - name: {{ .Values.app.name }}
+        - name: {{ .Values.app.name }}-backend
           image: 10.10.10.199:5000/ai/gpt-researcher:latest
           volumeMounts:
             - mountPath: /usr/src/app/my-docs
@@ -93,47 +93,6 @@ spec:
             periodSeconds: 5
             successThreshold: 1
             failureThreshold: 30
-        # - name: {{ .Values.app.name }}-nextjs
-        #   image: gptresearcher/gptr-nextjs
-        #   imagePullPolicy: Always
-        #   ports:
-        #     - name: http
-        #       containerPort: 3000
-        #       protocol: TCP
-        #   env:
-        #     - name: NEXT_PUBLIC_GPTR_API_URL
-        #       value: http://{{ .Values.app.name }}:8000
-        #   resources:
-        #     requests:
-        #       cpu: 500m
-        #       memory: 2Gi
-        #     limits: 
-        #       cpu: 2
-        #       memory: 4Gi
-        #   livenessProbe:
-        #     tcpSocket:
-        #       port: 3000
-        #     initialDelaySeconds: 5
-        #     timeoutSeconds: 2
-        #     periodSeconds: 10
-        #     successThreshold: 1
-        #     failureThreshold: 5
-        #   readinessProbe:
-        #     tcpSocket:
-        #       port: 3000
-        #     initialDelaySeconds: 5
-        #     timeoutSeconds: 2
-        #     periodSeconds: 5
-        #     successThreshold: 1
-        #     failureThreshold: 3
-        #   startupProbe:
-        #     tcpSocket:
-        #       port: 3000
-        #     initialDelaySeconds: 5
-        #     timeoutSeconds: 2
-        #     periodSeconds: 5
-        #     successThreshold: 1
-        #     failureThreshold: 30
 
       volumes:
         - name: docs-claim
