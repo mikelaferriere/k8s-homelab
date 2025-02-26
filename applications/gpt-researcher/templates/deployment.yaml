@@ -55,9 +55,9 @@ spec:
             - name: FAST_LLM
               value: ollama:deepseek-r1:14b
             - name: SMART_LLM
-              value: ollama:deepseek-r1:14b
+              value: ollama:deepseek-r1:14b-12k
             - name: STRATEGIC_LLM
-              value: ollama:deepseek-r1:14b
+              value: ollama:deepseek-r1:14b-12k
             - name: OLLAMA_BASE_URL
               value: http://ollama:11434
             - name: SEARX_URL
