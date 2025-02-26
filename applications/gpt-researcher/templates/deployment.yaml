@@ -53,7 +53,7 @@ spec:
             - name: RETRIEVER
               value: searx
             - name: FAST_LLM
-              value: ollama:deepseek-r1:14b
+              value: ollama:deepseek-r1:14b-12k
             - name: SMART_LLM
               value: ollama:deepseek-r1:14b-12k
             - name: STRATEGIC_LLM
