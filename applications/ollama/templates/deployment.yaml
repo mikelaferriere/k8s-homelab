@@ -51,10 +51,10 @@ spec:
         #   value: "10m"
         resources:
           requests:
-            cpu: 5
+            cpu: 10
             memory: 30Gi
           limits: 
-            cpu: 10
+            cpu: 20
             memory: 60Gi
         livenessProbe:
           httpGet:
