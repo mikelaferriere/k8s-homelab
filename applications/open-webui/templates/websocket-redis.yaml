@@ -15,7 +15,7 @@ spec:
         name: {{ .Values.app.name }}-redis
     spec:
       containers:
-      - name: open-webui-redis
+      - name: {{ .Values.app.name }}-redis
         image: redis:7.4.2-alpine3.21
         imagePullPolicy: IfNotPresent
         command: []
@@ -35,7 +35,6 @@ metadata:
 spec:
   selector:
     name: {{ .Values.app.name }}-redis
-  type: ClusterIP
   ports:
   - protocol: TCP
     name: http

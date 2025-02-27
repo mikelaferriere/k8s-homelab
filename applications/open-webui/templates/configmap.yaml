@@ -17,9 +17,9 @@ data:
   TIKA_SERVER_URL: http://{{ .Values.app.name }}-tika:9998  
 
   # websocket support
-  ENABLE_WEBSOCKET_SUPPORT: "True"
+  ENABLE_WEBSOCKET_SUPPORT: "true"
   WEBSOCKET_MANAGER: redis
-  WEBSOCKET_REDIS_URL: redis://open-webui-redis:6379/0
+  WEBSOCKET_REDIS_URL: redis://{{ .Values.app.name }}-redis:6379/0
 
   # ollama
   ENABLE_OLLAMA_API: "true"
@@ -30,11 +30,11 @@ data:
   # openai (use pipelines instead of actual openai)
   ENABLE_OPENAI_API: "true"
   OPENAI_API_KEY: "0p3n-w3bu!"
-  OPENAI_API_BASE_URL: http://open-webui-pipelines:9099
+  OPENAI_API_BASE_URL: http://{{ .Values.app.name }}-pipelines:9099
 
   # rag
-  # RAG_EMBEDDING_ENGINE: "ollama"
-  # RAG_EMBEDDING_MODEL: "mxbai-embed-large"
+  RAG_EMBEDDING_ENGINE: "ollama"
+  RAG_EMBEDDING_MODEL: "nomic-embed-text"
   ENABLE_RAG_HYBRID_SEARCH: "true"
   RAG_OLLAMA_BASE_URL: "http://ollama:11434"
   RAG_EMBEDDING_OPENAI_BATCH_SIZE: "20"
