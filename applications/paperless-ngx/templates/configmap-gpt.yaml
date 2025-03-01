@@ -6,7 +6,7 @@ metadata:
 data:
   PAPERLESS_BASE_URL: http://{{ .Values.app.name }}-app
   LLM_PROVIDER: 'ollama' # or 'ollama'
-  LLM_MODEL: 'deepseek-r1:32b-12k'     # or 'llama2'
+  LLM_MODEL: 'deepseek-r1:14b-32k'     # or 'llama2'
   # OPENAI_API_KEY: 'your_openai_api_key' # Required if using OpenAI
   LLM_LANGUAGE: 'English' # Optional, default is 'English'
   OLLAMA_HOST: 'http://ollama.ai:11434' # If using Ollama

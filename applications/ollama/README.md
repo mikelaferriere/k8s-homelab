@@ -25,6 +25,10 @@ The default context length for the Deepseek or LLaMA 3 models in Ollama is set t
      ```
      PARAMETER num_ctx 32000
      ```
+   - to increase num_predict
+     ```
+     PARAMETER num_predict 8192
+     ```
 
 3. Create the New Model:
    ```bash
