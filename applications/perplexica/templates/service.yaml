@@ -1,0 +1,29 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.app.name }}-backend
+spec:
+  selector:
+    name: {{ .Values.app.name }}-backend
+  type: LoadBalancer
+  ports:
+    - port: 3001
+      name: http
+      targetPort: http
+      protocol: TCP
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.app.name }}-frontend
+spec:
+  selector:
+    name: {{ .Values.app.name }}-frontend
+  type: LoadBalancer
+  ports:
+    - port: 3000
+      name: http
+      targetPort: http
+      protocol: TCP

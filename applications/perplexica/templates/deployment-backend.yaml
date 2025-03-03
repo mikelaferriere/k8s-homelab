@@ -1,0 +1,89 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.app.name }}-backend
+spec:
+  replicas: 1
+  revisionHistoryLimit: 2
+  strategy:
+    rollingUpdate:
+      maxSurge: 2
+      maxUnavailable: 0
+    type: RollingUpdate
+  selector:
+    matchLabels:
+      name: {{ .Values.app.name }}-backend
+  template:
+    metadata:
+      labels:
+        name: {{ .Values.app.name }}-backend
+    spec:
+      runtimeClassName: nvidia
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: "nvidia.com/gpu"
+                operator: In
+                values:
+                  - "true"
+      tolerations:
+        - key: "nvidia.com/gpu"
+          operator: "Equal"
+          value: "true"
+          effect: "NoSchedule"
+
+      volumes:
+        - name: configmap-toml # To access this volume, this name must be used inside volumeMounts of the container
+          configMap:
+            name: configmap-toml # Name of the configMap
+
+      containers:
+        - name: {{ .Values.app.name }}-backend
+          image: 10.10.10.199:5000/ai/perplexica-backend:latest
+          imagePullPolicy: Always
+          ports:
+            - name: http
+              containerPort: 3001
+              protocol: TCP
+          env:
+            - name: SEARXNG_API_URL
+              value: http://searxng:8080
+          volumeMounts:
+            - name: configmap-toml
+              mountPath: /home/perplexica/config.toml # This should be your final destination
+              subPath: config.toml  # The name of the file to be placed inside /etc, the filename used here and in mountPath should be same.
+          # resources:
+          #   requests:
+          #     cpu: 500m
+          #     memory: 2Gi
+          #   limits: 
+          #     cpu: 2
+          #     memory: 4Gi
+          livenessProbe:
+            tcpSocket:
+              port: 3001
+            initialDelaySeconds: 5
+            timeoutSeconds: 2
+            periodSeconds: 10
+            successThreshold: 1
+            failureThreshold: 5
+          readinessProbe:
+            tcpSocket:
+              port: 3001
+            initialDelaySeconds: 5
+            timeoutSeconds: 2
+            periodSeconds: 5
+            successThreshold: 1
+            failureThreshold: 3
+          startupProbe:
+            tcpSocket:
+              port: 3001
+            initialDelaySeconds: 5
+            timeoutSeconds: 2
+            periodSeconds: 5
+            successThreshold: 1
+            failureThreshold: 30
+

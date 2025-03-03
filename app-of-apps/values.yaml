@@ -146,4 +146,7 @@ applications:
   - name: gpt-researcher
     path: applications/gpt-researcher/
     destinationNamespace: ai
+  - name: perplexica
+    path: applications/perplexica/
+    destinationNamespace: ai
 
