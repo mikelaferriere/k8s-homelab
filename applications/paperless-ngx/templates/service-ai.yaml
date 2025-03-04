@@ -1,0 +1,15 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: {{ .Values.app.name }}-ai
+  name: {{ .Values.app.name }}-ai
+spec:
+  type: LoadBalancer
+  ports:
+    - name: ai-port
+      port: 3000
+      targetPort: 3000
+  selector:
+    app: {{ .Values.app.name }}-ai

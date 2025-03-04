@@ -1,0 +1,87 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations: {}
+  labels:
+    app: {{ .Values.app.name }}-ai
+  name: {{ .Values.app.name }}-ai
+spec:
+  replicas: 1
+  revisionHistoryLimit: 2
+  strategy:
+    rollingUpdate:
+      maxSurge: 2
+      maxUnavailable: 0
+    type: RollingUpdate
+  selector:
+    matchLabels:
+      app: {{ .Values.app.name }}-ai
+  template:
+    metadata:
+      annotations:
+        checksum/config-secrets: {{ include (print $.Template.BasePath "/configmap-ai.yaml") . | sha256sum }}
+        vault.hashicorp.com/agent-inject: "true"
+        vault.hashicorp.com/role: internal-app
+        # vault.hashicorp.com/agent-inject-secret-defined: kv/data/secrets/homelab
+        vault.hashicorp.com/agent-inject-template-gpt-init: |
+          {{`{{- with secret "kv/data/secrets/paperless" -}}
+          PAPERLESS_API_TOKEN={{ .Data.data.PAPERLESS_API_KEY }}
+          {{- end }}`}}
+      labels:
+        app: {{ .Values.app.name }}-ai
+    spec:
+      volumes:
+        - name: ai-data-claim
+          persistentVolumeClaim:
+            claimName: ai-data-claim
+        - name: configmap-env # To access this volume, this name must be used inside volumeMounts of the container
+          configMap:
+            name: ai-config # Name of the configMap
+
+      containers:
+        - name: {{ .Values.app.name }}-ai
+          image: clusterzx/paperless-ai:latest
+          command: ["sh", "-c", "cat /vault/secrets/gpt-init >> /app/data/.env && cat /app/data/.env-raw >> /app/data/.env && pm2-runtime ecosystem.config.js"]
+          imagePullPolicy: Always
+          volumeMounts:
+            - mountPath: /app/data
+              name: ai-data-claim
+            - name: configmap-env
+              mountPath: /app/data/.env-raw # This should be your final destination
+              subPath: .env  # The name of the file to be placed inside /etc, the filename used here and in mountPath should be same.
+          ports:
+            - containerPort: 3000
+          resources:
+            requests:
+              cpu: 250m
+              memory: 125Mi
+            limits: 
+              cpu: 500m
+              memory: 500Mi
+          livenessProbe:
+            tcpSocket:
+              port: 3000
+            initialDelaySeconds: 5
+            timeoutSeconds: 2
+            periodSeconds: 10
+            successThreshold: 1
+            failureThreshold: 5
+          readinessProbe:
+            tcpSocket:
+              port: 3000
+            initialDelaySeconds: 5
+            timeoutSeconds: 2
+            periodSeconds: 5
+            successThreshold: 1
+            failureThreshold: 3
+          startupProbe:
+            tcpSocket:
+              port: 3000
+            initialDelaySeconds: 5
+            timeoutSeconds: 2
+            periodSeconds: 5
+            successThreshold: 1
+            failureThreshold: 30
+      restartPolicy: Always
+status: {}
