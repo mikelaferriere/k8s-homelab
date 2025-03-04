@@ -42,18 +42,13 @@ spec:
             - name: http
               containerPort: 3000
               protocol: TCP
-          env:
-            - name: NEXT_PUBLIC_API_URL
-              value: http://{{ .Values.app.name }}-backend:3001/api
-            - name: NEXT_PUBLIC_WS_URL
-              value: http://{{ .Values.app.name }}-backend:3001
           resources:
             requests:
-              cpu: 500m
-              memory: 2Gi
+              cpu: 125m
+              memory: 350Mi
             limits: 
-              cpu: 2
-              memory: 4Gi
+              cpu: 250m
+              memory: 500Mi
           livenessProbe:
             tcpSocket:
               port: 3000

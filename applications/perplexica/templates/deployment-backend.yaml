@@ -55,13 +55,13 @@ spec:
             - name: configmap-toml
               mountPath: /home/perplexica/config.toml # This should be your final destination
               subPath: config.toml  # The name of the file to be placed inside /etc, the filename used here and in mountPath should be same.
-          # resources:
-          #   requests:
-          #     cpu: 500m
-          #     memory: 2Gi
-          #   limits: 
-          #     cpu: 2
-          #     memory: 4Gi
+          resources:
+            requests:
+              cpu: 125m
+              memory: 500Mi
+            limits: 
+              cpu: 250m
+              memory: 750Mi
           livenessProbe:
             tcpSocket:
               port: 3001
