@@ -1,16 +1,9 @@
 ---
 immich:
   image:
-    tag: v1.127.0
+    tag: v1.128.0
 
   immich:
-    replicas: 1
-    revisionHistoryLimit: 2
-    strategy:
-      rollingUpdate:
-        maxSurge: 2
-        maxUnavailable: 0
-      type: RollingUpdate
     persistence:
       library:
         existingClaim: nfs-photos
